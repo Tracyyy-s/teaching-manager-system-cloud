@@ -47,19 +47,14 @@ public class AppWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.addFilterAt(jwtLoginFilterBean(), UsernamePasswordAuthenticationFilter.class);
         http
-                // 定义哪些URL需要被保护、哪些不需要被保护
-                //不需要保护的URL
-                .authorizeRequests().antMatchers(PassRequestPaths.LOGIN_REQUEST).permitAll()
-                //.authorizeRequests().antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
+                .csrf()
+                .disable()
+                .authorizeRequests()
+                .antMatchers(PassRequestPaths.LOGIN_REQUEST)
+                .permitAll()
                 .and()
-                .logout().permitAll() // 登出
-                .invalidateHttpSession(true)
-                .and()
-                //不需要session
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .csrf().disable();
+                .logout()
+                .permitAll();
     }
 
     private JwtLoginAuthenticationFilter jwtLoginFilterBean() throws Exception {

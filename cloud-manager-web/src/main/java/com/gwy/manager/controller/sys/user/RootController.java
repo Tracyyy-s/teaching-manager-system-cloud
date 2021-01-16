@@ -1,7 +1,6 @@
 package com.gwy.manager.controller.sys.user;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageInfo;
 import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
@@ -18,11 +17,13 @@ import com.gwy.manager.service.impl.UserServiceImpl;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;
 import com.gwy.manager.util.ResultVoUtil;
-import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,7 +61,7 @@ public class RootController {
     @Autowired
     private SysLogServiceImpl logService;
 
-    @Autowired
+//    @Autowired
     private ElasticRepositoryHelper repositoryHelper;
 
     /**
@@ -373,7 +374,7 @@ public class RootController {
      * @param map 请求体
      * @return  结果集
      */
-    @PostMapping("/getLogByKeyword")
+    /*@PostMapping("/getLogByKeyword")
     public ResultVO getLogByKeyword(@RequestBody Map<String, Object> map) throws IOException {
 
         PageHelperUtil.pageMsg(map);
@@ -387,5 +388,5 @@ public class RootController {
         }
 
         return ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(result)));
-    }
+    }*/
 }
