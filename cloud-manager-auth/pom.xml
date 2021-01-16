@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>org.example</groupId>
-            <artifactId>teaching-manager-cloud</artifactId>
+            <artifactId>cloud-api-common</artifactId>
             <version>1.0</version>
         </dependency>
     </dependencies>
