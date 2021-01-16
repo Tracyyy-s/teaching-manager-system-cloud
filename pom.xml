@@ -12,6 +12,9 @@
         <module>cloud-api-common</module>
         <module>cloud-manager-web</module>
         <module>cloud-manager-auth</module>
+        <module>cloud-manager-eureka-7001</module>
+        <module>cloud-manager-eureka-7002</module>
+        <module>cloud-manager-eureka-7003</module>
         <module>cloud-manager-dao</module>
     </modules>
 
