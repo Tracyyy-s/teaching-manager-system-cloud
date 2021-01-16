@@ -8,6 +8,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-api-common" />
+        <module name="cloud-manager-auth" />
+        <module name="cloud-manager-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />

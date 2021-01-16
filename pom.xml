@@ -10,6 +10,8 @@
     <version>1.0</version>
     <modules>
         <module>cloud-api-common</module>
+        <module>cloud-manager-web</module>
+        <module>cloud-manager-auth</module>
     </modules>
 
     <!--统一管理jar包版本-->
