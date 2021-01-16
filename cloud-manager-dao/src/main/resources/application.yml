@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: springcloud-tqms-dao
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource #数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://cdb-neqw262o.cd.tencentcdb.com:10127/TQMS?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: GONGRAN0812qweabc!
+server:
+  port: 9001
+mybatis:
+  # 指定映射配置文件路径
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.gwy.manager.domain.entity
+eureka:
+  client:
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka/,http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/ # 服务注册到哪个 Eureka注册中心
+  instance:
+    instance-id: springcloud-tqms-dao-eureka  #修改该服务在 服务端的监控页面中的status状态名称
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql

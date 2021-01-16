@@ -1,0 +1,71 @@
+package com.gwy.manager.controller;
+
+import com.gwy.manager.domain.entity.Target;
+import com.gwy.manager.mapper.RoleMapper;
+import com.gwy.manager.mapper.TargetMapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * @author Tracy
+ * @date 2020/11/10 15:40
+ */
+@RestController
+@RequestMapping("TargetMapperController")
+public class TargetMapperController {
+    @Resource
+    TargetMapper targetMapper;
+
+    @PostMapping("deleteByPrimaryKey")
+    int deleteByPrimaryKey(Integer targetId){
+        return targetMapper.deleteByPrimaryKey(targetId);
+    }
+    @PostMapping("insert")
+    int insert(Target record){
+        return targetMapper.insert(record);
+    }
+    @PostMapping("selectByPrimaryKey")
+    Target selectByPrimaryKey(Integer targetId){
+        return targetMapper.selectByPrimaryKey(targetId);
+    }
+    @PostMapping("selectAll")
+    List<Target> selectAll(){
+        return targetMapper.selectAll();
+    }
+    @PostMapping("updateByPrimaryKey")
+    int updateByPrimaryKey(Target record){
+        return targetMapper.updateByPrimaryKey(record);
+    }
+
+    /**
+     * 获得学生评价的指标
+     * @return  结果集
+     */
+    @PostMapping("getStudentTargets")
+    List<Target> getStudentTargets(){
+        return targetMapper.getStudentTargets();
+    }
+
+    /**
+     * 获得教师评价的指标
+     * @return  结果集
+     */
+    @PostMapping("getTeacherTargets")
+    List<Target> getTeacherTargets(){
+        return targetMapper.getTeacherTargets();
+    }
+
+    /**
+     * 获得指标列表的指标
+     * @return  结果集
+     */    @PostMapping("getTargetsByIds")
+    List<Target> getTargetsByIds(List<Integer> ids){
+        return targetMapper.getTargetsByIds(ids);
+    }
+}
