@@ -6,7 +6,7 @@ import com.gwy.manager.domain.enums.ResponseStatus;
  * @author Tracy
  * @date 2020/11/4 13:14
  */
-public class ResultVo {
+public class ResultVO {
 
     /**
      * 结果响应码
@@ -23,12 +23,12 @@ public class ResultVo {
      */
     Object data;
 
-    public ResultVo() {
+    public ResultVO() {
         this.setResultCode(ResponseStatus.FAIL.getCode());
         this.setMessage(ResponseStatus.FAIL.getMessage());
     }
 
-    public ResultVo(Integer resultCode, String message, Object data) {
+    public ResultVO(Integer resultCode, String message, Object data) {
         this.resultCode = resultCode;
         this.message = message;
         this.data = data;
@@ -66,7 +66,7 @@ public class ResultVo {
 
     @Override
     public String toString() {
-        return "ResultVo{" +
+        return "ResultVO{" +
                 "resultCode=" + resultCode +
                 ", message='" + message + '\'' +
                 ", data=" + data +

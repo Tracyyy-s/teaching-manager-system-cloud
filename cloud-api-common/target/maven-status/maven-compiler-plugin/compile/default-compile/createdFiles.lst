@@ -1,3 +1,4 @@
+com\gwy\manager\domain\dto\ExcelSheetPO.class
 com\gwy\manager\domain\entity\Term.class
 com\gwy\manager\domain\entity\UserRole.class
 com\gwy\manager\domain\entity\TermTarget.class
@@ -18,6 +19,7 @@ com\gwy\manager\domain\constant\EncodeConstant.class
 com\gwy\manager\util\PageHelperUtil.class
 com\gwy\manager\domain\enums\ExcelVersion.class
 com\gwy\manager\domain\constant\PassRequestPaths.class
+com\gwy\manager\domain\dto\ResultVO.class
 com\gwy\manager\domain\enums\SysLogType.class
 com\gwy\manager\domain\entity\TeacherCourse.class
 com\gwy\manager\domain\entity\StudentClass.class
@@ -30,7 +32,5 @@ com\gwy\manager\domain\entity\Student.class
 com\gwy\manager\util\BeanUtil.class
 com\gwy\manager\domain\entity\TeacherAssess.class
 com\gwy\manager\domain\enums\ResponseStatus.class
-com\gwy\manager\domain\dto\ExcelSheetPo.class
-com\gwy\manager\domain\dto\ResultVo.class
 com\gwy\manager\domain\constant\RoleName.class
 com\gwy\manager\util\ResultVoUtil.class

@@ -7,7 +7,7 @@ import java.util.List;
  * 定义表格的数据对象
  * @author Tracy
  */
-public class ExcelSheetPo {
+public class ExcelSheetPO {
 
     /**
      * 表格标题
@@ -63,7 +63,7 @@ public class ExcelSheetPo {
 
     @Override
     public String toString() {
-        return "ExcelSheetPo{" +
+        return "ExcelSheetPO{" +
                 "title='" + title + '\'' +
                 ", sheetName='" + sheetName + '\'' +
                 ", headers=" + Arrays.toString(headers) +

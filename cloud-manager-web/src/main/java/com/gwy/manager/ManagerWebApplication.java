@@ -1,13 +1,20 @@
 package com.gwy.manager;
 
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author Tracy
  * @date 2021/1/16 11:05
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
+@EnableCaching
+@EnableRabbit
+@EnableTransactionManagement(proxyTargetClass = true)
 public class ManagerWebApplication {
 
     public static void main(String[] args) {
