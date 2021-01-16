@@ -1,8 +1,8 @@
 package com.gwy.manager.rabbimq;
 
 import com.gwy.manager.config.rabbitmq.RabbitmqConfiguration;
+import com.gwy.manager.domain.entity.MailForm;
 import com.gwy.manager.domain.entity.SysLog;
-import com.gwy.manager.mail.MailForm;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

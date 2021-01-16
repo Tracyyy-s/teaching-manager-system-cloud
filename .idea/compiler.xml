@@ -8,10 +8,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="cloud-api-common" />
+        <module name="cloud-manager-MQ-handler" />
         <module name="cloud-manager-auth" />
         <module name="cloud-manager-web" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="cloud-manager-MQ-handler" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

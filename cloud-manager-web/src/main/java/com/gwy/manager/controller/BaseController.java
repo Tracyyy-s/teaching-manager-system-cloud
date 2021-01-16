@@ -54,11 +54,6 @@ public class BaseController {
         return ResultVoUtil.success("Welcome to Teaching Manager System.");
     }
 
-    @GetMapping("/login")
-    public ResultVO login() {
-        return ResultVoUtil.error("Sorry, Not Found Resources");
-    }
-
     /**
      * 忘记密码时，向绑定邮箱发送验证码
      * @param map   请求体
