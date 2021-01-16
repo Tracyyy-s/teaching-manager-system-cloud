@@ -33,6 +33,7 @@ com\gwy\manager\domain\entity\TeacherAssess.class
 com\gwy\manager\mapper\MajorMapper.class
 com\gwy\manager\domain\enums\ResponseStatus.class
 com\gwy\manager\mapper\StudentClassMapper.class
+com\gwy\manager\security\exception\GlobalAuthorizeException.class
 com\gwy\manager\util\ResultVoUtil.class
 com\gwy\manager\mapper\TeacherCourseMapper.class
 com\gwy\manager\domain\entity\TermTarget.class
@@ -51,6 +52,7 @@ com\gwy\manager\mapper\SysLogMapper.class
 com\gwy\manager\domain\entity\TeacherCourse.class
 com\gwy\manager\domain\entity\Permission.class
 com\gwy\manager\domain\entity\RolePermission.class
+com\gwy\manager\domain\security\exception\GlobalAuthorizeException.class
 com\gwy\manager\util\BeanUtil.class
 com\gwy\manager\domain\constant\RoleName.class
 com\gwy\manager\mapper\TermTargetMapper.class

@@ -12,6 +12,7 @@
         <module>cloud-api-common</module>
         <module>cloud-manager-web</module>
         <module>cloud-manager-auth</module>
+        <module>cloud-manager-dao</module>
     </modules>
 
     <!--统一管理jar包版本-->
