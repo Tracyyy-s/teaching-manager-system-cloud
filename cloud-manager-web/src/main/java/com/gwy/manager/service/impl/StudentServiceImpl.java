@@ -10,11 +10,11 @@ import com.gwy.manager.domain.entity.UserRole;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.mapper.DeptMapper;
-import com.gwy.manager.mapper.RoleMapper;
-import com.gwy.manager.mapper.StudentMapper;
-import com.gwy.manager.mapper.UserMapper;
-import com.gwy.manager.mapper.UserRoleMapper;
+import com.gwy.manager.invokes.DeptInvoker;
+import com.gwy.manager.invokes.RoleInvoker;
+import com.gwy.manager.invokes.StudentInvoker;
+import com.gwy.manager.invokes.UserInvoker;
+import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.StudentService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.PageHelperUtil;
@@ -38,16 +38,16 @@ import java.util.Map;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    private StudentMapper studentMapper;
+    private StudentInvoker studentMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userMapper;
 
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleInvoker roleMapper;
 
     @Autowired
-    private UserRoleMapper userRoleMapper;
+    private UserRoleInvoker userRoleMapper;
 
     @Autowired
     private VrCodeServiceImpl vrCodeServiceImpl;
@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
     private ImportExcelFileUtil importExcelFileUtil;
 
     @Autowired
-    private DeptMapper deptMapper;
+    private DeptInvoker deptMapper;
 
     @Override
     public int addStudent(Student student) {
@@ -204,45 +204,46 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public ResultVO importStudentsByFile(String deptId, String headerType, MultipartFile file) {
 
-        ResultVO resultVO = importExcelFileUtil.importBeansByFile(deptId, headerType, file);
-
-        if (resultVO.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
-            Map<String, Object> map = (Map<String, Object>) resultVO.getData();
-
-            List<Student> students = new ArrayList<>();
-
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                Map<String, Object> dataMap = (Map<String, Object>) entry.getValue();
-                students.addAll((List<Student>) dataMap.get("dataList"));
-            }
-
-            Integer studentRoleId = roleMapper.selectRoleIdByName(RoleName.STUDENT);
-
-            //存储用户id, 增加用户-角色
-            List<UserRole> userRoles = new ArrayList<>();
-            for (Student student : students) {
-                UserRole userRole = new UserRole();
-                userRole.setUserId(student.getStudentNo());
-                userRole.setRoleId(studentRoleId);
-
-                userRoles.add(userRole);
-            }
-
-            int i, j;
-            try {
-                i = studentMapper.insertStudentBatch(students);
-                j = userRoleMapper.insertByBatch(userRoles);
-            } catch (Exception e) {
-                resultVO = ResultVoUtil.error("Exception in Executing");
-                return resultVO;
-            }
-            if (i == 0 || j == 0) {
-                resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
-            } else {
-                resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
-            }
-        }
-
-        return resultVO;
+//        ResultVO resultVO = importExcelFileUtil.importBeansByFile(deptId, headerType, file);
+//
+//        if (resultVO.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
+//            Map<String, Object> map = (Map<String, Object>) resultVO.getData();
+//
+//            List<Student> students = new ArrayList<>();
+//
+//            for (Map.Entry<String, Object> entry : map.entrySet()) {
+//                Map<String, Object> dataMap = (Map<String, Object>) entry.getValue();
+//                students.addAll((List<Student>) dataMap.get("dataList"));
+//            }
+//
+//            Integer studentRoleId = roleMapper.selectRoleIdByName(RoleName.STUDENT);
+//
+//            //存储用户id, 增加用户-角色
+//            List<UserRole> userRoles = new ArrayList<>();
+//            for (Student student : students) {
+//                UserRole userRole = new UserRole();
+//                userRole.setUserId(student.getStudentNo());
+//                userRole.setRoleId(studentRoleId);
+//
+//                userRoles.add(userRole);
+//            }
+//
+//            int i, j;
+//            try {
+//                i = studentMapper.insertStudentBatch(students);
+//                j = userRoleMapper.insertByBatch(userRoles);
+//            } catch (Exception e) {
+//                resultVO = ResultVoUtil.error("Exception in Executing");
+//                return resultVO;
+//            }
+//            if (i == 0 || j == 0) {
+//                resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+//            } else {
+//                resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+//            }
+//        }
+//
+//        return resultVO;
+        return null;
     }
 }

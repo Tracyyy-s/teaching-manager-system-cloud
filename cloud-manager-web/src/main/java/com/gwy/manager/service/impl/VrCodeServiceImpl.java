@@ -2,16 +2,16 @@ package com.gwy.manager.service.impl;
 
 import com.gwy.manager.domain.constant.RoleName;
 import com.gwy.manager.domain.dto.ResultVO;
+import com.gwy.manager.domain.entity.MailForm;
 import com.gwy.manager.domain.entity.Student;
 import com.gwy.manager.domain.entity.User;
-import com.gwy.manager.domain.entity.MailForm;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.util.MailUtil;
-import com.gwy.manager.mapper.StudentMapper;
-import com.gwy.manager.mapper.UserMapper;
+import com.gwy.manager.invokes.StudentInvoker;
+import com.gwy.manager.invokes.UserInvoker;
 import com.gwy.manager.rabbimq.RabbitmqProducer;
 import com.gwy.manager.service.VrCodeService;
+import com.gwy.manager.util.MailUtil;
 import com.gwy.manager.util.RedisUtil;
 import com.gwy.manager.util.ResultVoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +38,10 @@ public class VrCodeServiceImpl implements VrCodeService {
     private static final int EXPIRATION_TIME = 300;
 
     @Autowired
-    private StudentMapper studentMapper;
+    private StudentInvoker studentMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userMapper;
 
     @Autowired
     private MailUtil mailUtil;

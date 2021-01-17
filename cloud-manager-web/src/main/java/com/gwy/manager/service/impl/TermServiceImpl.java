@@ -3,7 +3,7 @@ package com.gwy.manager.service.impl;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Term;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.TermMapper;
+import com.gwy.manager.invokes.TermInvoker;
 import com.gwy.manager.service.TermService;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.ResultVoUtil;
@@ -23,7 +23,7 @@ import java.util.List;
 public class TermServiceImpl implements TermService {
 
     @Autowired
-    private TermMapper termMapper;
+    private TermInvoker termMapper;
 
     @Override
     public int addTerm(Term term) {

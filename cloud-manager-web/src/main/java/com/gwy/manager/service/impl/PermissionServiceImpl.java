@@ -3,8 +3,8 @@ package com.gwy.manager.service.impl;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Permission;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.PermissionMapper;
-import com.gwy.manager.mapper.RolePermissionMapper;
+import com.gwy.manager.invokes.PermissionInvoker;
+import com.gwy.manager.invokes.RolePermissionInvoker;
 import com.gwy.manager.service.PermissionService;
 import com.gwy.manager.util.ResultVoUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -31,10 +31,10 @@ public class PermissionServiceImpl implements PermissionService {
     private static final String TOKEN_PREFIX = "eyJ*";
 
     @Autowired
-    private PermissionMapper permissionMapper;
+    private PermissionInvoker permissionInvoker;
 
     @Autowired
-    private RolePermissionMapper rolePermissionMapper;
+    private RolePermissionInvoker rolePermissionInvoker;
 
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -45,7 +45,7 @@ public class PermissionServiceImpl implements PermissionService {
 
         ResultVO resultVO;
 
-        List<Permission> permissions = permissionMapper.selectByRoleIds(roleIds);
+        List<Permission> permissions = permissionInvoker.selectByRoleIds(roleIds);
         if (CollectionUtils.isEmpty(permissions)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -61,7 +61,7 @@ public class PermissionServiceImpl implements PermissionService {
 
         ResultVO resultVO;
 
-        List<Permission> permissions = permissionMapper.selectAll();
+        List<Permission> permissions = permissionInvoker.selectAll();
         if (CollectionUtils.isEmpty(permissions)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -75,7 +75,7 @@ public class PermissionServiceImpl implements PermissionService {
     public ResultVO getPermissionsByRoleId(Integer roleId) {
         ResultVO resultVO;
 
-        List<Permission> permissions = permissionMapper.selectByRoleId(roleId);
+        List<Permission> permissions = permissionInvoker.selectByRoleId(roleId);
         if (CollectionUtils.isEmpty(permissions)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -91,7 +91,7 @@ public class PermissionServiceImpl implements PermissionService {
 
         ResultVO resultVO;
 
-        List<Permission> permissions = permissionMapper.selectByIds(permissionIds);
+        List<Permission> permissions = permissionInvoker.selectByIds(permissionIds);
         if (CollectionUtils.isEmpty(permissions)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -107,12 +107,12 @@ public class PermissionServiceImpl implements PermissionService {
     public ResultVO updateRolePermission(Integer roleId, List<Integer> permissionIds) {
 
         try {
-            int i = rolePermissionMapper.deleteByRoleId(roleId);
+            int i = rolePermissionInvoker.deleteByRoleId(roleId);
             if (i == 0) {
                 return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
             }
 
-            int j = rolePermissionMapper.insertBatch(roleId, permissionIds);
+            int j = rolePermissionInvoker.insertBatch(roleId, permissionIds);
             if (j == 0) {
                 return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
             } else {

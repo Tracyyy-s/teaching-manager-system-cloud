@@ -5,9 +5,9 @@ import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.entity.RolePermission;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.PermissionMapper;
-import com.gwy.manager.mapper.RoleMapper;
-import com.gwy.manager.mapper.RolePermissionMapper;
+import com.gwy.manager.invokes.PermissionInvoker;
+import com.gwy.manager.invokes.RoleInvoker;
+import com.gwy.manager.invokes.RolePermissionInvoker;
 import com.gwy.manager.service.RoleService;
 import com.gwy.manager.util.ResultVoUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -32,13 +32,13 @@ public class RoleServiceImpl implements RoleService {
     private static final String DEFAULT_PERMISSION = "teacherCard";
 
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleInvoker roleMapper;
 
     @Autowired
-    private RolePermissionMapper rolePermissionMapper;
+    private RolePermissionInvoker rolePermissionMapper;
 
     @Autowired
-    private PermissionMapper permissionMapper;
+    private PermissionInvoker permissionMapper;
 
     @Cacheable(key = "'all'")
     @Override

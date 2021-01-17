@@ -10,7 +10,7 @@ import com.gwy.manager.domain.entity.SysLog;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.domain.enums.SysLogType;
-import com.gwy.manager.mapper.SysLogMapper;
+import com.gwy.manager.invokes.SysLogInvoker;
 import com.gwy.manager.rabbimq.RabbitmqProducer;
 import com.gwy.manager.service.SysLogService;
 import com.gwy.manager.util.DateUtilCustom;
@@ -44,7 +44,7 @@ public class SysLogServiceImpl implements SysLogService {
     private static final String POST = "POST";
 
     @Autowired
-    private SysLogMapper sysLogMapper;
+    private SysLogInvoker sysLogMapper;
 
     @Autowired
     private RabbitmqProducer producer;

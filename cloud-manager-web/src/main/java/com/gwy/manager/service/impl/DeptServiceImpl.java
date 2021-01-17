@@ -3,7 +3,7 @@ package com.gwy.manager.service.impl;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Dept;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.DeptMapper;
+import com.gwy.manager.invokes.DeptInvoker;
 import com.gwy.manager.service.DeptService;
 import com.gwy.manager.util.ResultVoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +22,16 @@ import java.util.List;
 public class DeptServiceImpl implements DeptService {
 
     @Autowired
-    private DeptMapper deptMapper;
+    private DeptInvoker deptInvoker;
 
     @Override
     public int addDept(Dept dept) {
-        return deptMapper.insert(dept);
+        return deptInvoker.insert(dept);
     }
 
     @Override
     public int updateDept(Dept dept) {
-        return deptMapper.updateByPrimaryKey(dept);
+        return deptInvoker.updateByPrimaryKey(dept);
     }
 
     @Cacheable(key = "#deptId")
@@ -40,7 +40,7 @@ public class DeptServiceImpl implements DeptService {
 
         ResultVO resultVO;
 
-        Dept dept = deptMapper.selectByPrimaryKey(deptId);
+        Dept dept = deptInvoker.selectByPrimaryKey(deptId);
         if (dept == null) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -51,7 +51,7 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public Dept getDeptByName(String name) {
-        return deptMapper.getDeptByName(name);
+        return deptInvoker.getDeptByName(name);
     }
 
     @Cacheable(key = "'all'")
@@ -60,7 +60,7 @@ public class DeptServiceImpl implements DeptService {
 
         ResultVO resultVO;
 
-        List<Dept> depts = deptMapper.selectAll();
+        List<Dept> depts = deptInvoker.selectAll();
         if (depts.size() == 0) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: springcloud-tqms-dao
+    name: cloud-manager-dao-server
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource #数据源
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -6,9 +6,9 @@ import com.gwy.manager.domain.entity.Term;
 import com.gwy.manager.domain.entity.TermTarget;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.mapper.TargetMapper;
-import com.gwy.manager.mapper.TermMapper;
-import com.gwy.manager.mapper.TermTargetMapper;
+import com.gwy.manager.invokes.TargetInvoker;
+import com.gwy.manager.invokes.TermInvoker;
+import com.gwy.manager.invokes.TermTargetInvoker;
 import com.gwy.manager.service.TermTargetService;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.ResultVoUtil;
@@ -32,13 +32,13 @@ import java.util.List;
 public class TermTargetServiceImpl implements TermTargetService {
 
     @Autowired
-    private TermTargetMapper termTargetMapper;
+    private TermTargetInvoker termTargetMapper;
 
     @Autowired
-    private TermMapper termMapper;
+    private TermInvoker termMapper;
 
     @Autowired
-    private TargetMapper targetMapper;
+    private TargetInvoker targetMapper;
 
     @CacheEvict(allEntries = true, beforeInvocation = true)
     @Override

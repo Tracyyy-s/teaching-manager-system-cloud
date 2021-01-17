@@ -4,11 +4,11 @@ import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Course;
 import com.gwy.manager.domain.entity.TeacherCourse;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.CourseMapper;
-import com.gwy.manager.mapper.StudentAssessMapper;
-import com.gwy.manager.mapper.TeacherCourseMapper;
-import com.gwy.manager.mapper.TermMapper;
-import com.gwy.manager.mapper.UserMapper;
+import com.gwy.manager.invokes.CourseInvoker;
+import com.gwy.manager.invokes.StudentAssessInvoker;
+import com.gwy.manager.invokes.TeacherCourseInvoker;
+import com.gwy.manager.invokes.TermInvoker;
+import com.gwy.manager.invokes.UserInvoker;
 import com.gwy.manager.service.TeacherCourseService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
@@ -33,19 +33,19 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
     private static final String ASSESS_STATE = "assessed";
 
     @Autowired
-    private TeacherCourseMapper teacherCourseMapper;
+    private TeacherCourseInvoker teacherCourseMapper;
 
     @Autowired
-    private TermMapper termMapper;
+    private TermInvoker termMapper;
 
     @Autowired
-    private CourseMapper courseMapper;
+    private CourseInvoker courseMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userMapper;
 
     @Autowired
-    private StudentAssessMapper studentAssessMapper;
+    private StudentAssessInvoker studentAssessMapper;
 
     @Override
     public int addTeacherCourse(TeacherCourse teacherCourse) {
