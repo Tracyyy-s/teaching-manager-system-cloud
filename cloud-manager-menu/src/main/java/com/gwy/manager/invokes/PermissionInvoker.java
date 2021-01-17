@@ -1,6 +1,7 @@
 package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.Permission;
+import com.gwy.manager.invokes.fallbackFactory.FallbackPermissionInvoker;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 @Component
 @RequestMapping("PermissionMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "101")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",contextId = "101",fallbackFactory = FallbackPermissionInvoker.class)
 @Qualifier("menuPermissionInvoker")
 public interface PermissionInvoker {
 
@@ -40,6 +41,7 @@ public interface PermissionInvoker {
     @PostMapping("selectByUserId")
     List<Permission> selectByUserId(@RequestParam("userId") String userId);
 
+    /*---根据roleId列表去筛选权限---*/
     @PostMapping("selectByRoleIds")
     List<Permission> selectByRoleIds(@RequestBody List<Integer> roleIds);
 

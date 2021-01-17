@@ -39,6 +39,7 @@ zuul:
       path: /**
       serviceId: CLOUD-MANAGER-WEB-SERVER
 
+
 ribbon:
   ConnectTimeout: 555000 # 连接超时时间(ms)
   ReadTimeout: 555000 # 通信超时时间(ms)

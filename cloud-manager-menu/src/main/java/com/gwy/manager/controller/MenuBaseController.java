@@ -176,7 +176,12 @@ public class MenuBaseController {
 
         String account = map.get("account");
         ResultVO rolesOfUser = userRoleService.getUserRoles(account);
-
+        System.out.println((List<Role>)rolesOfUser.getData());
+        if (((List<Role>)rolesOfUser.getData()).get(0).getRoleId() == -1){
+            System.out.println("cloud-manager-menu/controller/MenuBaseController-log:您请求的服务被临时关闭了");
+            rolesOfUser.setMessage("您请求的服务被临时关闭了,请稍后访问");
+            return rolesOfUser ;
+        }
         if (rolesOfUser.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
 
             List<Role> roles = (List<Role>) rolesOfUser.getData();
@@ -186,7 +191,8 @@ public class MenuBaseController {
                 roleIds.add(role.getRoleId());
             }
             return permissionService.getPermissionsByRoleIds(roleIds);
+        }else{
+            return rolesOfUser;
         }
-        return rolesOfUser;
     }
 }

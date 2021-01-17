@@ -53,6 +53,13 @@ public class UserRoleServiceImpl implements UserRoleService {
         return roleInvoker.selectByUserId(account);
     }
 
+    /**
+     * 获取用户角色
+     * @param account
+     * @return com.gwy.manager.domain.dto.ResultVO
+     * @author RayWang
+     * @date 2021/1/17 22:42
+     */
     @Cacheable(keyGenerator = "userRoles")
     @Override
     public ResultVO getUserRoles(String account) {
@@ -62,7 +69,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         List<Role> roles = this.getRolesOfUser(account);
         if (CollectionUtils.isEmpty(roles)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound);
-        } else {
+        }else {
             resultVO = ResultVoUtil.success(roles);
         }
 
