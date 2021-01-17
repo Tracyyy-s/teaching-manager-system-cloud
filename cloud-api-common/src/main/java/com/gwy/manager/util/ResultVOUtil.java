@@ -7,7 +7,7 @@ import com.gwy.manager.domain.enums.ResponseStatus;
  * @author Tracy
  * @date 2020/11/26 0:10
  */
-public class ResultVoUtil {
+public class ResultVOUtil {
 
     /**
      * 服务器解析错误请求返回

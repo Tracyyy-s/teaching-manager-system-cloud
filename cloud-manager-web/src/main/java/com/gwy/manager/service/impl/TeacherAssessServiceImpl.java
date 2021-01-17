@@ -7,9 +7,10 @@ import com.gwy.manager.invokes.TeacherAssessInvoker;
 import com.gwy.manager.invokes.TermInvoker;
 import com.gwy.manager.service.TeacherAssessService;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,9 +23,11 @@ import java.util.Map;
 @Service
 public class TeacherAssessServiceImpl implements TeacherAssessService {
 
+    @Qualifier("webTeacherAssessInvoker")
     @Autowired
     private TeacherAssessInvoker teacherAssessMapper;
 
+    @Qualifier("webTermInvoker")
     @Autowired
     private TermInvoker termMapper;
 
@@ -37,15 +40,15 @@ public class TeacherAssessServiceImpl implements TeacherAssessService {
         if (teacherAssessMapper.selectByPrimaryKey(teacherAssess.getTeacherNo(),
                 teacherAssess.getAssessedTeacherNo(), teacherAssess.getTermId()) != null) {
 
-            resultVO = ResultVoUtil.error("Already Exist");
+            resultVO = ResultVOUtil.error("Already Exist");
         } else {
             teacherAssess.setSubmitTime(DateUtilCustom.getTime());
 
             int i = teacherAssessMapper.insert(teacherAssess);
             if (i == 0) {
-                resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             } else {
-                resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+                resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
             }
         }
 
@@ -69,9 +72,9 @@ public class TeacherAssessServiceImpl implements TeacherAssessService {
 
         List<TeacherAssess> teacherAssesses = teacherAssessMapper.selectAllByTno(tno);
         if (CollectionUtils.isEmpty(teacherAssesses)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(teacherAssesses);
+            resultVO = ResultVOUtil.success(teacherAssesses);
         }
 
         return resultVO;

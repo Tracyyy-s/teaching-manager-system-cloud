@@ -15,9 +15,10 @@ import com.gwy.manager.rabbitmq.RabbitmqProducer;
 import com.gwy.manager.service.SysLogService;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -43,6 +44,7 @@ public class SysLogServiceImpl implements SysLogService {
 
     private static final String POST = "POST";
 
+    @Qualifier("authSysLogInvoker")
     @Autowired
     private SysLogInvoker sysLogMapper;
 
@@ -125,9 +127,9 @@ public class SysLogServiceImpl implements SysLogService {
 
         List<Map<String, Object>> types = sysLogMapper.selectDataExplainAndCount();
         if (CollectionUtils.isEmpty(types)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            return ResultVoUtil.success(types);
+            return ResultVOUtil.success(types);
         }
     }
 
@@ -138,9 +140,9 @@ public class SysLogServiceImpl implements SysLogService {
 
         List<SysLog> sysLogs = sysLogMapper.selectByType(type);
         if (CollectionUtils.isEmpty(sysLogs)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            return ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(sysLogs)));
+            return ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(sysLogs)));
         }
 
     }
@@ -151,21 +153,22 @@ public class SysLogServiceImpl implements SysLogService {
 
         int i = sysLogMapper.deleteByPrimaryKeys(ids);
         if (i != ids.size()) {
-            return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
-        return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+        return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
     }
 
     @Override
     public ResultVO getLogByInterval(Date beginTime, Date endTime, String type) {
 
-        List<SysLog> sysLogs = sysLogMapper.selectByInterval(beginTime, endTime, type);
+//        List<SysLog> sysLogs = sysLogMapper.selectByInterval(beginTime, endTime, type);
+        List<SysLog> sysLogs = null;
         if (CollectionUtils.isEmpty(sysLogs)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(sysLogs);
+        return ResultVOUtil.success(sysLogs);
     }
 
     @Override
@@ -173,9 +176,9 @@ public class SysLogServiceImpl implements SysLogService {
 
         List<SysLog> sysLogs = sysLogMapper.selectAll();
         if (CollectionUtils.isEmpty(sysLogs)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            return ResultVoUtil.success(sysLogs);
+            return ResultVOUtil.success(sysLogs);
         }
     }
 
@@ -184,10 +187,10 @@ public class SysLogServiceImpl implements SysLogService {
 
         List<Map<Date, Integer>> maps = sysLogMapper.selectLogsInfo();
         if (CollectionUtils.isEmpty(maps)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(sysLogMapper.selectLogsInfo());
+        return ResultVOUtil.success(sysLogMapper.selectLogsInfo());
     }
 
     /**

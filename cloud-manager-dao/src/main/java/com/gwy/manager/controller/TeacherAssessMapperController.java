@@ -6,7 +6,9 @@ import com.gwy.manager.mapper.TeacherAssessMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,7 +26,7 @@ public class TeacherAssessMapperController {
     TeacherAssessMapper teacherAssessMapper;
 
     @PostMapping("insert")
-    int insert(TeacherAssess record){
+    int insert(@RequestBody TeacherAssess record){
         return teacherAssessMapper.insert(record);
     }
     @PostMapping("selectAll")
@@ -32,7 +34,7 @@ public class TeacherAssessMapperController {
         return teacherAssessMapper.selectAll();
     }
     @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(TeacherAssess record){
+    int updateByPrimaryKey(@RequestBody TeacherAssess record){
         return teacherAssessMapper.updateByPrimaryKey(record);
     }
 
@@ -53,8 +55,8 @@ public class TeacherAssessMapperController {
      * @param termId    学期id
      * @return  结果集
      */    @PostMapping("getTeacherAssessesByDeptAndTerm")
-    List<TeacherAssess> getTeacherAssessesByDeptAndTerm(@Param("deptId") String deptId,
-                                                        @Param("termId") String termId){
+    List<TeacherAssess> getTeacherAssessesByDeptAndTerm(@RequestParam("deptId") String deptId,
+                                                        @RequestParam("termId") String termId){
         return teacherAssessMapper.getTeacherAssessesByDeptAndTerm(deptId, termId);
     }
 
@@ -65,9 +67,9 @@ public class TeacherAssessMapperController {
      * @param termId    学期id
      * @return  结果集
      */    @PostMapping("selectByPrimaryKey")
-    TeacherAssess selectByPrimaryKey(@Param("teacherNo") String teacherNo,
-                                     @Param("assessedTeacherNo") String assessedTeacherNo,
-                                     @Param("termId") String termId){
+    TeacherAssess selectByPrimaryKey(@RequestParam("teacherNo") String teacherNo,
+                                     @RequestParam("assessedTeacherNo") String assessedTeacherNo,
+                                     @RequestParam("termId") String termId){
         return teacherAssessMapper.selectByPrimaryKey(teacherNo, assessedTeacherNo, termId);
     }
 
@@ -87,9 +89,9 @@ public class TeacherAssessMapperController {
      * @param termId    学期id
      * @return  被评价的教师id列表
      */    @PostMapping("judgeAssessed")
-    List<String> judgeAssessed(@Param("teacherNo") String teacherNo,
-                               @Param("assessedTeacherNos") List<String> assessedTeacherNos,
-                               @Param("termId") String termId){
+    List<String> judgeAssessed(@RequestParam("teacherNo") String teacherNo,
+                               @RequestParam("assessedTeacherNos") List<String> assessedTeacherNos,
+                               @RequestParam("termId") String termId){
         return teacherAssessMapper.judgeAssessed(teacherNo, assessedTeacherNos, termId);
     }
 
@@ -99,13 +101,13 @@ public class TeacherAssessMapperController {
      * @param termId    学期id
      * @return  结果集
      */    @PostMapping("selectByTermAndDept")
-    List<Map<String, Object>> selectByTermAndDept(@Param("deptId") String deptId,
-                                                  @Param("termId") String termId){
+    List<Map<String, Object>> selectByTermAndDept(@RequestParam("deptId") String deptId,
+                                                  @RequestParam("termId") String termId){
         return teacherAssessMapper.selectByTermAndDept(deptId, termId);
     }
     @PostMapping("selectCountOfUserInTerm")
-    int selectCountOfUserInTerm(@Param("userId") String userId,
-                                @Param("termId") String termId){
+    int selectCountOfUserInTerm(@RequestParam("userId") String userId,
+                                @RequestParam("termId") String termId){
         return teacherAssessMapper.selectCountOfUserInTerm(userId, termId);
     }
 }

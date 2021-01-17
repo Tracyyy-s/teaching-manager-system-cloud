@@ -16,7 +16,7 @@ import com.gwy.manager.service.impl.UserRoleServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -164,7 +164,7 @@ public class RootController {
         try {
             roleId = Integer.parseInt(map.get("roleId"));
         } catch (Exception e) {
-            return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
         return permissionService.getPermissionsByRoleId(roleId);
     }
@@ -211,7 +211,7 @@ public class RootController {
             roleIds = (List<Integer>) map.get("data");
 
         } catch (Exception e) {
-            return ResultVoUtil.error(ResponseDataMsg.BadRequest.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
         }
         return userRoleService.updateUserRole(userId, roleIds);
     }
@@ -231,7 +231,7 @@ public class RootController {
         try {
             permissionIds = (List<Integer>) map.get("data");
         } catch (NumberFormatException e) {
-            return ResultVoUtil.error(ResponseDataMsg.BadRequest.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
         }
         return permissionService.updateRolePermission(roleId, permissionIds);
     }
@@ -251,7 +251,7 @@ public class RootController {
             list = (List<String>) map.get("deptIdList");
         } catch (Exception e) {
             ResultVO resultVO;
-            resultVO = ResultVoUtil.error(ResponseDataMsg.BadRequest.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
 
             return resultVO;
         }
@@ -287,7 +287,7 @@ public class RootController {
             map.put("label", type.getTypeExplain());
             typeList.add(map);
         }
-        return ResultVoUtil.success(typeList);
+        return ResultVOUtil.success(typeList);
     }
 
     /**
@@ -330,7 +330,7 @@ public class RootController {
         try {
             deleteId = (List<Integer>) map.get("deleteId");
         } catch (Exception e) {
-            return ResultVoUtil.error("NumberFormatException");
+            return ResultVOUtil.error("NumberFormatException");
         }
 
         return logService.deleteByBatch(deleteId);
@@ -362,7 +362,7 @@ public class RootController {
             beginTime = DateUtilCustom.string2Time(strBeginTime);
             endTime = DateUtilCustom.string2Time(strEndTime);
         } catch (ParseException e) {
-            return JSONObject.toJSONString(ResultVoUtil.error("ParseException"));
+            return JSONObject.toJSONString(ResultVOUtil.error("ParseException"));
         }
 
         return JSONObject.toJSONStringWithDateFormat(logService.getLogByInterval(beginTime, endTime, type), DateUtilCustom.TIME_PATTERN);
@@ -384,9 +384,9 @@ public class RootController {
 
         List<Map<String, Object>> result = repositoryHelper.searchByKeyword(keyword, pageNum, pageSize);
         if (CollectionUtils.isEmpty(result)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(result)));
+        return ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(result)));
     }*/
 }

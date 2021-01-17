@@ -51,6 +51,10 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
+ribbon:
+  ReadTimeout: 50000
+  ConnectTimeout: 50000
+
 eureka:
   client:
     service-url:

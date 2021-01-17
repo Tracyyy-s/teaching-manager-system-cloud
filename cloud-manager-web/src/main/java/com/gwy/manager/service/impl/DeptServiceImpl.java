@@ -5,8 +5,9 @@ import com.gwy.manager.domain.entity.Dept;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.invokes.DeptInvoker;
 import com.gwy.manager.service.DeptService;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.List;
 @Service
 public class DeptServiceImpl implements DeptService {
 
+    @Qualifier("webDeptInvoker")
     @Autowired
     private DeptInvoker deptInvoker;
 
@@ -42,9 +44,9 @@ public class DeptServiceImpl implements DeptService {
 
         Dept dept = deptInvoker.selectByPrimaryKey(deptId);
         if (dept == null) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(dept);
+            resultVO = ResultVOUtil.success(dept);
         }
         return resultVO;
     }
@@ -62,9 +64,9 @@ public class DeptServiceImpl implements DeptService {
 
         List<Dept> depts = deptInvoker.selectAll();
         if (depts.size() == 0) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(depts);
+            resultVO = ResultVOUtil.success(depts);
         }
 
         return resultVO;

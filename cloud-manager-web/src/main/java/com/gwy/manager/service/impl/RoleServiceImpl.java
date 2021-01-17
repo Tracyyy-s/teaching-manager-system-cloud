@@ -9,9 +9,10 @@ import com.gwy.manager.invokes.PermissionInvoker;
 import com.gwy.manager.invokes.RoleInvoker;
 import com.gwy.manager.invokes.RolePermissionInvoker;
 import com.gwy.manager.service.RoleService;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -31,12 +32,15 @@ public class RoleServiceImpl implements RoleService {
 
     private static final String DEFAULT_PERMISSION = "teacherCard";
 
+    @Qualifier("webRoleInvoker")
     @Autowired
     private RoleInvoker roleMapper;
 
+    @Qualifier("webRolePermissionInvoker")
     @Autowired
     private RolePermissionInvoker rolePermissionMapper;
 
+    @Qualifier("webPermissionInvoker")
     @Autowired
     private PermissionInvoker permissionMapper;
 
@@ -48,10 +52,10 @@ public class RoleServiceImpl implements RoleService {
 
         List<Role> roles = roleMapper.selectAll();
         if (CollectionUtils.isEmpty(roles)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
             roles.removeIf(role -> role.getRoleName().equals(RoleName.STUDENT) || role.getRoleName().equals(RoleName.ROOT));
-            resultVO = ResultVoUtil.success(roles);
+            resultVO = ResultVOUtil.success(roles);
         }
 
         return resultVO;
@@ -64,13 +68,13 @@ public class RoleServiceImpl implements RoleService {
 
         Integer id = roleMapper.selectRoleIdByName(role.getRoleName());
         if (id != null) {
-            return ResultVoUtil.error("Already Exists");
+            return ResultVOUtil.error("Already Exists");
         }
 
         try {
             int i = roleMapper.insert(role);
             if (i == 0) {
-                return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             }
 
             RolePermission rolePermission = new RolePermission();
@@ -82,14 +86,14 @@ public class RoleServiceImpl implements RoleService {
             //添加角色默认权限为资料卡片
             int j = rolePermissionMapper.insert(rolePermission);
             if (j == 0) {
-                return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             }
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 
-        return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+        return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
     }
 
     @Transactional(rollbackFor = {Exception.class})
@@ -102,13 +106,13 @@ public class RoleServiceImpl implements RoleService {
             int j = rolePermissionMapper.deleteByRoleId(roleId);
 
             if (i == 0 || j == 0) {
-                return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             }
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
-        return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+        return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
     }
 }

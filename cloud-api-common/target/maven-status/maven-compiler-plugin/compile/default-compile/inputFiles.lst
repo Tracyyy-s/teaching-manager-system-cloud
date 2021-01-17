@@ -1,8 +1,7 @@
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\enums\UserOption.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\SysPermissionApi.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Course.java
-D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\ResultVoUtil.java
-D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\config\RedisConfiguration.java
+D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\ResultVOUtil.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\BeanUtil.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\RolePermission.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\TeacherAssess.java

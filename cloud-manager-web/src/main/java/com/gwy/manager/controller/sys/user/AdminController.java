@@ -19,7 +19,7 @@ import com.gwy.manager.service.impl.TermTargetServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -95,7 +95,7 @@ public class AdminController {
             intTargetType = Integer.parseInt(targetType);
             intWeight = Integer.parseInt(weight);
         } catch (NumberFormatException e) {
-            return ResultVoUtil.error("NumberFormatException");
+            return ResultVOUtil.error("NumberFormatException");
         }
 
         Target target = new Target();
@@ -130,7 +130,7 @@ public class AdminController {
         try {
             intTargetId = Integer.parseInt(targetId);
         } catch (NumberFormatException e) {
-            return ResultVoUtil.error("NumberFormatException");
+            return ResultVOUtil.error("NumberFormatException");
         }
 
         return targetService.deleteTarget(intTargetId);
@@ -330,7 +330,7 @@ public class AdminController {
             }
         }
 
-        return ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(tScores)));
+        return ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(tScores)));
     }
 
     /**

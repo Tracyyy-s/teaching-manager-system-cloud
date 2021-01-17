@@ -3,10 +3,14 @@ package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.Course;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,32 +20,33 @@ import java.util.Map;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@RestController
+@Component
 @RequestMapping("courseMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "11")
+@Qualifier("webCourseInvoker")
 public interface CourseInvoker {
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String courseNo) ;
+    int deleteByPrimaryKey(@RequestParam("courseNo") String courseNo) ;
 
     @PostMapping("insert")
-    int insert(Course record) ;
+    int insert(@RequestBody Course record) ;
 
     @PostMapping("selectByPrimaryKey")
-    Course selectByPrimaryKey(String courseNo);
+    Course selectByPrimaryKey(@RequestParam("courseNo") String courseNo);
 
     @PostMapping("selectAll")
     List<Course> selectAll() ;
 
     @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(Course record);
+    int updateByPrimaryKey(@RequestBody Course record);
 
     @PostMapping("getCoursesOfTeacher")
-    List<Course> getCoursesOfTeacher(String teacherNo);
+    List<Course> getCoursesOfTeacher(@RequestParam("teacherNo") String teacherNo);
 
     @PostMapping("getCoursesByIds")
-    List<Course> getCoursesByIds(@Param("courseNos") List<String> courseNos);
+    List<Course> getCoursesByIds(@RequestBody List<String> courseNos);
 
     @PostMapping("getCoursesForMapByIds")
-    Map<String, Course> getCoursesForMapByIds(@Param("courseNos") List<String> courseNos) ;
+    Map<String, Course> getCoursesForMapByIds(@RequestBody List<String> courseNos) ;
 }

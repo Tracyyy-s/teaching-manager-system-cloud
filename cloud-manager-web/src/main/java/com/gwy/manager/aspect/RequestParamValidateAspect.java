@@ -2,7 +2,7 @@ package com.gwy.manager.aspect;
 
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,7 +42,7 @@ public class RequestParamValidateAspect {
         //参数判空
         for (Object arg : args) {
             if (arg == null) {
-                return ResultVoUtil.error(ResponseDataMsg.BadRequest.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
             }
         }
 

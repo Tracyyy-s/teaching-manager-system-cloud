@@ -8,7 +8,7 @@ import com.gwy.manager.domain.entity.User;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.UserOption;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -313,7 +313,7 @@ public class ImportExcelFileUtil {
                 titleMap.put("Failure", "表格标题不匹配");
                 titleMap.put("Expected", ImportExcelFileUtil.getValidHeaders(headerType));
 
-                return ResultVoUtil.error(titleMap);
+                return ResultVOUtil.error(titleMap);
             }
 
             dept = deptMapper.selectByPrimaryKey(deptId);
@@ -334,7 +334,7 @@ public class ImportExcelFileUtil {
 
                 //如果数据识别错误
                 if (thisData != null && thisData.get("msg").equals(ResponseDataMsg.Fail.getMsg())) {
-                    return ResultVoUtil.error(thisData.get("data"));
+                    return ResultVOUtil.error(thisData.get("data"));
                 } else if (thisData != null && thisData.get("msg").equals(ResponseDataMsg.Success.getMsg())) {
 
                     Object objBean = thisData.get("data");
@@ -356,7 +356,7 @@ public class ImportExcelFileUtil {
             map.put(po.getSheetName(), thisSheet);
         }
 
-        return ResultVoUtil.success(map);
+        return ResultVOUtil.success(map);
     }*/
 
     /**
@@ -380,7 +380,7 @@ public class ImportExcelFileUtil {
             //如果院系不为管理员所在学院
             //****封装时将Excel中的学院名字段赋予deptId****
             if (!StringUtils.isEmpty(user.getDeptId()) && !user.getDeptId().equals(dept.getDeptName())) {
-                return ResultVoUtil.error("添加的教师仅可属于管理员所在学院");
+                return ResultVOUtil.error("添加的教师仅可属于管理员所在学院");
             } else {
                 user.setDeptId(dept.getDeptId());
             }
@@ -392,7 +392,7 @@ public class ImportExcelFileUtil {
             Student student = ((Student) object);
 
             if (!StringUtils.isEmpty(student.getDeptId()) && !student.getDeptId().equals(dept.getDeptName())) {
-                return ResultVoUtil.error("添加的学生仅可属于管理员所在学院");
+                return ResultVOUtil.error("添加的学生仅可属于管理员所在学院");
             } else {
                 student.setDeptId(dept.getDeptId());
             }
@@ -400,6 +400,6 @@ public class ImportExcelFileUtil {
             list.add(student);
         }
 
-        return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+        return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
     }
 }

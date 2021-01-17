@@ -2,9 +2,14 @@ package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClientProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -14,52 +19,54 @@ import java.util.Map;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@RestController
+@Component
 @RequestMapping("UserMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "60")
+@Qualifier("webUserInvoker")
 public interface UserInvoker {
 
-    @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String userId);
+    @RequestMapping("deleteByPrimaryKey")
+    int deleteByPrimaryKey(@RequestParam("userId") String userId);
 
-    @PostMapping("insert")
-    int insert(User record);
+    @RequestMapping("insert")
+    int insert(@RequestBody User record);
 
-    @PostMapping("selectByPrimaryKey")
-    User selectByPrimaryKey(String userId);
+    @RequestMapping("selectByPrimaryKey")
+    User selectByPrimaryKey(@RequestParam("userId") String userId);
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<User> selectAll();
 
-    @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(User record);
+    @RequestMapping("updateByPrimaryKey")
+    int updateByPrimaryKey(@RequestBody User record);
 
-    @PostMapping("selectUsersByDeptId")
-    List<User> selectUsersByDeptId(String deptId);
+    @RequestMapping("selectUsersByDeptId")
+    List<User> selectUsersByDeptId(@RequestParam("deptId") String deptId);
 
-    @PostMapping("selectUserNamesByIds")
-    List<String> selectUserNamesByIds(@Param("userIds") List<String> userIds);
+    @RequestMapping("selectUserNamesByIds")
+    List<String> selectUserNamesByIds(@RequestBody List<String> userIds);
 
-    @PostMapping("selectUserNamesForMapByIds")
-    Map<String, Map<String, String>> selectUserNamesForMapByIds(@Param("userIds") List<String> userIds);
+    @RequestMapping("selectUserNamesForMapByIds")
+    Map<String, Map<String, String>> selectUserNamesForMapByIds(@RequestBody List<String> userIds);
 
-    @PostMapping("insertUsersByBatch")
-    int insertUsersByBatch(@Param("users") List<User> users);
+    @RequestMapping("insertUsersByBatch")
+    int insertUsersByBatch(@RequestBody List<User> users);
 
-    @PostMapping("updatePassword")
-    int updatePassword(@Param("userId") String userId,
-                       @Param("password") String password);
+    @RequestMapping("updatePassword")
+    int updatePassword(@RequestParam("userId") String userId,
+                       @RequestParam("password") String password);
 
-    @PostMapping("getUsersMatchNameInDept")
-    List<User> getUsersMatchNameInDept(@Param("deptId") String deptId,
-                                       @Param("name") String name);
+    @RequestMapping("getUsersMatchNameInDept")
+    List<User> getUsersMatchNameInDept(@RequestParam("deptId") String deptId,
+                                       @RequestParam("name") String name);
 
-    @PostMapping("selectByUsername")
-    User selectByUsername(String username);
+    @RequestMapping("selectByUsername")
+    User selectByUsername(@RequestParam("username") String username);
 
-    @PostMapping("selectUsersByRoleName")
-    List<User> selectUsersByRoleName(String roleName);
+    @RequestMapping("selectUsersByRoleName")
+    List<User> selectUsersByRoleName(@RequestParam("roleName") String roleName);
 
-    int updateAvailableDeptIds(@Param("userId") String userId,
-                               @Param("deptIds") String deptIds);
+    @RequestMapping("updateAvailableDeptIds")
+    int updateAvailableDeptIds(@RequestParam("userId") String userId,
+                               @RequestParam("deptIds") String deptIds);
 }

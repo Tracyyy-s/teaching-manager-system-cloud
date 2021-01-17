@@ -6,6 +6,7 @@ import com.gwy.manager.mapper.TermMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,32 +23,40 @@ import java.util.List;
 public class TermMapperController {
     @Resource
     TermMapper termMapper;
+
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String termId){
+    int deleteByPrimaryKey(String termId) {
         return termMapper.deleteByPrimaryKey(termId);
     }
+
     @PostMapping("insert")
-    int insert(Term record){
+    int insert(@RequestBody Term record) {
         return termMapper.insert(record);
     }
+
     @PostMapping("selectByPrimaryKey")
-    Term selectByPrimaryKey(String termId){
+    Term selectByPrimaryKey(String termId) {
         return termMapper.selectByPrimaryKey(termId);
     }
+
     @PostMapping("selectAll")
-    List<Term> selectAll(){
+    List<Term> selectAll() {
         return termMapper.selectAll();
     }
+
     @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(Term record){
+    int updateByPrimaryKey(@RequestBody Term record) {
         return termMapper.updateByPrimaryKey(record);
     }
+
     @PostMapping("insertByBatch")
-    int insertByBatch(@Param("terms") List<Term> terms){
+    int insertByBatch(@RequestBody List<Term> terms) {
         return termMapper.insertByBatch(terms);
     }
+
     @PostMapping("getCurrentTerm")
-    Term getCurrentTerm(Date date){
+    Term getCurrentTerm(@RequestBody Date date) {
+        System.out.println(date);
         return termMapper.getCurrentTerm(date);
     }
 }

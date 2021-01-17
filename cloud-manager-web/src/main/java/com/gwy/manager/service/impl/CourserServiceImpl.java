@@ -5,9 +5,10 @@ import com.gwy.manager.domain.entity.Course;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.invokes.CourseInvoker;
 import com.gwy.manager.service.CourseService;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import java.util.List;
 @Service
 public class CourserServiceImpl implements CourseService {
 
+    @Qualifier("webCourseInvoker")
     @Autowired
     private CourseInvoker courseInvoker;
 
@@ -44,9 +46,9 @@ public class CourserServiceImpl implements CourseService {
 
         List<Course> coursesOfTeacher = courseInvoker.getCoursesOfTeacher(teacherNo);
         if (CollectionUtils.isEmpty(coursesOfTeacher)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(coursesOfTeacher);
+            resultVO = ResultVOUtil.success(coursesOfTeacher);
         }
 
         return resultVO;

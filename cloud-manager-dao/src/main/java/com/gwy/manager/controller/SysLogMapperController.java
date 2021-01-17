@@ -5,6 +5,7 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.SysLogMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,40 +25,47 @@ public class SysLogMapperController {
     SysLogMapper sysLogMapper;
 
     @PostMapping("insert")
-    int insert(SysLog record){
+    int insert(@RequestBody SysLog record) {
         return sysLogMapper.insert(record);
     }
+
     @PostMapping("selectByPrimaryKey")
-    SysLog selectByPrimaryKey(Integer id){
+    SysLog selectByPrimaryKey(Integer id) {
         return sysLogMapper.selectByPrimaryKey(id);
     }
+
     @PostMapping("selectAll")
-    List<SysLog> selectAll(){
+    List<SysLog> selectAll() {
         return sysLogMapper.selectAll();
     }
+
     @PostMapping("selectDataExplainAndCount")
-    List<Map<String, Object>> selectDataExplainAndCount(){
+    List<Map<String, Object>> selectDataExplainAndCount() {
         return sysLogMapper.selectDataExplainAndCount();
     }
+
     @PostMapping("selectByType")
-    List<SysLog> selectByType(String type){
+    List<SysLog> selectByType(String type) {
         return sysLogMapper.selectByType(type);
     }
+
     @PostMapping("selectByInterval")
-    List<SysLog> selectByInterval(Date beginTime, Date endTime, String type){
-        return sysLogMapper.selectByInterval(beginTime,endTime,type);
+    List<SysLog> selectByInterval(@RequestBody Date beginTime, @RequestBody Date endTime, String type) {
+        return sysLogMapper.selectByInterval(beginTime, endTime, type);
     }
+
     @PostMapping("deleteByPrimaryKeys")
-    int deleteByPrimaryKeys( List<Integer> ids){
+    int deleteByPrimaryKeys(@RequestBody List<Integer> ids) {
         return sysLogMapper.deleteByPrimaryKeys(ids);
     }
 
     @PostMapping("selectLogsInfo")
-    List<Map<Date, Integer>> selectLogsInfo(){
+    List<Map<Date, Integer>> selectLogsInfo() {
         return sysLogMapper.selectLogsInfo();
     }
+
     @PostMapping("selectLogInfo")
-    List<Map<String, Integer>> selectLogInfo(){
+    List<Map<String, Integer>> selectLogInfo() {
         return sysLogMapper.selectLogInfo();
     }
 }
