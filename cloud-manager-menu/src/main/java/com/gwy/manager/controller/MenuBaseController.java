@@ -1,7 +1,6 @@
 package com.gwy.manager.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
@@ -184,6 +183,7 @@ public class MenuBaseController {
             for (Role role : roles) {
                 roleIds.add(role.getRoleId());
             }
+            System.out.println(permissionService.getPermissionsByRoleIds(roleIds));
             return permissionService.getPermissionsByRoleIds(roleIds);
         }
         return rolesOfUser;

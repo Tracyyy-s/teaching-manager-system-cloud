@@ -32,9 +32,13 @@ zuul:
     api-login:
       path: /login
       serviceId: CLOUD-MANAGER-AUTH-SERVER
+    api-menu:
+      path: /menu
+      serviceId: CLOUD-MANAGER-MENU-SERVER
     api-project:
       path: /**
       serviceId: CLOUD-MANAGER-WEB-SERVER
+
 
 ribbon:
   ConnectTimeout: 55000 # 连接超时时间(ms)

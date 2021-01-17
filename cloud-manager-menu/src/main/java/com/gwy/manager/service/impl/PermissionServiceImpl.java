@@ -56,7 +56,7 @@ public class PermissionServiceImpl implements PermissionService {
         } else {
             resultVO = ResultVoUtil.success(permissions);
         }
-
+        System.out.println(permissions);
         return resultVO;
     }
 

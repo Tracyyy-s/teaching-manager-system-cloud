@@ -68,6 +68,7 @@ public class PermissionMapperController {
     @RequestMapping("selectByRoleIds")
     List<Permission> selectByRoleIds(@RequestBody List<Integer> roleIds) {
         System.out.println(roleIds);
+        System.out.println(permissionMapper.selectByRoleIds(roleIds));
         return permissionMapper.selectByRoleIds(roleIds);
     }
 
