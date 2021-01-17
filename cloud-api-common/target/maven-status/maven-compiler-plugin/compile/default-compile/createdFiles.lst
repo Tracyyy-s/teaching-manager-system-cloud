@@ -7,7 +7,6 @@ com\gwy\manager\domain\entity\SysLog.class
 com\gwy\manager\domain\entity\Course.class
 com\gwy\manager\domain\entity\StudentAssess.class
 com\gwy\manager\domain\entity\SysPermissionApi.class
-com\gwy\manager\config\RedisConfiguration.class
 com\gwy\manager\util\RedisUtil.class
 com\gwy\manager\domain\constant\PageHelperConst.class
 com\gwy\manager\domain\entity\MailForm.class
@@ -32,10 +31,10 @@ com\gwy\manager\domain\enums\UserOption.class
 com\gwy\manager\domain\entity\Dept.class
 com\gwy\manager\domain\entity\Role.class
 com\gwy\manager\domain\entity\Student.class
+com\gwy\manager\util\ResultVOUtil.class
 com\gwy\manager\domain\security\exception\GlobalAuthorizeException.class
 com\gwy\manager\util\BeanUtil.class
 com\gwy\manager\domain\entity\TeacherAssess.class
 com\gwy\manager\domain\enums\ResponseStatus.class
 com\gwy\manager\domain\constant\RoleName.class
 com\gwy\manager\security\exception\GlobalAuthorizeException.class
-com\gwy\manager\util\ResultVoUtil.class

@@ -12,9 +12,10 @@ import com.gwy.manager.invokes.UserInvoker;
 import com.gwy.manager.service.TeacherCourseService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,18 +33,23 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
 
     private static final String ASSESS_STATE = "assessed";
 
+    @Qualifier("webTeacherCourseInvoker")
     @Autowired
     private TeacherCourseInvoker teacherCourseMapper;
 
+    @Qualifier("webTermInvoker")
     @Autowired
     private TermInvoker termMapper;
 
+    @Qualifier("webCourseInvoker")
     @Autowired
     private CourseInvoker courseMapper;
 
+    @Qualifier("webUserInvoker")
     @Autowired
     private UserInvoker userMapper;
 
+    @Qualifier("webStudentAssessInvoker")
     @Autowired
     private StudentAssessInvoker studentAssessMapper;
 
@@ -74,13 +80,13 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
                     .selectByTeacherNoAndTermId(teacherNo, currentTermId);
 
             if (CollectionUtils.isEmpty(teacherCourses)) {
-                resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+                resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
             } else {
-                resultVO = ResultVoUtil.success(this.teacherCourseFormat(teacherCourses));
+                resultVO = ResultVOUtil.success(this.teacherCourseFormat(teacherCourses));
             }
         } catch (Exception e) {
             e.printStackTrace();
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
         return resultVO;
@@ -95,7 +101,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
                 .selectByStudentNoAndTermId(studentNo, termId);
 
         if (CollectionUtils.isEmpty(teacherCourses)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
             List<String> tcIds = new ArrayList<>();
             for (TeacherCourse teacherCourse : teacherCourses) {
@@ -110,7 +116,7 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
                 map.put(ASSESS_STATE, assessStates.get(i++) == 1);
             }
 
-            resultVO = ResultVoUtil.success(maps);
+            resultVO = ResultVOUtil.success(maps);
         }
 
         return resultVO;
@@ -124,9 +130,9 @@ public class TeacherCourseServiceImpl implements TeacherCourseService {
         List<TeacherCourse> teacherCourses = teacherCourseMapper
                 .selectByTermAndDept(deptId, termId);
         if (CollectionUtils.isEmpty(teacherCourses)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(this.teacherCourseFormat(teacherCourses));
+            resultVO = ResultVOUtil.success(this.teacherCourseFormat(teacherCourses));
         }
         return resultVO;
     }

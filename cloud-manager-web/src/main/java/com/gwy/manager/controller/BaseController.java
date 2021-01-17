@@ -12,7 +12,7 @@ import com.gwy.manager.service.impl.UserRoleServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
 import com.gwy.manager.service.impl.VrCodeServiceImpl;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,7 +51,7 @@ public class BaseController {
 
     @RequestMapping("/")
     public ResultVO root() {
-        return ResultVoUtil.success("Welcome to Teaching Manager System.");
+        return ResultVOUtil.success("Welcome to Teaching Manager System.");
     }
 
     /**
@@ -102,6 +102,7 @@ public class BaseController {
      */
     @PostMapping("/getCurrentTerm")
     public String getCurrentTerm() {
+        System.out.println("getCurrentTerm");
         return JSONObject.toJSONStringWithDateFormat(termService.getCurrentTerm(), DateUtilCustom.DATE_PATTERN);
     }
 

@@ -6,9 +6,7 @@ import com.gwy.manager.domain.constant.RoleName;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Student;
 import com.gwy.manager.domain.entity.User;
-import com.gwy.manager.domain.entity.UserRole;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.domain.enums.UserOption;
 import com.gwy.manager.invokes.DeptInvoker;
 import com.gwy.manager.invokes.RoleInvoker;
@@ -18,17 +16,16 @@ import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.StudentService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.PageHelperUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import com.gwy.manager.util.file.ImportExcelFileUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Tracy
@@ -37,15 +34,19 @@ import java.util.Map;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+    @Qualifier("webStudentInvoker")
     @Autowired
     private StudentInvoker studentMapper;
 
+    @Qualifier("webUserInvoker")
     @Autowired
     private UserInvoker userMapper;
 
+    @Qualifier("webRoleInvoker")
     @Autowired
     private RoleInvoker roleMapper;
 
+    @Qualifier("webUserRoleInvoker")
     @Autowired
     private UserRoleInvoker userRoleMapper;
 
@@ -55,6 +56,7 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private ImportExcelFileUtil importExcelFileUtil;
 
+    @Qualifier("webDeptInvoker")
     @Autowired
     private DeptInvoker deptMapper;
 
@@ -74,9 +76,9 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = this.getStudent(studentNo);
         if (student == null) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(BeanUtil.beanToMap(student));
+            resultVO = ResultVOUtil.success(BeanUtil.beanToMap(student));
         }
 
         return resultVO;
@@ -88,15 +90,15 @@ public class StudentServiceImpl implements StudentService {
 
         Student student = this.getStudent(studentNo);
         if (student == null) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
             //获得管理员角色用户
             User adminUser = userMapper.selectByPrimaryKey(adminNo);
             //若学生学院不在管理员可管理学院内
             if (adminUser == null || !adminUser.getAvailableDeptIds().contains(student.getDeptId())) {
-                resultVO = ResultVoUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
+                resultVO = ResultVOUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
             } else {
-                resultVO = ResultVoUtil.success(BeanUtil.beanToMap(student));
+                resultVO = ResultVOUtil.success(BeanUtil.beanToMap(student));
             }
         }
 
@@ -117,9 +119,9 @@ public class StudentServiceImpl implements StudentService {
 
         int i = studentMapper.updateByPrimaryKey(student);
         if (i == 0) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+            resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
         }
 
         return resultVO;
@@ -137,16 +139,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResultVO getStudentsByDept(int pageNum, int pageSize, String deptId) {
+    public ResultVO getStudentsByDept(String deptId) {
 
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<Student> students = studentMapper.selectStudentsByDept(deptId);
         if (CollectionUtils.isEmpty(students)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(students)));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(students));
         }
         return resultVO;
     }
@@ -157,9 +158,9 @@ public class StudentServiceImpl implements StudentService {
 
         List<Student> students = studentMapper.selectStudentsByClass(classId);
         if (students.size() == 0) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(BeanUtil.beansToList(students));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(students));
         }
         return resultVO;
     }
@@ -171,36 +172,34 @@ public class StudentServiceImpl implements StudentService {
 
         User adminUser = userMapper.selectByPrimaryKey(adminNo);
         if (adminUser == null || !adminUser.getAvailableDeptIds().contains(deptId)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
             return resultVO;
         }
 
         List<Student> students = studentMapper.selectStudentsMatchName(deptId, name);
         if (CollectionUtils.isEmpty(students)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(BeanUtil.beansToList(students));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(students));
         }
 
         return resultVO;
     }
 
     @Override
-    public ResultVO getAllStudents(int pageNum, int pageSize) {
+    public ResultVO getAllStudents() {
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<Student> students = studentMapper.selectAll();
         if (CollectionUtils.isEmpty(students)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(students)));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(students));
         }
 
         return resultVO;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public ResultVO importStudentsByFile(String deptId, String headerType, MultipartFile file) {
 
@@ -233,13 +232,13 @@ public class StudentServiceImpl implements StudentService {
 //                i = studentMapper.insertStudentBatch(students);
 //                j = userRoleMapper.insertByBatch(userRoles);
 //            } catch (Exception e) {
-//                resultVO = ResultVoUtil.error("Exception in Executing");
+//                resultVO = ResultVOUtil.error("Exception in Executing");
 //                return resultVO;
 //            }
 //            if (i == 0 || j == 0) {
-//                resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+//                resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
 //            } else {
-//                resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+//                resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
 //            }
 //        }
 //

@@ -9,7 +9,6 @@ import com.gwy.manager.domain.entity.Dept;
 import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.entity.Term;
 import com.gwy.manager.domain.entity.User;
-import com.gwy.manager.domain.entity.UserRole;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.domain.enums.UserOption;
@@ -23,13 +22,13 @@ import com.gwy.manager.service.UserService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import com.gwy.manager.util.file.ImportExcelFileUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -46,24 +45,30 @@ import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Qualifier("webUserInvoker")
     @Autowired
     private UserInvoker userMapper;
 
     @Autowired
     private VrCodeServiceImpl vrCodeServiceImpl;
 
+    @Qualifier("webUserRoleInvoker")
     @Autowired
     private UserRoleInvoker userRoleMapper;
 
+    @Qualifier("webRoleInvoker")
     @Autowired
     private RoleInvoker roleMapper;
 
+    @Qualifier("webDeptInvoker")
     @Autowired
     private DeptInvoker deptMapper;
 
+    @Qualifier("webTermInvoker")
     @Autowired
     private TermInvoker termMapper;
 
+    @Qualifier("webTeacherAssessInvoker")
     @Autowired
     private TeacherAssessInvoker teacherAssessMapper;
 
@@ -75,13 +80,13 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectByPrimaryKey(userId);
         if (user == null) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
             User adminUser = userMapper.selectByPrimaryKey(adminNo);
             if (adminUser == null || !adminUser.getAvailableDeptIds().contains(user.getDeptId())) {
-                return ResultVoUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
             } else {
-                return ResultVoUtil.success(BeanUtil.beanToMap(user));
+                return ResultVOUtil.success(BeanUtil.beanToMap(user));
             }
         }
     }
@@ -91,10 +96,10 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectByPrimaryKey(userId);
         if (user == null) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(BeanUtil.beanToMap(user));
+        return ResultVOUtil.success(BeanUtil.beanToMap(user));
     }
 
     @Override
@@ -105,15 +110,15 @@ public class UserServiceImpl implements UserService {
         //判断管理员用户是否存在
         User adminUser = userMapper.selectByPrimaryKey(adminNo);
         if (adminUser == null || !adminUser.getAvailableDeptIds().contains(deptId)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
             return resultVO;
         }
 
         List<User> users = userMapper.getUsersMatchNameInDept(deptId, name);
         if (CollectionUtils.isEmpty(users)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(BeanUtil.beansToList(users));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(users));
         }
 
         return resultVO;
@@ -126,40 +131,36 @@ public class UserServiceImpl implements UserService {
 
         int i = userMapper.updateByPrimaryKey(user);
         if (i == 0) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+            resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
         }
 
         return resultVO;
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public ResultVO getUsersOfDept(int pageNum, int pageSize, String deptId) {
+    public ResultVO getUsersOfDept(String deptId) {
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectUsersByDeptId(deptId);
         if (CollectionUtils.isEmpty(users)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        Map<String, Object> infoMap = PageHelperUtil.pageInfoToMap(new PageInfo<>(users));
-
-        Collection<Map<String, Object>> userMaps = (Collection<Map<String, Object>>) infoMap.get(PageHelperConst.LIST);
+        Collection<Map<String, Object>> userMaps = BeanUtil.beansToList(users);
         Dept dept = deptMapper.selectByPrimaryKey(deptId);
         for (Map<String, Object> map : userMaps) {
             map.put("deptName", dept.getDeptName());
         }
 
-        return ResultVoUtil.success(infoMap);
+        return ResultVOUtil.success(userMaps);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public ResultVO getUsersOfDept(int pageNum, int pageSize, String userId, String deptId) {
+    public ResultVO getUsersOfDept(String userId, String deptId) {
 
-        ResultVO resultUsers = this.getUsersOfDept(pageNum, pageSize, deptId);
+        ResultVO resultUsers = this.getUsersOfDept(deptId);
 
         if (resultUsers.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
 
@@ -168,12 +169,12 @@ public class UserServiceImpl implements UserService {
             if (term != null) {
 
                 //获得已经查询到的结果集
-                Collection<Map<String, Object>> maps = (Collection<Map<String, Object>>) ((Map<String, Object>) resultUsers.getData()).get(PageHelperConst.LIST);
+                Collection<Map<String, Object>> maps = (Collection<Map<String, Object>>) resultUsers.getData();
 
                 //存储查询结果的userId
                 List<String> userIds = new ArrayList<>();
                 for (Map<String, Object> map : maps) {
-                    userIds.add((String)map.get("userId"));
+                    userIds.add((String) map.get("userId"));
                 }
 
                 //查询该教师在本学期已经评价的教师id
@@ -205,7 +206,7 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectByPrimaryKey(userId);
         if (user == null) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
             List<String> ids = Arrays.asList(user.getAvailableDeptIds().split(","));
             Map<String, Dept> res = deptMapper.getDeptByIds(ids);
@@ -213,7 +214,7 @@ public class UserServiceImpl implements UserService {
             for (Map.Entry<String, Dept> dept : res.entrySet()) {
                 depts.add(dept.getValue());
             }
-            resultVO = ResultVoUtil.success(depts);
+            resultVO = ResultVOUtil.success(depts);
         }
 
         return resultVO;
@@ -226,9 +227,9 @@ public class UserServiceImpl implements UserService {
 
         User user = userMapper.selectByPrimaryKey(userId);
         if (user == null) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(BeanUtil.beanToMap(user));
+            resultVO = ResultVOUtil.success(BeanUtil.beanToMap(user));
         }
 
         return resultVO;
@@ -247,32 +248,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultVO getAllAdmin(int pageNum, int pageSize) {
+    public ResultVO getAllAdmin() {
 
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectUsersByRoleName(RoleName.ADMIN);
         if (CollectionUtils.isEmpty(users)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(users)));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(users));
         }
 
         return resultVO;
     }
 
     @Override
-    public ResultVO getAllUsers(int pageNum, int pageSize) {
+    public ResultVO getAllUsers() {
 
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectAll();
         if (CollectionUtils.isEmpty(users)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(users)));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(users));
         }
 
         return resultVO;
@@ -296,7 +295,7 @@ public class UserServiceImpl implements UserService {
         Integer adminRoleId = roleMapper.selectRoleIdByName(RoleName.ADMIN);
         //若用户不存在管理员角色
         if (!roleIds.contains(adminRoleId)) {
-            resultVO = ResultVoUtil.error("User Is Not Admin");
+            resultVO = ResultVOUtil.error("User Is Not Admin");
             return resultVO;
         }
 
@@ -315,9 +314,9 @@ public class UserServiceImpl implements UserService {
 
         int i = userMapper.updateAvailableDeptIds(userId, deptIds);
         if (i == 0) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+            resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
         }
 
         return resultVO;
@@ -358,13 +357,13 @@ public class UserServiceImpl implements UserService {
 //                    i = userMapper.insertUsersByBatch(users);
 //                    j = userRoleMapper.insertByBatch(userRoles);
 //                } catch (Exception e) {
-//                    resultVO = ResultVoUtil.error("Exception in Executing");
+//                    resultVO = ResultVOUtil.error("Exception in Executing");
 //                    return resultVO;
 //                }
 //                if (i == 0 || j == 0) {
-//                    resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+//                    resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
 //                } else {
-//                    resultVO = ResultVoUtil.success(BeanUtil.beansToList(users));
+//                    resultVO = ResultVOUtil.success(BeanUtil.beansToList(users));
 //                }
 //            } catch (Exception e) {
 //                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

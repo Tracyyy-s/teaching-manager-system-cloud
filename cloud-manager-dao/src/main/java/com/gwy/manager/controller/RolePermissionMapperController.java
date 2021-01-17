@@ -6,6 +6,7 @@ import com.gwy.manager.mapper.RolePermissionMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,32 +22,40 @@ import java.util.List;
 public class RolePermissionMapperController {
     @Resource
     RolePermissionMapper rolePermissionMapper;
+
     @RequestMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey( Integer roleId,Integer permissionId){
-      return rolePermissionMapper.deleteByPrimaryKey(roleId,permissionId);
-    };
+    int deleteByPrimaryKey(Integer roleId, Integer permissionId) {
+        return rolePermissionMapper.deleteByPrimaryKey(roleId, permissionId);
+    }
+
     @RequestMapping("insert")
-    int insert(RolePermission record){
+    int insert(@RequestBody RolePermission record) {
         return rolePermissionMapper.insert(record);
-    };
+    }
+
     @RequestMapping("selectAll")
-    List<RolePermission> selectAll(){
+    List<RolePermission> selectAll() {
         return rolePermissionMapper.selectAll();
-    };
+    }
+
     @RequestMapping("selectPermissionIdsByRoleIds")
-    List<Integer> selectPermissionIdsByRoleIds(@Param("roleIds") List<Integer> roleIds){
+    List<Integer> selectPermissionIdsByRoleIds(@RequestBody List<Integer> roleIds) {
         return rolePermissionMapper.selectPermissionIdsByRoleIds(roleIds);
-    };
+    }
+
     @RequestMapping("selectPermissionIdsByRoleId")
-    List<Integer> selectPermissionIdsByRoleId(Integer roleId){
+    List<Integer> selectPermissionIdsByRoleId(Integer roleId) {
         return rolePermissionMapper.selectPermissionIdsByRoleId(roleId);
-    };
+    }
+
     @RequestMapping("deleteByRoleId")
-    int deleteByRoleId(Integer roleId){
+    int deleteByRoleId(Integer roleId) {
         return rolePermissionMapper.deleteByRoleId(roleId);
-    };
+    }
+
     @RequestMapping("insertBatch")
-    int insertBatch( Integer roleId, List<Integer> permissionIds){
-        return rolePermissionMapper.insertBatch(roleId,permissionIds);
-    };
+    int insertBatch(Integer roleId, @RequestBody List<Integer> permissionIds) {
+        return rolePermissionMapper.insertBatch(roleId, permissionIds);
+    }
+
 }

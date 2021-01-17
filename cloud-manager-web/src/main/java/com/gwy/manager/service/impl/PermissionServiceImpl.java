@@ -6,9 +6,10 @@ import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.invokes.PermissionInvoker;
 import com.gwy.manager.invokes.RolePermissionInvoker;
 import com.gwy.manager.service.PermissionService;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -30,9 +31,11 @@ public class PermissionServiceImpl implements PermissionService {
 
     private static final String TOKEN_PREFIX = "eyJ*";
 
+    @Qualifier("webPermissionInvoker")
     @Autowired
     private PermissionInvoker permissionInvoker;
 
+    @Qualifier("webRolePermissionInvoker")
     @Autowired
     private RolePermissionInvoker rolePermissionInvoker;
 
@@ -47,9 +50,9 @@ public class PermissionServiceImpl implements PermissionService {
 
         List<Permission> permissions = permissionInvoker.selectByRoleIds(roleIds);
         if (CollectionUtils.isEmpty(permissions)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(permissions);
+            resultVO = ResultVOUtil.success(permissions);
         }
 
         return resultVO;
@@ -63,9 +66,9 @@ public class PermissionServiceImpl implements PermissionService {
 
         List<Permission> permissions = permissionInvoker.selectAll();
         if (CollectionUtils.isEmpty(permissions)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(permissions);
+            resultVO = ResultVOUtil.success(permissions);
         }
         return resultVO;
     }
@@ -77,9 +80,9 @@ public class PermissionServiceImpl implements PermissionService {
 
         List<Permission> permissions = permissionInvoker.selectByRoleId(roleId);
         if (CollectionUtils.isEmpty(permissions)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(permissions);
+            resultVO = ResultVOUtil.success(permissions);
         }
 
         return resultVO;
@@ -93,9 +96,9 @@ public class PermissionServiceImpl implements PermissionService {
 
         List<Permission> permissions = permissionInvoker.selectByIds(permissionIds);
         if (CollectionUtils.isEmpty(permissions)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(permissions);
+            resultVO = ResultVOUtil.success(permissions);
         }
 
         return resultVO;
@@ -109,14 +112,14 @@ public class PermissionServiceImpl implements PermissionService {
         try {
             int i = rolePermissionInvoker.deleteByRoleId(roleId);
             if (i == 0) {
-                return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             }
 
             int j = rolePermissionInvoker.insertBatch(roleId, permissionIds);
             if (j == 0) {
-                return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             } else {
-                return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+                return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
             }
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -128,6 +131,6 @@ public class PermissionServiceImpl implements PermissionService {
             redisTemplate.delete(keys);
         }
 
-        return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+        return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
     }
 }

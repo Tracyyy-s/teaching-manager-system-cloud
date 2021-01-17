@@ -4,6 +4,7 @@ import com.gwy.manager.domain.entity.StudentClass;
 import com.gwy.manager.invokes.StudentClassInvoker;
 import com.gwy.manager.service.StudentClassService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 @Service
 public class StudentClassServiceImpl implements StudentClassService {
 
+    @Qualifier("webStudentClassInvoker")
     @Autowired
     private StudentClassInvoker studentClassMapper;
 

@@ -96,7 +96,7 @@ public class JwtLoginAuthenticationFilter extends UsernamePasswordAuthentication
             encodedToken = AesEncryptUtils.aesEncrypt(authToken, EncodeConstant.SALT);
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().write(JSONObject.toJSONString(ResultVoUtil.error("Encode Token Error")));
+            response.getWriter().write(JSONObject.toJSONString(ResultVOUtil.error("Encode Token Error")));
             return;
         }
 

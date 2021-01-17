@@ -2,6 +2,18 @@ server:
   port: 8848
 
 spring:
+  # redis相关配置
+  redis:
+    host: 39.97.102.209
+    password: GONGRAN0812
+    database: 2
+    port: 6379
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: 5000
+        max-idle: 10
+        min-idle: 0
   # rabbitmq相关配置
   rabbitmq:
     host: www.tracys.cn
@@ -15,10 +27,21 @@ spring:
         prefetch: 50
   application:
     name: cloud-manager-auth-server
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    inetutils:
+      timeout-seconds: 10
 
 mybatis:
   # 指定映射配置文件路径
   mapper-locations: classpath:mapper/*.xml
+
+
+
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
 
 eureka:
   client:

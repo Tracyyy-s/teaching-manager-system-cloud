@@ -9,9 +9,10 @@ import com.gwy.manager.invokes.TeacherCourseInvoker;
 import com.gwy.manager.service.StudentAssessService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,12 +26,15 @@ import java.util.Map;
 @Service
 public class StudentAssessServiceImpl implements StudentAssessService {
 
+    @Qualifier("webStudentAssessInvoker")
     @Autowired
     private StudentAssessInvoker studentAssessMapper;
 
+    @Qualifier("webTeacherCourseInvoker")
     @Autowired
     private TeacherCourseInvoker teacherCourseMapper;
 
+    @Qualifier("webStudentInvoker")
     @Autowired
     private StudentInvoker studentMapper;
 
@@ -42,10 +46,10 @@ public class StudentAssessServiceImpl implements StudentAssessService {
         //判断学生是否提交过
         StudentAssess assess = studentAssessMapper.selectByPrimaryKey(studentAssess.getStudentNo(), studentAssess.getTcId());
         if (assess.getAppraiseScore() != null || assess.getSubmitTime() != null) {
-            resultVO = ResultVoUtil.error("Already Assessed!");
+            resultVO = ResultVOUtil.error("Already Assessed!");
         } else {
             if (studentAssess.getAppraiseScore() <= 0) {
-                return ResultVoUtil.error("Error Score!");
+                return ResultVOUtil.error("Error Score!");
             }
 
             //设置评论提交时间
@@ -56,9 +60,9 @@ public class StudentAssessServiceImpl implements StudentAssessService {
             int j = teacherCourseMapper.updateAppraiseScore(studentAssess.getTcId(), studentAssess.getAppraiseScore());
 
             if (i == 0 || j == 0) {
-                resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             } else {
-                resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+                resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
             }
         }
 
@@ -85,7 +89,7 @@ public class StudentAssessServiceImpl implements StudentAssessService {
 
         List<StudentAssess> studentAssesses = studentAssessMapper.selectByTcId(tcId);
         if (CollectionUtils.isEmpty(studentAssesses)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
         List<String> studentNos = new ArrayList<>();
@@ -105,7 +109,7 @@ public class StudentAssessServiceImpl implements StudentAssessService {
             }
         }
 
-        return ResultVoUtil.success(assessMap);
+        return ResultVOUtil.success(assessMap);
     }
 
     @Override

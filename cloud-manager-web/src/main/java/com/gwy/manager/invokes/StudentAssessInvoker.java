@@ -1,9 +1,14 @@
 package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.StudentAssess;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClientProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -13,25 +18,28 @@ import java.util.Map;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@RestController
+@Component
 @RequestMapping("StudentAssessMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "88")
+@Qualifier("webStudentAssessInvoker")
 public interface StudentAssessInvoker {
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String studentNo, String tcId);
+    int deleteByPrimaryKey(@RequestParam("studentNo") String studentNo,
+                           @RequestParam("tcId") String tcId);
 
     @PostMapping("insert")
-    int insert(StudentAssess record);
+    int insert(@RequestBody StudentAssess record);
 
     @PostMapping("selectByPrimaryKey")
-    StudentAssess selectByPrimaryKey(String studentNo, String tcId);
+    StudentAssess selectByPrimaryKey(@RequestParam("studentNo")String studentNo,
+                                     @RequestParam("tcId") String tcId);
 
     @PostMapping("selectAll")
     List<StudentAssess> selectAll();
 
     @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(StudentAssess record);
+    int updateByPrimaryKey(@RequestBody StudentAssess record);
 
     /**
      * 获取学生在本学期的评价列表
@@ -41,7 +49,8 @@ public interface StudentAssessInvoker {
      * @return 结果集
      */
     @PostMapping("selectByStudentNoAndTerm")
-    List<StudentAssess> selectByStudentNoAndTerm(String studentNo, String termId);
+    List<StudentAssess> selectByStudentNoAndTerm(@RequestParam("studentNo")String studentNo,
+                                                 @RequestParam("termId") String termId);
 
     /**
      * 获得某门课的评价
@@ -50,7 +59,7 @@ public interface StudentAssessInvoker {
      * @return 结果集
      */
     @PostMapping("selectByTcId")
-    List<StudentAssess> selectByTcId(String tcId);
+    List<StudentAssess> selectByTcId(@RequestParam("tcId") String tcId);
 
     /**
      * 获得学生对课程评价状态
@@ -60,7 +69,8 @@ public interface StudentAssessInvoker {
      * @return 结果集
      */
     @PostMapping("selectStateByStudentAndTcIds")
-    List<Integer> selectStateByStudentAndTcIds(String studentNo, List<String> tcIds);
+    List<Integer> selectStateByStudentAndTcIds(@RequestParam("studentNo") String studentNo,
+                                               @RequestBody List<String> tcIds);
 
     /**
      * 获得某学期教师所有的课程评价
@@ -70,5 +80,5 @@ public interface StudentAssessInvoker {
      * @return 结果集
      */
     @PostMapping("selectByTeacherNosAndTerm")
-    List<Map<String, Object>> selectByTeacherNosAndTerm(List<String> teacherNos, String termId);
+    List<Map<String, Object>> selectByTeacherNosAndTerm(@RequestBody List<String> teacherNos, @RequestParam("termId") String termId);
 }

@@ -9,10 +9,11 @@ import com.gwy.manager.invokes.RoleInvoker;
 import com.gwy.manager.invokes.UserInvoker;
 import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.UserRoleService;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -35,12 +36,15 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     private static final String TOKEN_PREFIX = "eyJ*";
 
+    @Qualifier("webRoleInvoker")
     @Autowired
     private RoleInvoker roleMapper;
 
+    @Qualifier("webUserInvoker")
     @Autowired
     private UserInvoker userMapper;
 
+    @Qualifier("webUserRoleInvoker")
     @Autowired
     private UserRoleInvoker userRoleMapper;
 
@@ -59,9 +63,9 @@ public class UserRoleServiceImpl implements UserRoleService {
 
         List<Role> roles = this.getRolesOfUser(account);
         if (CollectionUtils.isEmpty(roles)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound);
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound);
         } else {
-            resultVO = ResultVoUtil.success(roles);
+            resultVO = ResultVOUtil.success(roles);
         }
 
         return resultVO;
@@ -75,13 +79,13 @@ public class UserRoleServiceImpl implements UserRoleService {
 
         List<Role> roles = this.getRolesOfUser(account);
         if (CollectionUtils.isEmpty(roles)) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound);
+            resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound);
         } else {
             List<Integer> roleIds = new ArrayList<>();
             for (Role role : roles) {
                 roleIds.add(role.getRoleId());
             }
-            resultVO = ResultVoUtil.success(roleIds);
+            resultVO = ResultVOUtil.success(roleIds);
         }
 
         return resultVO;
@@ -132,13 +136,13 @@ public class UserRoleServiceImpl implements UserRoleService {
             //为用户添加新角色
             int i = userRoleMapper.addRolesForUser(userId, roleIds);
             if (i == 0) {
-                resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+                resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
             } else {
-                resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+                resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
             }
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
         //删除所有缓存的token
