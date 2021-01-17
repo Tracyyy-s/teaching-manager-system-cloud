@@ -35,9 +35,11 @@ public class RoleServiceImpl implements RoleService {
     @Qualifier("menuRoleInvoker")
     @Autowired
     private RoleInvoker roleInvoker;
+
     @Qualifier("menuRolePermissionInvoker")
     @Autowired
     private RolePermissionInvoker rolePermissionInvoker;
+
     @Qualifier("menuPermissionInvoker")
     @Autowired
     private PermissionInvoker permissionInvoker;

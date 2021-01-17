@@ -8,7 +8,7 @@ public interface UserService {
      * 获得所有用户
      * @return  结果集
      */
-    ResultVO getAllUsers(int pageNum, int pageSize);
+    ResultVO getAllUsers();
 
     /**
      * 通过学院id和userId获得用户

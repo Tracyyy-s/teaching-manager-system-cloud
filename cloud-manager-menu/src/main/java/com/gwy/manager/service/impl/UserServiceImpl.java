@@ -1,7 +1,5 @@
 package com.gwy.manager.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.*;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
@@ -105,17 +103,15 @@ public class UserServiceImpl implements UserService {
 
         return resultVO;
     }
-    @Override
-    public ResultVO getAllUsers(int pageNum, int pageSize) {
 
+    public ResultVO getAllUsers() {
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userInvoker.selectAll();
         if (CollectionUtils.isEmpty(users)) {
             resultVO =ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(users)));
+            resultVO = ResultVoUtil.success(BeanUtil.beansToList(users));
         }
 
         return resultVO;

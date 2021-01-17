@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Component
 @RequestMapping("UserRoleMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "70")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "105")
 @Qualifier("menuUserRoleInvoker")
 public interface UserRoleInvoker {
 

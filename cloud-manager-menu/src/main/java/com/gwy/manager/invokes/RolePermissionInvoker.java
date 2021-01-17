@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,28 +18,28 @@ import java.util.List;
  */
 @Component
 @RequestMapping("RolePermissionMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "77")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "103")
 @Qualifier("menuRolePermissionInvoker")
 public interface RolePermissionInvoker {
 
-    @RequestMapping("deleteByPrimaryKey")
+    @PostMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("roleId") Integer roleId, @RequestParam("permissionId")Integer permissionId);
 
-    @RequestMapping("insert")
+    @PostMapping("insert")
     int insert(@RequestBody RolePermission record);
 
-    @RequestMapping("selectAll")
+    @PostMapping("selectAll")
     List<RolePermission> selectAll();
 
-    @RequestMapping("selectPermissionIdsByRoleIds")
+    @PostMapping("selectPermissionIdsByRoleIds")
     List<Integer> selectPermissionIdsByRoleIds(@RequestBody List<Integer> roleIds);
 
-    @RequestMapping("selectPermissionIdsByRoleId")
+    @PostMapping("selectPermissionIdsByRoleId")
     List<Integer> selectPermissionIdsByRoleId(@RequestParam("roleId") Integer roleId);
 
-    @RequestMapping("deleteByRoleId")
+    @PostMapping("deleteByRoleId")
     int deleteByRoleId(@RequestParam("roleId") Integer roleId);
 
-    @RequestMapping("insertBatch")
+    @PostMapping("insertBatch")
     int insertBatch(@RequestParam("roleId") Integer roleId, @RequestBody List<Integer> permissionIds);
 }
