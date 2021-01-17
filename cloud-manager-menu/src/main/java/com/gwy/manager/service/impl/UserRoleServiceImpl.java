@@ -53,7 +53,13 @@ public class UserRoleServiceImpl implements UserRoleService {
         return roleInvoker.selectByUserId(account);
     }
 
-    /*-----------获取用户角色------------------*/
+    /**
+     * 获取用户角色
+     * @param account
+     * @return com.gwy.manager.domain.dto.ResultVO
+     * @author RayWang
+     * @date 2021/1/17 22:42
+     */
     @Cacheable(keyGenerator = "userRoles")
     @Override
     public ResultVO getUserRoles(String account) {

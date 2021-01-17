@@ -63,7 +63,6 @@ public class FallbackRoleInvoker implements FallbackFactory<RoleInvoker> {
             /*------------获取用户角色--------------*/
             @Override
             public List<Role> selectByUserId(String userId) {
-                System.out.println("被关闭了");
                 List<Role> l = new ArrayList<Role>();
                 Role r = new Role();
                 r.setRoleId(-1);

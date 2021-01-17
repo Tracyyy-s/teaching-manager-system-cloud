@@ -176,7 +176,7 @@ public class MenuBaseController {
         ResultVO rolesOfUser = userRoleService.getUserRoles(account);
         System.out.println((List<Role>)rolesOfUser.getData());
         if (((List<Role>)rolesOfUser.getData()).get(0).getRoleId() == -1){
-            System.out.println("您请求的服务被临时关闭了");
+            System.out.println("cloud-manager-menu/controller/MenuBaseController-log:您请求的服务被临时关闭了");
             rolesOfUser.setMessage("您请求的服务被临时关闭了,请稍后访问");
             return rolesOfUser ;
         }
