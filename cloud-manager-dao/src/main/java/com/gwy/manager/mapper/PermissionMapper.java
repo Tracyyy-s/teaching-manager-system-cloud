@@ -28,6 +28,7 @@ public interface PermissionMapper {
 
     List<Permission> selectByUserId(String userId);
 
+    /*---根据roleId列表去筛选权限---*/
     List<Permission> selectByRoleIds(@Param("roleIds") List<Integer> roleIds);
 
     List<Permission> selectByRoleId(@Param("roleId") Integer roleId);

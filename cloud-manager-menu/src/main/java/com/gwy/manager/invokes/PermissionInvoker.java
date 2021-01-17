@@ -40,6 +40,7 @@ public interface PermissionInvoker {
     @PostMapping("selectByUserId")
     List<Permission> selectByUserId(@RequestParam("userId") String userId);
 
+    /*---根据roleId列表去筛选权限---*/
     @PostMapping("selectByRoleIds")
     List<Permission> selectByRoleIds(@RequestBody List<Integer> roleIds);
 

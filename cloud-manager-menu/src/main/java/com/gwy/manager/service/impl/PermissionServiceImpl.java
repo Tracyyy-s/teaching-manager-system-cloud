@@ -42,6 +42,8 @@ public class PermissionServiceImpl implements PermissionService {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+
+    /*---根据roleId列表去筛选权限---*/
     @Cacheable(keyGenerator = "byRoleIds")
     @Override
     public ResultVO getPermissionsByRoleIds(List<Integer> roleIds) {

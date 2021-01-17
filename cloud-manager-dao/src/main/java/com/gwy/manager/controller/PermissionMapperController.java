@@ -64,6 +64,7 @@ public class PermissionMapperController {
         return permissionMapper.selectByUserId(userId);
     }
 
+    /*---根据roleId列表去筛选权限---*/
     @RequestMapping("selectByRoleIds")
     List<Permission> selectByRoleIds(@RequestBody List<Integer> roleIds) {
         System.out.println(roleIds);
