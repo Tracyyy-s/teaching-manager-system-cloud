@@ -13,9 +13,8 @@ import java.util.List;
  * @author Tracy
  * @date 2020/12/10 15:40
  */
-@RestController
+@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "SysPermissionApiInvoker")
 @RequestMapping("SysPermissionApiMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
 public interface SysPermissionApiInvoker {
 
     @PostMapping("deleteByPrimaryKey")

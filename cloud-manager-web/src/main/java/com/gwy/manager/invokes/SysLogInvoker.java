@@ -14,9 +14,8 @@ import java.util.Map;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@RestController
+@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "SysLogInvoker")
 @RequestMapping("SysLogMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
 public interface SysLogInvoker {
 
     @PostMapping("insert")

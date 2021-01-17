@@ -13,12 +13,11 @@ import java.util.Map;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@RestController
+@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "StudentInvoker")
 @RequestMapping("StudentMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
 public interface StudentInvoker {
 
-    @PostMapping("deleteByPrimaryKey")
+    @PostMapping("/StudentMapperController/deleteByPrimaryKey")
     int deleteByPrimaryKey(String studentNo);
 
     @PostMapping("insert")

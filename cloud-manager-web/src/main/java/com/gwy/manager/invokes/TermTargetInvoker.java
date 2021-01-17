@@ -13,9 +13,8 @@ import java.util.List;
  * @author Tracy
  * @date 2021/1/17 9:40
  */
-@RestController
+@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "TermTargetInvoker")
 @RequestMapping("TermTargetInvoker")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
 public interface TermTargetInvoker {
 
     @PostMapping("deleteByPrimaryKey")

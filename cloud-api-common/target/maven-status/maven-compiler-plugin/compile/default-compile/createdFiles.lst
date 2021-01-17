@@ -7,7 +7,6 @@ com\gwy\manager\domain\entity\SysLog.class
 com\gwy\manager\domain\entity\Course.class
 com\gwy\manager\domain\entity\StudentAssess.class
 com\gwy\manager\domain\entity\SysPermissionApi.class
-com\gwy\manager\config\RedisConfiguration.class
 com\gwy\manager\util\RedisUtil.class
 com\gwy\manager\domain\constant\PageHelperConst.class
 com\gwy\manager\domain\entity\MailForm.class

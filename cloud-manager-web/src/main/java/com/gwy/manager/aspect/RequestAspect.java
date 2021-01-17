@@ -31,7 +31,7 @@ public class RequestAspect {
     public void pointcut(){}
 
     @Autowired
-    private SysLogServiceImpl logService;
+    private SysLogServiceImpl sysLogServiceImpl;
 
     /**
      * 定义环绕通知切面
@@ -74,7 +74,7 @@ public class RequestAspect {
 
         //记录日志
         if (resultVO != null) {
-            logService.recordLog(request, argsForLog, resultVO);
+            sysLogServiceImpl.recordLog(request, argsForLog, resultVO);
         }
 
         return result;

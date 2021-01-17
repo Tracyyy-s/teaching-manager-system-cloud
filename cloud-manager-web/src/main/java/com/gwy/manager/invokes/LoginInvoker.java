@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Tracy
  * @date 2020/12/16 15:45
  */
-@RestController
+@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "LoginInvoker")
 @RequestMapping("LoginMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
 public interface LoginInvoker {
 
     /**

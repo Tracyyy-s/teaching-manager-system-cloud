@@ -44,7 +44,7 @@ public class SysLogServiceImpl implements SysLogService {
     private static final String POST = "POST";
 
     @Autowired
-    private SysLogInvoker sysLogMapper;
+    private SysLogInvoker sysLogInvoker;
 
     @Autowired
     private RabbitmqProducer producer;
@@ -117,13 +117,13 @@ public class SysLogServiceImpl implements SysLogService {
      */
     @Override
     public void insertLog(SysLog sysLog) {
-        sysLogMapper.insert(sysLog);
+        sysLogInvoker.insert(sysLog);
     }
 
     @Override
     public ResultVO getLogTypeAndCount() {
 
-        List<Map<String, Object>> types = sysLogMapper.selectDataExplainAndCount();
+        List<Map<String, Object>> types = sysLogInvoker.selectDataExplainAndCount();
         if (CollectionUtils.isEmpty(types)) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -136,7 +136,7 @@ public class SysLogServiceImpl implements SysLogService {
 
         PageHelper.startPage(pageNum, pageSize);
 
-        List<SysLog> sysLogs = sysLogMapper.selectByType(type);
+        List<SysLog> sysLogs = sysLogInvoker.selectByType(type);
         if (CollectionUtils.isEmpty(sysLogs)) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -149,7 +149,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public ResultVO deleteByBatch(List<Integer> ids) {
 
-        int i = sysLogMapper.deleteByPrimaryKeys(ids);
+        int i = sysLogInvoker.deleteByPrimaryKeys(ids);
         if (i != ids.size()) {
             return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
         }
@@ -160,7 +160,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public ResultVO getLogByInterval(Date beginTime, Date endTime, String type) {
 
-        List<SysLog> sysLogs = sysLogMapper.selectByInterval(beginTime, endTime, type);
+        List<SysLog> sysLogs = sysLogInvoker.selectByInterval(beginTime, endTime, type);
         if (CollectionUtils.isEmpty(sysLogs)) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
@@ -171,7 +171,7 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public ResultVO getLogs(int pageNum, int pageSize) {
 
-        List<SysLog> sysLogs = sysLogMapper.selectAll();
+        List<SysLog> sysLogs = sysLogInvoker.selectAll();
         if (CollectionUtils.isEmpty(sysLogs)) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -182,12 +182,12 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public ResultVO getLogsInfo() {
 
-        List<Map<Date, Integer>> maps = sysLogMapper.selectLogsInfo();
+        List<Map<Date, Integer>> maps = sysLogInvoker.selectLogsInfo();
         if (CollectionUtils.isEmpty(maps)) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(sysLogMapper.selectLogsInfo());
+        return ResultVoUtil.success(sysLogInvoker.selectLogsInfo());
     }
 
     /**
