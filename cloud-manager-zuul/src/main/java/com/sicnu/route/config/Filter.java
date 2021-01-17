@@ -40,7 +40,7 @@ public class Filter extends ZuulFilter {
         String token = request.getParameter("token");
         // 业务逻辑处理
         if (null== token) {
-            logger.warn("token is null...");
+            logger.warn("无token");
             // 请求结束，不在继续向下请求。
             rc.setSendZuulResponse(false);
             // 响应状态码，HTTP 401 错误代表用户没有访问权限
@@ -61,7 +61,7 @@ public class Filter extends ZuulFilter {
             }
         } else {
             // 使用 token 进行身份验证
-            logger.info("token is OK!");
+            logger.info("有token");
         }
         return null;
     }
