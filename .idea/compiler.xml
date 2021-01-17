@@ -12,7 +12,6 @@
         <module name="cloud-api-common" />
         <module name="cloud-manager-MQ-handler" />
         <module name="cloud-manager-dao" />
-        <module name="route" />
         <module name="cloud-manager-eureka-7003" />
         <module name="cloud-manager-eureka-7002" />
         <module name="cloud-manager-eureka-7001" />
@@ -21,12 +20,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
       <module name="cloud-manager-MQ-handler" target="1.8" />
-      <module name="zuul" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="route" options="-parameters" />
       <module name="zuul" options="-parameters" />
     </option>
   </component>
