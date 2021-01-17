@@ -6,7 +6,6 @@ import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Tracy

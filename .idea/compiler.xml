@@ -8,14 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zuul" />
-        <module name="cloud-manager-web" />
+        <module name="cloud-manager-eureka-7001" />
         <module name="cloud-api-common" />
-        <module name="cloud-manager-MQ-handler" />
         <module name="cloud-manager-dao" />
+        <module name="cloud-manager-auth" />
         <module name="cloud-manager-eureka-7003" />
         <module name="cloud-manager-eureka-7002" />
-        <module name="cloud-manager-eureka-7001" />
-        <module name="cloud-manager-auth" />
+        <module name="cloud-manager-MQ-handler" />
+        <module name="cloud-manager-web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
