@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public interface StudentInvoker {
     @PostMapping("selectByPrimaryKey")
     Student selectByPrimaryKey(@RequestParam("studentNo") String studentNo);
 
-    @PostMapping("selectAll")
+    @GetMapping("selectAll")
     List<Student> selectAll();
 
     @PostMapping("updateByPrimaryKey")

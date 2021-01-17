@@ -1,10 +1,7 @@
 package com.gwy.manager.controller.sys.user;
 
 import com.alibaba.fastjson.JSONObject;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.gwy.manager.domain.constant.ExcelConstants;
-import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Student;
 import com.gwy.manager.domain.entity.Target;
@@ -17,12 +14,17 @@ import com.gwy.manager.service.impl.TeacherAssessServiceImpl;
 import com.gwy.manager.service.impl.TeacherCourseServiceImpl;
 import com.gwy.manager.service.impl.TermTargetServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
+import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.PageHelperUtil;
 import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -296,15 +298,11 @@ public class AdminController {
     @SuppressWarnings("unchecked")
     public ResultVO getAssessOfDeptInTerm(@RequestBody Map<String, Object> map) {
 
-        PageHelperUtil.pageMsg(map);
         String deptId = ((String) map.get("deptId"));
         String termId = ((String) map.get("termId"));
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
 
         List<String> teacherNos = new ArrayList<>();
 
-        PageHelper.startPage(pageNum, pageSize);
         List<Map<String, Object>> tScores = teacherAssessService.getScoresByTermAndDept(deptId, termId);
 
         for (Map<String, Object> tScore : tScores) {
@@ -324,7 +322,7 @@ public class AdminController {
             }
         }
 
-        return ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(tScores)));
+        return ResultVOUtil.success(BeanUtil.beansToList(tScores));
     }
 
     /**

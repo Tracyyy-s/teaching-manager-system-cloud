@@ -36,11 +36,10 @@ public interface SysLogService {
     /**
      * 通过日志类型获得日志
      * @param type  关键字
-     * @param pageNum   页码
-     * @param pageSize  页大小
+
      * @return  结果集
      */
-    ResultVO getLogInfoByType(String type, int pageNum, int pageSize);
+    ResultVO getLogInfoByType(String type);
 
     /**
      * 批量删除日志
