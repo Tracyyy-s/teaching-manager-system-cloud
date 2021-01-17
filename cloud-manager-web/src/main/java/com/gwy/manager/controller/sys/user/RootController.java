@@ -121,8 +121,8 @@ public class RootController {
      * @return  结果集
      */
     @PostMapping("/getUserById")
-    public ResultVO getUserById(@RequestBody Map<String, String> map) {
-        return userService.getUserById(map.get("userId"));
+    public String getUserById(@RequestBody Map<String, String> map) {
+        return JSONObject.toJSONStringWithDateFormat(userService.getUserById(map.get("userId")), DateUtilCustom.DATE_PATTERN);
     }
 
     /**

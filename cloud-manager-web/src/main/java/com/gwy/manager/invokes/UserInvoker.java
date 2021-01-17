@@ -33,7 +33,7 @@ public interface UserInvoker {
     @PostMapping("selectByPrimaryKey")
     User selectByPrimaryKey(@RequestParam("userId") String userId);
 
-    @GetMapping(value = "selectAll")
+    @PostMapping(value = "selectAll")
     List<User> selectAll();
 
     @RequestMapping("updateByPrimaryKey")

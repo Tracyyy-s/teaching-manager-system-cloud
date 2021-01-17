@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  # redis相关配置
+  redis:
+    host: 39.97.102.209
+    password: GONGRAN0812
+    database: 2
+    port: 6379
+    jedis:
+      pool:
+        max-active: 100
+        max-wait: 5000
+        max-idle: 10
+        min-idle: 0
+
+  application:
+    name: cloud-manager-route-server
+
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/, http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+zuul:
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,APPToken
+  routes:
+    api-login:
+      path: /login
+      serviceId: CLOUD-MANAGER-AUTH-SERVER
+    api-project:
+      path: /**
+      serviceId: CLOUD-MANAGER-WEB-SERVER
+
+ribbon:
+  ConnectTimeout: 55000 # 连接超时时间(ms)
+  ReadTimeout: 55000 # 通信超时时间(ms)
+hystrix:
+  command:
+    default:
+    execution:
+    isolation:
+    thread:
+    timeoutInMilliseconds: 60000 # 设置hystrix的超时时间为6000ms

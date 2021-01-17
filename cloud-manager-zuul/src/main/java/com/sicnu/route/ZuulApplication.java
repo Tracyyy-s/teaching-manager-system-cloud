@@ -14,10 +14,10 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableZuulProxy
-public class zuulApplication {
+public class ZuulApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(zuulApplication.class, args);
+        SpringApplication.run(ZuulApplication.class, args);
     }
 
     @Bean

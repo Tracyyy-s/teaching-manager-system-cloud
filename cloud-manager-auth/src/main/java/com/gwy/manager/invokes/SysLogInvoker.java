@@ -6,7 +6,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -24,10 +26,10 @@ import java.util.Map;
 public interface SysLogInvoker {
 
     @PostMapping("insert")
-    int insert(SysLog record);
+    int insert(@RequestBody SysLog record);
 
     @PostMapping("selectByPrimaryKey")
-    SysLog selectByPrimaryKey(Integer id);
+    SysLog selectByPrimaryKey(@RequestParam("id") Integer id);
 
     @PostMapping("selectAll")
     List<SysLog> selectAll();
@@ -36,10 +38,10 @@ public interface SysLogInvoker {
     List<Map<String, Object>> selectDataExplainAndCount();
 
     @PostMapping("selectByType")
-    List<SysLog> selectByType(String type);
+    List<SysLog> selectByType(@RequestParam("type") String type);
 
     @PostMapping("deleteByPrimaryKeys")
-    int deleteByPrimaryKeys(List<Integer> ids);
+    int deleteByPrimaryKeys(@RequestBody List<Integer> ids);
 
     @PostMapping("selectLogsInfo")
     List<Map<Date, Integer>> selectLogsInfo();

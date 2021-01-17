@@ -34,7 +34,7 @@ public interface StudentInvoker {
     @PostMapping("selectByPrimaryKey")
     Student selectByPrimaryKey(@RequestParam("studentNo") String studentNo);
 
-    @GetMapping("selectAll")
+    @PostMapping("selectAll")
     List<Student> selectAll();
 
     @PostMapping("updateByPrimaryKey")

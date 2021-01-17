@@ -1,26 +1,25 @@
 package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.Permission;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Tracy
- * @date 2020/11/10 15:40
+ * @date 2021/1/17 16:57
  */
-@RestController
-@RequestMapping("/PermissionMapperController/")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "2")
-@Qualifier("authPermissionInvoker")
+@Component
+@RequestMapping("PermissionMapperController")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "5fm5")
+@Qualifier("routePermissionInvoker")
 public interface PermissionInvoker {
 
     @RequestMapping("deleteByPrimaryKey")
@@ -48,7 +47,7 @@ public interface PermissionInvoker {
     List<Permission> selectByRoleIds(@RequestBody List<Integer> roleIds);
 
     @RequestMapping("selectByRoleId")
-    List<Permission> selectByRoleId(@RequestParam("roleId") Integer roleId);
+    List<Permission> selectByRoleId(@RequestBody Integer roleId);
 
     @RequestMapping("selectIdByName")
     Integer selectIdByName(@RequestParam("permissionName") String permissionName);

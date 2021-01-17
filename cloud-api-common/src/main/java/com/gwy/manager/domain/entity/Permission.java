@@ -13,6 +13,8 @@ public class Permission {
 
     private String permissionRange;
 
+    private String permissionVxUrl;
+
     public Integer getPermissionId() {
         return permissionId;
     }
@@ -45,6 +47,14 @@ public class Permission {
         return permissionRange;
     }
 
+    public String getPermissionVxUrl() {
+        return permissionVxUrl;
+    }
+
+    public void setPermissionVxUrl(String permissionVxUrl) {
+        this.permissionVxUrl = permissionVxUrl;
+    }
+
     @Override
     public String toString() {
         return "Permission{" +
@@ -52,6 +62,7 @@ public class Permission {
                 ", permissionName='" + permissionName + '\'' +
                 ", permissionUrl='" + permissionUrl + '\'' +
                 ", permissionRange='" + permissionRange + '\'' +
+                ", permissionVxUrl='" + permissionVxUrl + '\'' +
                 '}';
     }
 }

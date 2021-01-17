@@ -25,7 +25,7 @@ public class RoleMapperController {
     RoleMapper roleMapper;
 
     @RequestMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(Integer roleId) {
+    int deleteByPrimaryKey(@RequestParam("roleId") Integer roleId) {
         return roleMapper.deleteByPrimaryKey(roleId);
     }
 
@@ -35,7 +35,7 @@ public class RoleMapperController {
     }
 
     @RequestMapping("selectByPrimaryKey")
-    Role selectByPrimaryKey(Integer roleId) {
+    Role selectByPrimaryKey(@RequestParam("roleId") Integer roleId) {
         return roleMapper.selectByPrimaryKey(roleId);
     }
 
@@ -50,12 +50,12 @@ public class RoleMapperController {
     }
 
     @RequestMapping("selectRoleNameById")
-    String selectRoleNameById(Integer roleId) {
+    String selectRoleNameById(@RequestParam("roleId") Integer roleId) {
         return roleMapper.selectRoleNameById(roleId);
     }
 
     @RequestMapping("selectRoleIdByName")
-    Integer selectRoleIdByName(String roleName) {
+    Integer selectRoleIdByName(@RequestParam("roleName") String roleName) {
         return roleMapper.selectRoleIdByName(roleName);
     }
 
@@ -65,7 +65,7 @@ public class RoleMapperController {
     }
 
     @RequestMapping("selectByUserId")
-    List<Role> selectByUserId(String userId) {
+    List<Role> selectByUserId(@RequestParam("userId") String userId) {
         System.out.println("*******");
         System.out.println(userId);
         List<Role> roles = roleMapper.selectByUserId(userId);

@@ -6,35 +6,39 @@
     <result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
     <result column="permission_url" property="permissionUrl" jdbcType="VARCHAR" />
     <result column="permission_range" property="permissionRange" jdbcType="VARCHAR"/>
+    <result column="permission_vx_url" property="permissionVxUrl" jdbcType="VARCHAR"/>
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ts_permission
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.gwy.manager.domain.entity.Permission" >
-    insert into ts_permission (permission_id, permission_name, permission_url, permission_range
+    insert into ts_permission (permission_id, permission_name, permission_url, permission_range,permission_vx_url
       )
     values (#{permissionId,jdbcType=INTEGER}, #{permissionName,jdbcType=VARCHAR},
-            #{permissionUrl,jdbcType=VARCHAR}, #{permissionRange,jdbcType=VARCHAR}
+            #{permissionUrl,jdbcType=VARCHAR}, #{permissionRange,jdbcType=VARCHAR},
+            #{permissionVxUrl,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.gwy.manager.domain.entity.Permission" >
     update ts_permission
     set permission_name = #{permissionName,jdbcType=VARCHAR},
-      permission_url = #{permissionUrl,jdbcType=VARCHAR}
+      permission_url = #{permissionUrl,jdbcType=VARCHAR},
+      permission_range = #{permissionRange,jdbcType=VARCHAR}
+      permission_vx_url = #{permissionVxUrl,jdbcType=VARCHAR}
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
     where permission_id = #{permissionId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
   </select>
   <select id="selectByIds" resultMap="BaseResultMap">
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
     where permission_id in
     <foreach collection="permissionIds" item="permissionId" open="(" close=")" separator=",">
@@ -43,7 +47,7 @@
   </select>
   <!-- 获得用户的权限 -->
   <select id="selectByUserId" resultMap="BaseResultMap">
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
     where permission_id in (select permission_id
                             from ts_role_permission
@@ -52,7 +56,7 @@
                                               where user_id = #{userId,jdbcType=VARCHAR}))
   </select>
   <select id="selectByRoleIds" resultMap="BaseResultMap">
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
     where permission_id in (select permission_id
                             from ts_role_permission
@@ -63,7 +67,7 @@
                             )
   </select>
   <select id="selectByRoleId" resultMap="BaseResultMap">
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
     where permission_id in (select permission_id
                             from ts_role_permission
@@ -75,7 +79,7 @@
     where permission_url = #{permissionName,jdbcType=VARCHAR}
   </select>
   <select id="selectAllForMap" resultMap="BaseResultMap">
-    select permission_id, permission_name, permission_url, permission_range
+    select permission_id, permission_name, permission_url, permission_range,permission_vx_url
     from ts_permission
   </select>
 </mapper>

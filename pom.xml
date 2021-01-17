@@ -17,6 +17,7 @@
         <module>cloud-manager-eureka-7003</module>
         <module>cloud-manager-dao</module>
         <module>cloud-manager-zuul</module>
+        <module>cloud-manager-route</module>
     </modules>
 
     <!--统一管理jar包版本-->

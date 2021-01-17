@@ -26,6 +26,7 @@ public class LoginMapperController {
      */
     @RequestMapping("selectUserPasswordFromAll")
     String selectUserPasswordFromAll(@RequestParam("account") String account) {
+        System.out.println("login..." + account);
         return loginMapper.selectUserPasswordFromAll(account);
     }
 }
