@@ -11,6 +11,7 @@
     <modules>
         <module>cloud-api-common</module>
         <module>cloud-manager-web</module>
+        <module>cloud-manager-menu</module>
         <module>cloud-manager-auth</module>
         <module>cloud-manager-eureka-7001</module>
         <module>cloud-manager-eureka-7002</module>
@@ -18,6 +19,7 @@
         <module>cloud-manager-dao</module>
         <module>cloud-manager-zuul</module>
         <module>cloud-manager-route</module>
+        <module>cloud-manager-log</module>
     </modules>
 
     <!--统一管理jar包版本-->

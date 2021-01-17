@@ -6,13 +6,7 @@ import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.SysLogType;
 import com.gwy.manager.elastic.ElasticRepositoryHelper;
-import com.gwy.manager.service.impl.DeptServiceImpl;
-import com.gwy.manager.service.impl.PermissionServiceImpl;
-import com.gwy.manager.service.impl.RoleServiceImpl;
-import com.gwy.manager.service.impl.StudentServiceImpl;
-import com.gwy.manager.service.impl.SysLogServiceImpl;
-import com.gwy.manager.service.impl.UserRoleServiceImpl;
-import com.gwy.manager.service.impl.UserServiceImpl;
+import com.gwy.manager.service.impl.*;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -151,7 +145,7 @@ public class RootController {
         try {
             roleId = Integer.parseInt(map.get("roleId"));
         } catch (Exception e) {
-            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
+            return com.gwy.manager.util.ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
         return permissionService.getPermissionsByRoleId(roleId);
     }
@@ -198,7 +192,7 @@ public class RootController {
             roleIds = (List<Integer>) map.get("data");
 
         } catch (Exception e) {
-            return ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
+            return com.gwy.manager.util.ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
         }
         return userRoleService.updateUserRole(userId, roleIds);
     }
@@ -218,7 +212,7 @@ public class RootController {
         try {
             permissionIds = (List<Integer>) map.get("data");
         } catch (NumberFormatException e) {
-            return ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
+            return com.gwy.manager.util.ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
         }
         return permissionService.updateRolePermission(roleId, permissionIds);
     }
@@ -238,7 +232,7 @@ public class RootController {
             list = (List<String>) map.get("deptIdList");
         } catch (Exception e) {
             ResultVO resultVO;
-            resultVO = ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
+            resultVO = com.gwy.manager.util.ResultVOUtil.error(ResponseDataMsg.BadRequest.getMsg());
 
             return resultVO;
         }
@@ -274,7 +268,7 @@ public class RootController {
             map.put("label", type.getTypeExplain());
             typeList.add(map);
         }
-        return ResultVOUtil.success(typeList);
+        return com.gwy.manager.util.ResultVOUtil.success(typeList);
     }
 
     /**
@@ -314,7 +308,7 @@ public class RootController {
         try {
             deleteId = (List<Integer>) map.get("deleteId");
         } catch (Exception e) {
-            return ResultVOUtil.error("NumberFormatException");
+            return com.gwy.manager.util.ResultVOUtil.error("NumberFormatException");
         }
 
         return logService.deleteByBatch(deleteId);
@@ -346,7 +340,7 @@ public class RootController {
             beginTime = DateUtilCustom.string2Time(strBeginTime);
             endTime = DateUtilCustom.string2Time(strEndTime);
         } catch (ParseException e) {
-            return JSONObject.toJSONString(ResultVOUtil.error("ParseException"));
+            return JSONObject.toJSONString(com.gwy.manager.util.ResultVOUtil.error("ParseException"));
         }
 
         return JSONObject.toJSONStringWithDateFormat(logService.getLogByInterval(beginTime, endTime, type), DateUtilCustom.TIME_PATTERN);

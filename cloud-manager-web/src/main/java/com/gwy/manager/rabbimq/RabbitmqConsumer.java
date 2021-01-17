@@ -1,14 +1,11 @@
 package com.gwy.manager.rabbimq;
 
-import com.alibaba.fastjson.JSONObject;
 import com.gwy.manager.config.rabbitmq.RabbitmqConfiguration;
 import com.gwy.manager.domain.entity.MailForm;
 import com.gwy.manager.domain.entity.SysLog;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.elastic.SysLogString;
 import com.gwy.manager.elastic.SysLogStringElasticRepository;
 import com.gwy.manager.service.impl.SysLogServiceImpl;
-import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

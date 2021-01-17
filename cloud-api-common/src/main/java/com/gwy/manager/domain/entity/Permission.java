@@ -15,6 +15,14 @@ public class Permission {
 
     private String permissionVxUrl;
 
+    public String getPermissionVxUrl() {
+        return permissionVxUrl;
+    }
+
+    public void setPermissionVxUrl(String permissionVxUrl) {
+        this.permissionVxUrl = permissionVxUrl;
+    }
+
     public Integer getPermissionId() {
         return permissionId;
     }
