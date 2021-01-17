@@ -36,19 +36,14 @@ public class MajorMapperController {
         return majorMapper.selectByPrimaryKey(majorId);
     }
 
-
     @RequestMapping("selectAll")
     List<Major> selectAll() {
         return majorMapper.selectAll();
     }
-
-
     @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody Major record) {
         return majorMapper.updateByPrimaryKey(record);
     }
-
-    ;
 
     /**
      * 获得某学院的所有专业
@@ -60,6 +55,4 @@ public class MajorMapperController {
     List<Major> selectByDept(@RequestParam("deptId") String deptId) {
         return majorMapper.selectByDept(deptId);
     }
-
-    ;
 }

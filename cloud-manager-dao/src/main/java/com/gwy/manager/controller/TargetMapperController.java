@@ -5,7 +5,7 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.TargetMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,27 +24,27 @@ public class TargetMapperController {
     @Resource
     TargetMapper targetMapper;
 
-    @PostMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("targetId") Integer targetId) {
         return targetMapper.deleteByPrimaryKey(targetId);
     }
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody Target record) {
         return targetMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
+    @RequestMapping("selectByPrimaryKey")
     Target selectByPrimaryKey(@RequestParam("targetId") Integer targetId) {
         return targetMapper.selectByPrimaryKey(targetId);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<Target> selectAll() {
         return targetMapper.selectAll();
     }
 
-    @PostMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody Target record) {
         return targetMapper.updateByPrimaryKey(record);
     }
@@ -54,7 +54,7 @@ public class TargetMapperController {
      *
      * @return 结果集
      */
-    @PostMapping("getStudentTargets")
+    @RequestMapping("getStudentTargets")
     List<Target> getStudentTargets() {
         return targetMapper.getStudentTargets();
     }
@@ -64,7 +64,7 @@ public class TargetMapperController {
      *
      * @return 结果集
      */
-    @PostMapping("getTeacherTargets")
+    @RequestMapping("getTeacherTargets")
     List<Target> getTeacherTargets() {
         return targetMapper.getTeacherTargets();
     }
@@ -74,7 +74,7 @@ public class TargetMapperController {
      *
      * @return 结果集
      */
-    @PostMapping("getTargetsByIds")
+    @RequestMapping("getTargetsByIds")
     List<Target> getTargetsByIds(@RequestBody List<Integer> ids) {
         return targetMapper.getTargetsByIds(ids);
     }

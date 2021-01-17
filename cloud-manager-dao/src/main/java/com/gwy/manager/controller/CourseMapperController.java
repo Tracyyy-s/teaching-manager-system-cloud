@@ -3,9 +3,7 @@ package com.gwy.manager.controller;
 
 import com.gwy.manager.domain.entity.Course;
 import com.gwy.manager.mapper.CourseMapper;
-import org.apache.ibatis.annotations.Param;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,42 +23,42 @@ public class CourseMapperController {
     @Resource
     private CourseMapper courseMapper;
 
-    @PostMapping("deleteByPrimaryKey")
+    @GetMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("courseNo") String courseNo) {
         return courseMapper.deleteByPrimaryKey(courseNo);
     }
 
-    @PostMapping("insert")
+    @GetMapping("insert")
     int insert(@RequestBody Course record) {
         return courseMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
+    @GetMapping("selectByPrimaryKey")
     Course selectByPrimaryKey(@RequestParam("courseNo") String courseNo) {
         return courseMapper.selectByPrimaryKey(courseNo);
     }
 
-    @PostMapping("selectAll")
+    @GetMapping("selectAll")
     List<Course> selectAll() {
         return courseMapper.selectAll();
     }
 
-    @PostMapping("updateByPrimaryKey")
+    @GetMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody Course record) {
         return courseMapper.updateByPrimaryKey(record);
     }
 
-    @PostMapping("getCoursesOfTeacher")
+    @GetMapping("getCoursesOfTeacher")
     List<Course> getCoursesOfTeacher(@RequestParam("teacherNo") String teacherNo) {
         return courseMapper.getCoursesOfTeacher(teacherNo);
     }
 
-    @PostMapping("getCoursesByIds")
+    @GetMapping("getCoursesByIds")
     List<Course> getCoursesByIds(@RequestBody List<String> courseNos) {
         return courseMapper.getCoursesByIds(courseNos);
     }
 
-    @PostMapping("getCoursesForMapByIds")
+    @GetMapping("getCoursesForMapByIds")
     Map<String, Course> getCoursesForMapByIds(@RequestBody List<String> courseNos) {
         return courseMapper.getCoursesForMapByIds(courseNos);
     }

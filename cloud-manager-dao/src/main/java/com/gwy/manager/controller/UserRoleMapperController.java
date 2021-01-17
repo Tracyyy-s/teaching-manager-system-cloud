@@ -5,7 +5,7 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.UserRoleMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,33 +24,33 @@ public class UserRoleMapperController {
     @Resource
     UserRoleMapper userRoleMapper;
 
-    @PostMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("userId") String userId, @RequestParam("roleId") Integer roleId) {
         return userRoleMapper.deleteByPrimaryKey(userId, roleId);
     }
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody UserRole record) {
         return userRoleMapper.insert(record);
     }
 
 
-    @PostMapping("insertByBatch")
+    @RequestMapping("insertByBatch")
     int insertByBatch(@RequestBody List<UserRole> userRoles) {
         return userRoleMapper.insertByBatch(userRoles);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<UserRole> selectAll() {
         return userRoleMapper.selectAll();
     }
 
-    @PostMapping("deleteRoleOfUser")
+    @RequestMapping("deleteRoleOfUser")
     int deleteRoleOfUser(@RequestParam("userId") String userId) {
         return userRoleMapper.deleteRoleOfUser(userId);
     }
 
-    @PostMapping("addRolesForUser")
+    @RequestMapping("addRolesForUser")
     int addRolesForUser(@RequestParam("userId") String userId, @RequestBody List<Integer> roleIds) {
         return userRoleMapper.addRolesForUser(userId, roleIds);
     }

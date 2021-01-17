@@ -248,6 +248,7 @@ public class UserServiceImpl implements UserService {
 
         ResultVO resultVO;
 
+        System.out.println("service..getAllAdmin");
         List<User> users = userMapper.selectUsersByRoleName(RoleName.ADMIN);
         if (CollectionUtils.isEmpty(users)) {
             resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());

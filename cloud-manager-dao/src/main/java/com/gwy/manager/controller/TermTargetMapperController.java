@@ -4,7 +4,7 @@ import com.gwy.manager.domain.entity.TermTarget;
 import com.gwy.manager.mapper.TermTargetMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,27 +24,27 @@ public class TermTargetMapperController {
     @Resource
     TermTargetMapper termTargetMapper;
 
-    @PostMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("termId") String termId, @RequestParam("targetId") Integer targetId) {
         return termTargetMapper.deleteByPrimaryKey(termId, targetId);
     }
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody TermTarget record) {
         return termTargetMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
+    @RequestMapping("selectByPrimaryKey")
     TermTarget selectByPrimaryKey(@RequestParam("termId") String termId, @RequestParam("targetId") Integer targetId) {
         return termTargetMapper.selectByPrimaryKey(termId, targetId);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<TermTarget> selectAll() {
         return termTargetMapper.selectAll();
     }
 
-    @PostMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody TermTarget record) {
         return termTargetMapper.updateByPrimaryKey(record);
     }
@@ -55,7 +55,7 @@ public class TermTargetMapperController {
      * @param termTargets 学期评价指标
      * @return 结果集
      */
-    @PostMapping("insertTermTargets")
+    @RequestMapping("insertTermTargets")
     int insertTermTargets(@RequestBody List<TermTarget> termTargets) {
         return termTargetMapper.insertTermTargets(termTargets);
     }
@@ -66,7 +66,7 @@ public class TermTargetMapperController {
      * @param termId 学期
      * @return 结果集
      */
-    @PostMapping("getStudentTermTargets")
+    @RequestMapping("getStudentTermTargets")
     List<Integer> getStudentTermTargets(@RequestParam("termId") String termId) {
         return termTargetMapper.getStudentTermTargets(termId);
     }
@@ -77,7 +77,7 @@ public class TermTargetMapperController {
      * @param termId 学期
      * @return 结果集
      */
-    @PostMapping("getTeacherTermTargets")
+    @RequestMapping("getTeacherTermTargets")
     List<Integer> getTeacherTermTargets(@RequestParam("termId") String termId) {
         return termTargetMapper.getTeacherTermTargets(termId);
     }
