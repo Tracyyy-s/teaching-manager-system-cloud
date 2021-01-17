@@ -6,7 +6,7 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.StudentAssessMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,27 +26,27 @@ public class StudentAssessMapperController {
     @Resource
     StudentAssessMapper studentAssessMapper;
 
-    @GetMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("studentNo") String studentNo, @RequestParam("tcId") String tcId) {
         return studentAssessMapper.deleteByPrimaryKey(studentNo, tcId);
     }
 
-    @GetMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody StudentAssess record) {
         return studentAssessMapper.insert(record);
     }
 
-    @GetMapping("selectByPrimaryKey")
+    @RequestMapping("selectByPrimaryKey")
     StudentAssess selectByPrimaryKey(@RequestParam("studentNo") String studentNo, @RequestParam("tcId") String tcId) {
         return studentAssessMapper.selectByPrimaryKey(studentNo, tcId);
     }
 
-    @GetMapping("selectAll")
+    @RequestMapping("selectAll")
     List<StudentAssess> selectAll() {
         return studentAssessMapper.selectAll();
     }
 
-    @GetMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody StudentAssess record) {
         return studentAssessMapper.updateByPrimaryKey(record);
     }
@@ -58,7 +58,7 @@ public class StudentAssessMapperController {
      * @param termId    学期号
      * @return 结果集
      */
-    @GetMapping("selectByStudentNoAndTerm")
+    @RequestMapping("selectByStudentNoAndTerm")
     List<StudentAssess> selectByStudentNoAndTerm(@RequestParam("studentNo") String studentNo, @RequestParam("termId") String termId) {
         return studentAssessMapper.selectByStudentNoAndTerm(studentNo, termId);
     }
@@ -69,7 +69,7 @@ public class StudentAssessMapperController {
      * @param tcId 课程号
      * @return 结果集
      */
-    @GetMapping("selectByTcId")
+    @RequestMapping("selectByTcId")
     List<StudentAssess> selectByTcId(@RequestParam("tcId") String tcId) {
         return studentAssessMapper.selectByTcId(tcId);
     }
@@ -81,7 +81,7 @@ public class StudentAssessMapperController {
      * @param tcIds     教师课程号
      * @return 结果集
      */
-    @GetMapping("selectStateByStudentAndTcIds")
+    @RequestMapping("selectStateByStudentAndTcIds")
     List<Integer> selectStateByStudentAndTcIds(@RequestParam("studentNo") String studentNo, @RequestBody List<String> tcIds) {
         return studentAssessMapper.selectStateByStudentAndTcIds(studentNo, tcIds);
     }
@@ -93,7 +93,7 @@ public class StudentAssessMapperController {
      * @param termId     学期id
      * @return 结果集
      */
-    @GetMapping("selectByTeacherNosAndTerm")
+    @RequestMapping("selectByTeacherNosAndTerm")
     List<Map<String, Object>> selectByTeacherNosAndTerm(@RequestBody List<String> teacherNos, @RequestParam("termId") String termId) {
         return studentAssessMapper.selectByTeacherNosAndTerm(teacherNos, termId);
     }

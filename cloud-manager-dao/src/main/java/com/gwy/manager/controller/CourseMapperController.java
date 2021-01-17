@@ -3,7 +3,7 @@ package com.gwy.manager.controller;
 
 import com.gwy.manager.domain.entity.Course;
 import com.gwy.manager.mapper.CourseMapper;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,42 +23,42 @@ public class CourseMapperController {
     @Resource
     private CourseMapper courseMapper;
 
-    @GetMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("courseNo") String courseNo) {
         return courseMapper.deleteByPrimaryKey(courseNo);
     }
 
-    @GetMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody Course record) {
         return courseMapper.insert(record);
     }
 
-    @GetMapping("selectByPrimaryKey")
+    @RequestMapping("selectByPrimaryKey")
     Course selectByPrimaryKey(@RequestParam("courseNo") String courseNo) {
         return courseMapper.selectByPrimaryKey(courseNo);
     }
 
-    @GetMapping("selectAll")
+    @RequestMapping("selectAll")
     List<Course> selectAll() {
         return courseMapper.selectAll();
     }
 
-    @GetMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody Course record) {
         return courseMapper.updateByPrimaryKey(record);
     }
 
-    @GetMapping("getCoursesOfTeacher")
+    @RequestMapping("getCoursesOfTeacher")
     List<Course> getCoursesOfTeacher(@RequestParam("teacherNo") String teacherNo) {
         return courseMapper.getCoursesOfTeacher(teacherNo);
     }
 
-    @GetMapping("getCoursesByIds")
+    @RequestMapping("getCoursesByIds")
     List<Course> getCoursesByIds(@RequestBody List<String> courseNos) {
         return courseMapper.getCoursesByIds(courseNos);
     }
 
-    @GetMapping("getCoursesForMapByIds")
+    @RequestMapping("getCoursesForMapByIds")
     Map<String, Course> getCoursesForMapByIds(@RequestBody List<String> courseNos) {
         return courseMapper.getCoursesForMapByIds(courseNos);
     }
