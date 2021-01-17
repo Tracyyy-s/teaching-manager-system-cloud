@@ -1,0 +1,234 @@
+<changelist name="Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1" date="1610788142592" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2021/1/16 17:07 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/domain/security/exception/GlobalAuthorizeException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/GlobalAuthorizeException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/service/impl/SysLogServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/SysLogServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/CourseMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/CourseMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/CourseMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/TermTargetMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/TermTargetMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/TermTargetMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/filter/JwtLoginAuthenticationFilter.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/JwtLoginAuthenticationFilter.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/TargetMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/TargetMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/TargetMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/StudentAssessMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/StudentAssessMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/StudentAssessMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/SysLogMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/SysLogMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/SysLogMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/config/rabbitmq/RabbitmqConfiguration.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RabbitmqConfiguration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/LoginMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/LoginMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/LoginMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/StudentClassMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/StudentClassMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/StudentClassMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/handler/CustomizeLoginFailureHandler.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/CustomizeLoginFailureHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/rabbimq/RabbitmqProducer.class" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/rabbimq/RabbitmqProducer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RabbitmqProducer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mail/MailUtil.class" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/util/MailUtil.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/MailUtil.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/RoleMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/RoleMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RoleMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/service/SysLogService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/SysLogService.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/DeptMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/DeptMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/DeptMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/config/db/DataBaseConfiguration.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/DataBaseConfiguration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/PermissionMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/PermissionMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/PermissionMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/StudentMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/StudentMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/StudentMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/config/redis/RedisConfiguration.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RedisConfiguration.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/AppWebSecurityConfig.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/AppWebSecurityConfig.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/UserMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/UserMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/UserMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/SysPermissionApiMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/SysPermissionApiMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/SysPermissionApiMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/TeacherAssessMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/TeacherAssessMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/TeacherAssessMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/controller/LoginController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/LoginController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/TeacherCourseMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/TeacherCourseMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/TeacherCourseMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/UserDetailServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/UserDetailServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/AuthApplication.class" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/AuthApplication.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/AuthApplication.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mail/MailForm.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/domain/entity/MailForm.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/MailForm.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/exception/GlobalAuthorizeException.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/GlobalAuthorizeException.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/META-INF/cloud-manager-web.kotlin_module" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/cloud-manager-web.kotlin_module" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/rabbimq/RabbitmqConsumer.class" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/rabbimq/RabbitmqConsumer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RabbitmqConsumer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/RolePermissionMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/RolePermissionMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RolePermissionMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/UserRoleMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/UserRoleMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/UserRoleMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/handler/CustomizeLoginSuccessHandler.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/CustomizeLoginSuccessHandler.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/controller/BaseController.class" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/controller/BaseController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/BaseController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/service/impl/VrCodeServiceImpl.class" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/service/impl/VrCodeServiceImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/VrCodeServiceImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/MajorMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/MajorMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/MajorMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-api-common/target/cloud-api-common-1.0.jar" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/cloud-api-common-1.0.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/cloud-api-common-1.0.jar" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/listener/AuthenticationSucceedEventListener.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/AuthenticationSucceedEventListener.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/rabbitmq/RabbitmqProducer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/RabbitmqProducer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/mapper/TermMapper.class" />
+    <option name="AFTER_PATH" value="cloud-api-common/target/classes/com/gwy/manager/mapper/TermMapper.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/TermMapper.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/com/gwy/manager/security/listener/AuthenticationFailureEventListener.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/AuthenticationFailureEventListener.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/controller/sys/student/StudentController.class" />
+    <option name="AFTER_PATH" value="cloud-manager-web/target/classes/com/gwy/manager/controller/sys/student/StudentController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/StudentController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="cloud-manager-auth/target/classes/META-INF/cloud-manager-auth.kotlin_module" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2021_1_16_17_07_[Default_Changelist]1/cloud-manager-auth.kotlin_module" />
+  </binary>
+</changelist>
