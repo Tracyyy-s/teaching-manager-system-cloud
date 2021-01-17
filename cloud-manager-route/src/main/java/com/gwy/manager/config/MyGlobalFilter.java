@@ -1,6 +1,7 @@
 package com.gwy.manager.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gwy.manager.request.WebHttpServletRequestWrapper;
 import com.gwy.manager.util.JwtTokenUtils;
 import com.gwy.manager.util.ResultVOUtil;
 import com.netflix.zuul.ZuulFilter;
@@ -89,6 +90,22 @@ public class MyGlobalFilter extends ZuulFilter {
                 }
             }
 
+            WebHttpServletRequestWrapper requestWrapper = null;
+            try {
+                requestWrapper = new WebHttpServletRequestWrapper(request, getUsernameByToken(token));
+            } catch (IOException e) {
+                e.printStackTrace();
+                try {
+                    rc.getResponse().getWriter().write(JSONObject.toJSONString(ResultVOUtil.error("Error Parsing Token")));
+                } catch (IOException ignored) {
+
+                }
+            }
+
+            if (requestWrapper != null) {
+                rc.setRequest(requestWrapper);
+            }
+
         }
         return null;
     }
@@ -100,9 +117,18 @@ public class MyGlobalFilter extends ZuulFilter {
      */
     private boolean isInvalidToken(String token) {
         //从token中获取用户信息，jwtUtils自定义的token加解密方式
-        String username = JwtTokenUtils.getUsername(token);
+        String username = this.getUsernameByToken(token);
 
         return username.equals(JwtTokenUtils.ERROR_TOKEN);
     }
 
+    /**
+     * 根据token获得username
+     *
+     * @param token token
+     * @return  结果集
+     */
+    private String getUsernameByToken(String token) {
+        return JwtTokenUtils.getUsername(token);
+    }
 }
