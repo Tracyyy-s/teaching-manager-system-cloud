@@ -1,6 +1,8 @@
 package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.Role;
+import com.gwy.manager.invokes.fallbackFactory.FallbackPermissionInvoker;
+import com.gwy.manager.invokes.fallbackFactory.FallbackRoleInvoker;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
@@ -17,8 +19,8 @@ import java.util.List;
  * @date 2020/11/10 15:40
  */
 @Component
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER", contextId = "102",fallbackFactory = FallbackRoleInvoker.class)
 @RequestMapping("RoleMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "102")
 @Qualifier("menuRoleInvoker")
 public interface RoleInvoker {
 
@@ -46,6 +48,7 @@ public interface RoleInvoker {
     @PostMapping("selectRoleIdsByNames")
     List<Integer> selectRoleIdsByNames(@RequestBody List<String> roleNames);
 
+    /*------------获取用户角色--------------*/
     @PostMapping("selectByUserId")
     List<Role> selectByUserId(@RequestParam("userId") String userId);
 }

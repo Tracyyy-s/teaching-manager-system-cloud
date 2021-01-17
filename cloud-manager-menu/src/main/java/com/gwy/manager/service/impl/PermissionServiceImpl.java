@@ -51,12 +51,16 @@ public class PermissionServiceImpl implements PermissionService {
         ResultVO resultVO;
 
         List<Permission> permissions = permissionInvoker.selectByRoleIds(roleIds);
+        System.out.println(permissions);
         if (CollectionUtils.isEmpty(permissions)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(permissions);
+            if (permissions.get(0).getPermissionId() == 0){
+                resultVO = ResultVoUtil.error("您请求的服务被临时关闭了,请稍后访问");
+            }else{
+                resultVO = ResultVoUtil.success(permissions);
+            }
         }
-        System.out.println(permissions);
         return resultVO;
     }
 

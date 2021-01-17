@@ -13,7 +13,9 @@ spring:
         max-wait: 5000
         max-idle: 10
         min-idle: 0
-
+feign:
+  hystrix:
+    enabled: true
 server:
   port: 8101
 eureka:
