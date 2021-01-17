@@ -4,7 +4,7 @@ import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Target;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.mapper.TargetMapper;
+import com.gwy.manager.invokes.TargetInvoker;
 import com.gwy.manager.service.TargetService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.ResultVoUtil;
@@ -23,7 +23,7 @@ import java.util.List;
 public class TargetServiceImpl implements TargetService {
 
     @Autowired
-    private TargetMapper targetMapper;
+    private TargetInvoker targetMapper;
 
     @Override
     public ResultVO addTarget(Target target) {

@@ -3,8 +3,8 @@ package com.gwy.manager.service.impl;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.TeacherAssess;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.TeacherAssessMapper;
-import com.gwy.manager.mapper.TermMapper;
+import com.gwy.manager.invokes.TeacherAssessInvoker;
+import com.gwy.manager.invokes.TermInvoker;
 import com.gwy.manager.service.TeacherAssessService;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.ResultVoUtil;
@@ -23,10 +23,10 @@ import java.util.Map;
 public class TeacherAssessServiceImpl implements TeacherAssessService {
 
     @Autowired
-    private TeacherAssessMapper teacherAssessMapper;
+    private TeacherAssessInvoker teacherAssessMapper;
 
     @Autowired
-    private TermMapper termMapper;
+    private TermInvoker termMapper;
 
     @Override
     public ResultVO addTeacherAssess(TeacherAssess teacherAssess) {

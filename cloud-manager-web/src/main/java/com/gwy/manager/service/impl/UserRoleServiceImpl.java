@@ -5,9 +5,9 @@ import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.entity.User;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.mapper.RoleMapper;
-import com.gwy.manager.mapper.UserMapper;
-import com.gwy.manager.mapper.UserRoleMapper;
+import com.gwy.manager.invokes.RoleInvoker;
+import com.gwy.manager.invokes.UserInvoker;
+import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.UserRoleService;
 import com.gwy.manager.util.ResultVoUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -36,13 +36,13 @@ public class UserRoleServiceImpl implements UserRoleService {
     private static final String TOKEN_PREFIX = "eyJ*";
 
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleInvoker roleMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userMapper;
 
     @Autowired
-    private UserRoleMapper userRoleMapper;
+    private UserRoleInvoker userRoleMapper;
 
     @Autowired
     private StringRedisTemplate redisTemplate;

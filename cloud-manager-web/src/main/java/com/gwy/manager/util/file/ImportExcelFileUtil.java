@@ -1,29 +1,22 @@
 package com.gwy.manager.util.file;
 
 import com.gwy.manager.domain.constant.ExcelConstants;
-import com.gwy.manager.domain.dto.ExcelSheetPO;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Dept;
 import com.gwy.manager.domain.entity.Student;
 import com.gwy.manager.domain.entity.User;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.mapper.DeptMapper;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.ResultVoUtil;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -38,8 +31,8 @@ import java.util.regex.Pattern;
 @Component
 public class ImportExcelFileUtil {
 
-    @Autowired
-    private DeptMapper deptMapper;
+//    @Autowired
+//    private DeptMapper deptMapper;
 
     private static PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -285,7 +278,7 @@ public class ImportExcelFileUtil {
      * @param file       传入文件
      * @return 结果集
      */
-    public ResultVO importBeansByFile(String deptId, String headerType, MultipartFile file) {
+    /*public ResultVO importBeansByFile(String deptId, String headerType, MultipartFile file) {
 
         List<ExcelSheetPO> pos = new ArrayList<>();
 
@@ -364,7 +357,7 @@ public class ImportExcelFileUtil {
         }
 
         return ResultVoUtil.success(map);
-    }
+    }*/
 
     /**
      * 将实例bean对象加入list

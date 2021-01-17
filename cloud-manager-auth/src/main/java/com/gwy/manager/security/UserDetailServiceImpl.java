@@ -3,9 +3,9 @@ package com.gwy.manager.security;
 import com.gwy.manager.domain.constant.RoleName;
 import com.gwy.manager.domain.entity.Permission;
 import com.gwy.manager.domain.entity.Role;
-import com.gwy.manager.mapper.LoginMapper;
-import com.gwy.manager.mapper.PermissionMapper;
-import com.gwy.manager.mapper.RoleMapper;
+import com.gwy.manager.invokes.LoginInvoker;
+import com.gwy.manager.invokes.PermissionInvoker;
+import com.gwy.manager.invokes.RoleInvoker;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -26,13 +26,13 @@ import java.util.List;
 public class UserDetailServiceImpl implements UserDetailsService {
 
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleInvoker roleMapper;
 
     @Autowired
-    private PermissionMapper permissionMapper;
+    private PermissionInvoker permissionMapper;
 
     @Autowired
-    private LoginMapper loginMapper;
+    private LoginInvoker loginMapper;
 
     @Override
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {

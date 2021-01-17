@@ -13,12 +13,12 @@ import com.gwy.manager.domain.entity.UserRole;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.mapper.DeptMapper;
-import com.gwy.manager.mapper.RoleMapper;
-import com.gwy.manager.mapper.TeacherAssessMapper;
-import com.gwy.manager.mapper.TermMapper;
-import com.gwy.manager.mapper.UserMapper;
-import com.gwy.manager.mapper.UserRoleMapper;
+import com.gwy.manager.invokes.DeptInvoker;
+import com.gwy.manager.invokes.RoleInvoker;
+import com.gwy.manager.invokes.TeacherAssessInvoker;
+import com.gwy.manager.invokes.TermInvoker;
+import com.gwy.manager.invokes.UserInvoker;
+import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.UserService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
@@ -47,25 +47,25 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userMapper;
 
     @Autowired
     private VrCodeServiceImpl vrCodeServiceImpl;
 
     @Autowired
-    private UserRoleMapper userRoleMapper;
+    private UserRoleInvoker userRoleMapper;
 
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleInvoker roleMapper;
 
     @Autowired
-    private DeptMapper deptMapper;
+    private DeptInvoker deptMapper;
 
     @Autowired
-    private TermMapper termMapper;
+    private TermInvoker termMapper;
 
     @Autowired
-    private TeacherAssessMapper teacherAssessMapper;
+    private TeacherAssessInvoker teacherAssessMapper;
 
     @Autowired
     private ImportExcelFileUtil importExcelFileUtil;
@@ -328,50 +328,51 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVO importUsersByFile(String deptId, String headerType, MultipartFile file) {
 
-        ResultVO resultVO = importExcelFileUtil.importBeansByFile(deptId, headerType, file);
-
-        if (resultVO.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
-            Map<String, Object> map = (Map<String, Object>) resultVO.getData();
-
-            List<User> users = new ArrayList<>();
-
-            for (Map.Entry<String, Object> entry : map.entrySet()) {
-                Map<String, Object> dataMap = (Map<String, Object>) entry.getValue();
-                users.addAll((List<User>) dataMap.get("dataList"));
-            }
-
-            Integer teacherRoleId = roleMapper.selectRoleIdByName(RoleName.TEACHER);
-
-            //存储用户id, 增加用户-角色
-            List<UserRole> userRoles = new ArrayList<>();
-            for (User user : users) {
-                UserRole userRole = new UserRole();
-                userRole.setUserId(user.getUserId());
-                userRole.setRoleId(teacherRoleId);
-
-                userRoles.add(userRole);
-            }
-
-            try {
-                int i, j;
-                try {
-                    i = userMapper.insertUsersByBatch(users);
-                    j = userRoleMapper.insertByBatch(userRoles);
-                } catch (Exception e) {
-                    resultVO = ResultVoUtil.error("Exception in Executing");
-                    return resultVO;
-                }
-                if (i == 0 || j == 0) {
-                    resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
-                } else {
-                    resultVO = ResultVoUtil.success(BeanUtil.beansToList(users));
-                }
-            } catch (Exception e) {
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            }
-        }
-
-        return resultVO;
+//        ResultVO resultVO = importExcelFileUtil.importBeansByFile(deptId, headerType, file);
+//
+//        if (resultVO.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
+//            Map<String, Object> map = (Map<String, Object>) resultVO.getData();
+//
+//            List<User> users = new ArrayList<>();
+//
+//            for (Map.Entry<String, Object> entry : map.entrySet()) {
+//                Map<String, Object> dataMap = (Map<String, Object>) entry.getValue();
+//                users.addAll((List<User>) dataMap.get("dataList"));
+//            }
+//
+//            Integer teacherRoleId = roleMapper.selectRoleIdByName(RoleName.TEACHER);
+//
+//            //存储用户id, 增加用户-角色
+//            List<UserRole> userRoles = new ArrayList<>();
+//            for (User user : users) {
+//                UserRole userRole = new UserRole();
+//                userRole.setUserId(user.getUserId());
+//                userRole.setRoleId(teacherRoleId);
+//
+//                userRoles.add(userRole);
+//            }
+//
+//            try {
+//                int i, j;
+//                try {
+//                    i = userMapper.insertUsersByBatch(users);
+//                    j = userRoleMapper.insertByBatch(userRoles);
+//                } catch (Exception e) {
+//                    resultVO = ResultVoUtil.error("Exception in Executing");
+//                    return resultVO;
+//                }
+//                if (i == 0 || j == 0) {
+//                    resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+//                } else {
+//                    resultVO = ResultVoUtil.success(BeanUtil.beansToList(users));
+//                }
+//            } catch (Exception e) {
+//                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//            }
+//        }
+//
+//        return resultVO;
+        return null;
     }
 
 }

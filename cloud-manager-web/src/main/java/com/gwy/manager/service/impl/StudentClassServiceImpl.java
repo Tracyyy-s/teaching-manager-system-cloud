@@ -1,7 +1,7 @@
 package com.gwy.manager.service.impl;
 
 import com.gwy.manager.domain.entity.StudentClass;
-import com.gwy.manager.mapper.StudentClassMapper;
+import com.gwy.manager.invokes.StudentClassInvoker;
 import com.gwy.manager.service.StudentClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class StudentClassServiceImpl implements StudentClassService {
 
     @Autowired
-    private StudentClassMapper studentClassMapper;
+    private StudentClassInvoker studentClassMapper;
 
     @Override
     public StudentClass getClassById(String classId) {

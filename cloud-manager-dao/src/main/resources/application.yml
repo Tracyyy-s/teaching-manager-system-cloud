@@ -1,12 +1,12 @@
 spring:
   application:
-    name: cloud-manager-dao-server
-#  datasource:
-#    type: com.alibaba.druid.pool.DruidDataSource #数据源
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://cdb-neqw262o.cd.tencentcdb.com:10127/TQMS?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
-#    username: root
-#    password: GONGRAN0812qweabc!
+    name: springcloud-tqms-dao
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource #数据源
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://cdb-neqw262o.cd.tencentcdb.com:10127/TQMS?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
+    username: root
+    password: GONGRAN0812qweabc!
 server:
   port: 9001
 mybatis:
