@@ -1,4 +1,4 @@
-package com.gwy.manager.config.redis;
+package com.gwy.manager.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -22,7 +22,7 @@ import java.time.Duration;
 
 /**
  * @author Tracy
- * @date 2020/11/9 9:30
+ * @date 2021/1/16 23:33
  */
 @Configuration
 public class RedisConfiguration {

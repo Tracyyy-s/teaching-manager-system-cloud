@@ -7,6 +7,7 @@ D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\g
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\mapper\TargetMapper.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\mapper\PermissionMapper.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\ResultVoUtil.java
+D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\config\RedisConfiguration.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\mapper\MajorMapper.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\RolePermission.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\UserRole.java
@@ -18,6 +19,7 @@ D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\g
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\TeacherCourse.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\TermTarget.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Role.java
+D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\security\exception\GlobalAuthorizeException.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Major.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\mapper\SysPermissionApiMapper.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Target.java
@@ -25,6 +27,7 @@ D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\g
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\mapper\TeacherAssessMapper.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\RedisUtil.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\dto\ResultVO.java
+D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\security\exception\GlobalAuthorizeException.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\mapper\LoginMapper.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\DateUtilCustom.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\enums\ExcelVersion.java
