@@ -1,10 +1,10 @@
-package com.gwy.manager.security.filter;
+package com.gwy.manager.security;
 
 import java.util.Collection;
 
 /**
  * @author Tracy
- * @date 2020/12/14 22:09
+ * @date 2021/1/17 19:49
  */
 public class CaseUser {
 
