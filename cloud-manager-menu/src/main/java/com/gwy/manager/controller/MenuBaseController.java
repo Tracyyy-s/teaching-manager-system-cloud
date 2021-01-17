@@ -1,7 +1,6 @@
 package com.gwy.manager.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
@@ -10,12 +9,14 @@ import com.gwy.manager.service.RoleService;
 import com.gwy.manager.service.impl.PermissionServiceImpl;
 import com.gwy.manager.service.impl.UserRoleServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
-import com.gwy.manager.domain.enums.*;
-
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.ResultVoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;

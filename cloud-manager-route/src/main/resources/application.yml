@@ -32,6 +32,9 @@ zuul:
     api-login:
       path: /login
       serviceId: CLOUD-MANAGER-AUTH-SERVER
+    api-menu:
+      path: /menu/**
+      serviceId: CLOUD-MANAGER-MENU-SERVER
     api-project:
       path: /**
       serviceId: CLOUD-MANAGER-WEB-SERVER

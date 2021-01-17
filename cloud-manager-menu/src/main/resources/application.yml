@@ -1,6 +1,6 @@
 spring:
   application:
-    name: CLOUD-MANAGER-menu-SERVER
+    name: cloud-manager-menu-server
     # redis相关配置
   redis:
     host: 39.97.102.209

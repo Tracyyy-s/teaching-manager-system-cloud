@@ -50,12 +50,6 @@
             </exclusions>
         </dependency>
 
-        <!--   SpringSecurity依赖     -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
         <!-- openfeign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
