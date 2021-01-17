@@ -1,8 +1,5 @@
 package com.gwy.manager.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.constant.RoleName;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Dept;
@@ -21,7 +18,6 @@ import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.UserService;
 import com.gwy.manager.util.BeanUtil;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.PageHelperUtil;
 import com.gwy.manager.util.ResultVOUtil;
 import com.gwy.manager.util.file.ImportExcelFileUtil;
 import org.apache.commons.collections4.CollectionUtils;
@@ -267,6 +263,7 @@ public class UserServiceImpl implements UserService {
 
         ResultVO resultVO;
 
+        System.out.println("getAllUsers...");
         List<User> users = userMapper.selectAll();
         if (CollectionUtils.isEmpty(users)) {
             resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());

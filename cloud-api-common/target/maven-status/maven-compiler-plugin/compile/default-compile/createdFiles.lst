@@ -17,7 +17,6 @@ com\gwy\manager\domain\constant\ExcelConstants.class
 com\gwy\manager\domain\entity\User.class
 com\gwy\manager\domain\enums\ResponseDataMsg.class
 com\gwy\manager\domain\constant\EncodeConstant.class
-com\gwy\manager\util\PageHelperUtil.class
 com\gwy\manager\domain\enums\ExcelVersion.class
 com\gwy\manager\domain\constant\PassRequestPaths.class
 com\gwy\manager\domain\dto\ResultVO.class

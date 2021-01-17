@@ -37,12 +37,13 @@ public class UserMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    User selectByPrimaryKey(String userId) {
+    User selectByPrimaryKey(@RequestParam("userId") String userId) {
         return userMapper.selectByPrimaryKey(userId);
     }
 
     @PostMapping("selectAll")
     List<User> selectAll() {
+        System.out.println("dao...allUsers");
         return userMapper.selectAll();
     }
 

@@ -21,7 +21,6 @@ D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\g
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\TermTarget.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Role.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Student.java
-D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\util\PageHelperUtil.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\dto\ExcelSheetPO.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\security\exception\GlobalAuthorizeException.java
 D:\IDEA_\SpringCloud\teaching-manager-cloud\cloud-api-common\src\main\java\com\gwy\manager\domain\entity\Major.java

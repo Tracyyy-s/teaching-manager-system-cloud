@@ -1,7 +1,6 @@
 package com.gwy.manager.controller.sys.user;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
@@ -15,7 +14,6 @@ import com.gwy.manager.service.impl.SysLogServiceImpl;
 import com.gwy.manager.service.impl.UserRoleServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.PageHelperUtil;
 import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -82,7 +80,6 @@ public class RootController {
      */
     @PostMapping("/getAllUsers")
     public String getAllUsers() {
-        System.out.println("allUsers");
         return JSONObject.toJSONStringWithDateFormat(userService.getAllUsers(), DateUtilCustom.DATE_PATTERN);
     }
 
@@ -296,14 +293,11 @@ public class RootController {
      * @param map 请求体
      * @return 结果集
      */
-    @PostMapping("/getLogInfoByType")
+        @PostMapping("/getLogInfoByType")
     public String getLogs(@RequestBody Map<String, Object> map) {
 
-        PageHelperUtil.pageMsg(map);
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
         String type = (String) map.get("type");
-        return JSONObject.toJSONStringWithDateFormat(logService.getLogInfoByType(type, pageNum, pageSize), DateUtilCustom.TIME_PATTERN);
+        return JSONObject.toJSONStringWithDateFormat(logService.getLogInfoByType(type), DateUtilCustom.TIME_PATTERN);
     }
 
     /**

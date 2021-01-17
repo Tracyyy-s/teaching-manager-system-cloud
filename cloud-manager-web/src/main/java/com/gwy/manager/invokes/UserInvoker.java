@@ -1,16 +1,15 @@
 package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.User;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -31,10 +30,10 @@ public interface UserInvoker {
     @RequestMapping("insert")
     int insert(@RequestBody User record);
 
-    @RequestMapping("selectByPrimaryKey")
+    @PostMapping("selectByPrimaryKey")
     User selectByPrimaryKey(@RequestParam("userId") String userId);
 
-    @RequestMapping("selectAll")
+    @GetMapping(value = "selectAll")
     List<User> selectAll();
 
     @RequestMapping("updateByPrimaryKey")
@@ -63,7 +62,7 @@ public interface UserInvoker {
     @RequestMapping("selectByUsername")
     User selectByUsername(@RequestParam("username") String username);
 
-    @RequestMapping("selectUsersByRoleName")
+    @GetMapping(value = "selectUsersByRoleName")
     List<User> selectUsersByRoleName(@RequestParam("roleName") String roleName);
 
     @RequestMapping("updateAvailableDeptIds")
