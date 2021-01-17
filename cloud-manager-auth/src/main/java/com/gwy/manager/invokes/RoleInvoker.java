@@ -2,8 +2,13 @@ package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.Role;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClientProperties;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -12,9 +17,10 @@ import java.util.List;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@RestController
-@RequestMapping("RoleMapperController")
-@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER")
+@Component
+@RequestMapping("/RoleMapperController/")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "3")
+@Qualifier("authRoleInvoker")
 public interface RoleInvoker {
 
     @RequestMapping("deleteByPrimaryKey")
@@ -39,8 +45,8 @@ public interface RoleInvoker {
     Integer selectRoleIdByName(String roleName);
 
     @RequestMapping("selectRoleIdsByNames")
-    List<Integer> selectRoleIdsByNames(@Param("roleNames") List<String> roleNames);
+    List<Integer> selectRoleIdsByNames(@RequestParam("roleNames") List<String> roleNames);
 
     @RequestMapping("selectByUserId")
-    List<Role> selectByUserId(String userId);
+    List<Role> selectByUserId(@RequestBody String userId);
 }

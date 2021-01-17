@@ -1,7 +1,7 @@
 package com.gwy.manager.controller;
 
 import com.gwy.manager.domain.dto.ResultVO;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +14,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public ResultVO login() {
-        return ResultVoUtil.error("Sorry, Not Found Resources");
+        return ResultVOUtil.error("Sorry, Not Found Resources");
     }
 
 }

@@ -6,8 +6,9 @@ import com.gwy.manager.domain.enums.ResponseDataMsg;
 import com.gwy.manager.invokes.TermInvoker;
 import com.gwy.manager.service.TermService;
 import com.gwy.manager.util.DateUtilCustom;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.List;
 @Service
 public class TermServiceImpl implements TermService {
 
+    @Qualifier("webTermInvoker")
     @Autowired
     private TermInvoker termMapper;
 
@@ -48,9 +50,9 @@ public class TermServiceImpl implements TermService {
         List<Term> terms;
         try {
             terms = termMapper.selectAll();
-            resultVO = ResultVoUtil.success(terms);
+            resultVO = ResultVOUtil.success(terms);
         } catch (Exception e) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
         return resultVO;
@@ -64,6 +66,7 @@ public class TermServiceImpl implements TermService {
     @Cacheable(keyGenerator = "currentTerm")
     @Override
     public ResultVO getCurrentTerm() {
-        return ResultVoUtil.success(termMapper.getCurrentTerm(DateUtilCustom.getDate()));
+        System.out.println(DateUtilCustom.getDate());
+        return ResultVOUtil.success(termMapper.getCurrentTerm(DateUtilCustom.getDate()));
     }
 }

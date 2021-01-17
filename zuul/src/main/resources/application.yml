@@ -1,0 +1,45 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: teach
+
+eureka:
+  instance:
+    hostname: ${spring.cloud.client.ip-address}
+  client:
+    service-url:
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7003.com:7003/eureka/
+
+zuul:
+  sensitive-headers: Access-Control-Allow-Origin
+  ignored-headers: Access-Control-Allow-Origin,H-APP-Id,APPToken
+  routes:
+    api-login:
+      path: /login/**
+      serviceId: cloud-manager-dao-server
+#    api-project:
+      ##      path: /project/**
+      ##      serviceId: PROJECT
+#    api-achievement:
+#      path: /achievement/**
+#      serviceId: ACHIEVEMENT
+#    api-examine:
+#      path: /examine/**
+#      serviceId: EXAMINE
+#    api-auth:
+#      path: /auth/**
+#      serviceId: AUTH
+#    api-check:
+#      path: /check/**
+#      serviceId: CHECK
+#    api-log:
+#      path: /log/**
+#      serviceId: LOG
+#    api-user:
+#      path: /user/**
+#      serviceId: LOGIN
+#    api-manage:
+#      path: /manage/**
+#      serviceId: MANAGE

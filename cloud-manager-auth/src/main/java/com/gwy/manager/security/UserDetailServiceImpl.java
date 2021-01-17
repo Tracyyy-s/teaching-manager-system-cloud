@@ -8,6 +8,7 @@ import com.gwy.manager.invokes.PermissionInvoker;
 import com.gwy.manager.invokes.RoleInvoker;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,12 +26,15 @@ import java.util.List;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
+    @Qualifier("authRoleInvoker")
     @Autowired
     private RoleInvoker roleMapper;
 
+    @Qualifier("authPermissionInvoker")
     @Autowired
     private PermissionInvoker permissionMapper;
 
+    @Qualifier("authLoginInvoker")
     @Autowired
     private LoginInvoker loginMapper;
 
@@ -45,6 +49,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException(account + " Not Found");
         }
 
+        System.out.println(account);
         List<Role> roleList = roleMapper.selectByUserId(account);
 
         List<Integer> roleIds = new ArrayList<>();
@@ -56,6 +61,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
         //添加角色
         List<Role> roles = new ArrayList<>(roleList);
         //添加所有角色的权限
+        System.out.println(roleIds);
         List<Permission> permissions = new ArrayList<>(permissionMapper.selectByRoleIds(roleIds));
 
         StringBuilder sb = new StringBuilder();

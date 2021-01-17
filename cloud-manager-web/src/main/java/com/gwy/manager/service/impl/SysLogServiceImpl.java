@@ -15,9 +15,10 @@ import com.gwy.manager.rabbimq.RabbitmqProducer;
 import com.gwy.manager.service.SysLogService;
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -43,8 +44,9 @@ public class SysLogServiceImpl implements SysLogService {
 
     private static final String POST = "POST";
 
+    @Qualifier("webSysLogInvoker")
     @Autowired
-    private SysLogInvoker sysLogInvoker;
+    private SysLogInvoker sysLogMapper;
 
     @Autowired
     private RabbitmqProducer producer;
@@ -117,17 +119,17 @@ public class SysLogServiceImpl implements SysLogService {
      */
     @Override
     public void insertLog(SysLog sysLog) {
-        sysLogInvoker.insert(sysLog);
+        sysLogMapper.insert(sysLog);
     }
 
     @Override
     public ResultVO getLogTypeAndCount() {
 
-        List<Map<String, Object>> types = sysLogInvoker.selectDataExplainAndCount();
+        List<Map<String, Object>> types = sysLogMapper.selectDataExplainAndCount();
         if (CollectionUtils.isEmpty(types)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            return ResultVoUtil.success(types);
+            return ResultVOUtil.success(types);
         }
     }
 
@@ -136,11 +138,11 @@ public class SysLogServiceImpl implements SysLogService {
 
         PageHelper.startPage(pageNum, pageSize);
 
-        List<SysLog> sysLogs = sysLogInvoker.selectByType(type);
+        List<SysLog> sysLogs = sysLogMapper.selectByType(type);
         if (CollectionUtils.isEmpty(sysLogs)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            return ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(sysLogs)));
+            return ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(sysLogs)));
         }
 
     }
@@ -149,45 +151,46 @@ public class SysLogServiceImpl implements SysLogService {
     @Override
     public ResultVO deleteByBatch(List<Integer> ids) {
 
-        int i = sysLogInvoker.deleteByPrimaryKeys(ids);
+        int i = sysLogMapper.deleteByPrimaryKeys(ids);
         if (i != ids.size()) {
-            return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
-        return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+        return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
     }
 
     @Override
     public ResultVO getLogByInterval(Date beginTime, Date endTime, String type) {
 
-        List<SysLog> sysLogs = sysLogInvoker.selectByInterval(beginTime, endTime, type);
+//        List<SysLog> sysLogs = sysLogMapper.selectByInterval(beginTime, endTime, type);
+        List<SysLog> sysLogs = null;
         if (CollectionUtils.isEmpty(sysLogs)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(sysLogs);
+        return ResultVOUtil.success(sysLogs);
     }
 
     @Override
     public ResultVO getLogs(int pageNum, int pageSize) {
 
-        List<SysLog> sysLogs = sysLogInvoker.selectAll();
+        List<SysLog> sysLogs = sysLogMapper.selectAll();
         if (CollectionUtils.isEmpty(sysLogs)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            return ResultVoUtil.success(sysLogs);
+            return ResultVOUtil.success(sysLogs);
         }
     }
 
     @Override
     public ResultVO getLogsInfo() {
 
-        List<Map<Date, Integer>> maps = sysLogInvoker.selectLogsInfo();
+        List<Map<Date, Integer>> maps = sysLogMapper.selectLogsInfo();
         if (CollectionUtils.isEmpty(maps)) {
-            return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        return ResultVoUtil.success(sysLogInvoker.selectLogsInfo());
+        return ResultVOUtil.success(sysLogMapper.selectLogsInfo());
     }
 
     /**

@@ -6,7 +6,9 @@ import com.gwy.manager.mapper.UserRoleMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -23,30 +25,33 @@ public class UserRoleMapperController {
     UserRoleMapper userRoleMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(@Param("userId") String userId, @Param("roleId") Integer roleId){
-        return  userRoleMapper.deleteByPrimaryKey(userId, roleId);
+    int deleteByPrimaryKey(@RequestParam("userId") String userId, @RequestParam("roleId") Integer roleId) {
+        return userRoleMapper.deleteByPrimaryKey(userId, roleId);
     }
 
     @PostMapping("insert")
-    int insert(UserRole record){
-        return  userRoleMapper.insert(record);
+    int insert(@RequestBody UserRole record) {
+        return userRoleMapper.insert(record);
     }
 
 
     @PostMapping("insertByBatch")
-    int insertByBatch(@Param("userRoles") List<UserRole> userRoles){
-        return  userRoleMapper.insertByBatch(userRoles);
+    int insertByBatch(@RequestBody List<UserRole> userRoles) {
+        return userRoleMapper.insertByBatch(userRoles);
     }
+
     @PostMapping("selectAll")
-    List<UserRole> selectAll(){
-        return  userRoleMapper.selectAll();
+    List<UserRole> selectAll() {
+        return userRoleMapper.selectAll();
     }
+
     @PostMapping("deleteRoleOfUser")
-    int deleteRoleOfUser(@Param("userId") String userId){
-        return  userRoleMapper.deleteRoleOfUser(userId);
+    int deleteRoleOfUser(@RequestParam("userId") String userId) {
+        return userRoleMapper.deleteRoleOfUser(userId);
     }
+
     @PostMapping("addRolesForUser")
-    int addRolesForUser(@Param("userId") String userId, @Param("roleIds") List<Integer> roleIds){
-        return  userRoleMapper.addRolesForUser(userId, roleIds);
+    int addRolesForUser(@RequestParam("userId") String userId, @RequestBody List<Integer> roleIds) {
+        return userRoleMapper.addRolesForUser(userId, roleIds);
     }
 }

@@ -3,6 +3,7 @@ package com.gwy.manager.controller;
 
 import com.gwy.manager.domain.entity.Major;
 import com.gwy.manager.mapper.MajorMapper;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,33 +21,44 @@ public class MajorMapperController {
     private MajorMapper majorMapper;
 
     @RequestMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String majorId){
-        return majorMapper.deleteByPrimaryKey( majorId) ;
-    };
+    int deleteByPrimaryKey(String majorId) {
+        return majorMapper.deleteByPrimaryKey(majorId);
+    }
+
     @RequestMapping("insert")
-    int insert(Major record){
-        return majorMapper.insert(record) ;
-    };
+    int insert(@RequestBody Major record) {
+        return majorMapper.insert(record);
+    }
+
     @RequestMapping("selectByPrimaryKey")
-    Major selectByPrimaryKey(String majorId){
-        return majorMapper.selectByPrimaryKey( majorId) ;
-    };
+    Major selectByPrimaryKey(String majorId) {
+        return majorMapper.selectByPrimaryKey(majorId);
+    }
+
+
     @RequestMapping("selectAll")
-    List<Major> selectAll(){
-        return majorMapper.selectAll() ;
-    };
+    List<Major> selectAll() {
+        return majorMapper.selectAll();
+    }
+
+
     @RequestMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(Major record){
-        return majorMapper.updateByPrimaryKey(record) ;
-    };
+    int updateByPrimaryKey(@RequestBody Major record) {
+        return majorMapper.updateByPrimaryKey(record);
+    }
+
+    ;
 
     /**
      * 获得某学院的所有专业
-     * @param deptId    学院id
-     * @return  返回结果
+     *
+     * @param deptId 学院id
+     * @return 返回结果
      */
     @RequestMapping("selectByDept")
-    List<Major> selectByDept(String deptId){
-        return majorMapper.selectByDept(deptId) ;
-    };
+    List<Major> selectByDept(String deptId) {
+        return majorMapper.selectByDept(deptId);
+    }
+
+    ;
 }

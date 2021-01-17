@@ -2,9 +2,14 @@ package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.TeacherAssess;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClientProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -14,18 +19,20 @@ import java.util.Map;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "TeacherAssessInvoker")
+@Component
 @RequestMapping("TeacherAssessMapperController")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "67")
+@Qualifier("webTeacherAssessInvoker")
 public interface TeacherAssessInvoker {
 
     @PostMapping("insert")
-    int insert(TeacherAssess record);
+    int insert(@RequestBody TeacherAssess record);
 
     @PostMapping("selectAll")
     List<TeacherAssess> selectAll();
 
     @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(TeacherAssess record);
+    int updateByPrimaryKey(@RequestBody TeacherAssess record);
 
     /**
      * 删除教师提交的评价
@@ -36,7 +43,9 @@ public interface TeacherAssessInvoker {
      * @return jieugoji
      */
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String teacherNo, String assessedTeacherNo, String termId);
+    int deleteByPrimaryKey(@RequestParam("teacherNo") String teacherNo,
+                           @RequestParam("assessedTeacherNo") String assessedTeacherNo,
+                           @RequestParam("termId") String termId);
 
     /**
      * 获取某学院的教师在某学期的评价列表
@@ -46,8 +55,8 @@ public interface TeacherAssessInvoker {
      * @return 结果集
      */
     @PostMapping("getTeacherAssessesByDeptAndTerm")
-    List<TeacherAssess> getTeacherAssessesByDeptAndTerm(@Param("deptId") String deptId,
-                                                        @Param("termId") String termId);
+    List<TeacherAssess> getTeacherAssessesByDeptAndTerm(@RequestParam("deptId") String deptId,
+                                                        @RequestParam("termId") String termId);
 
     /**
      * 获得某教师在某学期对某个教师的评价
@@ -58,9 +67,9 @@ public interface TeacherAssessInvoker {
      * @return 结果集
      */
     @PostMapping("selectByPrimaryKey")
-    TeacherAssess selectByPrimaryKey(@Param("teacherNo") String teacherNo,
-                                     @Param("assessedTeacherNo") String assessedTeacherNo,
-                                     @Param("termId") String termId);
+    TeacherAssess selectByPrimaryKey(@RequestParam("teacherNo") String teacherNo,
+                                     @RequestParam("assessedTeacherNo") String assessedTeacherNo,
+                                     @RequestParam("termId") String termId);
 
     /**
      * 获得某教师的所有评价
@@ -69,7 +78,7 @@ public interface TeacherAssessInvoker {
      * @return 返回列表
      */
     @PostMapping("selectAllByTno")
-    List<TeacherAssess> selectAllByTno(String teacherNo);
+    List<TeacherAssess> selectAllByTno(@RequestParam("teacherNo") String teacherNo);
 
     /**
      * 获得某教师在某学期的所有评价
@@ -80,9 +89,9 @@ public interface TeacherAssessInvoker {
      * @return 被评价的教师id列表
      */
     @PostMapping("judgeAssessed")
-    List<String> judgeAssessed(@Param("teacherNo") String teacherNo,
-                               @Param("assessedTeacherNos") List<String> assessedTeacherNos,
-                               @Param("termId") String termId);
+    List<String> judgeAssessed(@RequestParam("teacherNo") String teacherNo,
+                               @RequestParam("assessedTeacherNos") List<String> assessedTeacherNos,
+                               @RequestParam("termId") String termId);
 
     /**
      * 获得某学院教师某学期所有的教师评价结果
@@ -92,11 +101,11 @@ public interface TeacherAssessInvoker {
      * @return 结果集
      */
     @PostMapping("selectByTermAndDept")
-    List<Map<String, Object>> selectByTermAndDept(@Param("deptId") String deptId,
-                                                  @Param("termId") String termId);
+    List<Map<String, Object>> selectByTermAndDept(@RequestParam("deptId") String deptId,
+                                                  @RequestParam("termId") String termId);
 
     @PostMapping("selectCountOfUserInTerm")
-    int selectCountOfUserInTerm(@Param("userId") String userId,
-                                @Param("termId") String termId);
+    int selectCountOfUserInTerm(@RequestParam("userId") String userId,
+                                @RequestParam("termId") String termId);
 
 }

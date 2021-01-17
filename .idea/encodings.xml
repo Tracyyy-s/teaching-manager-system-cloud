@@ -16,6 +16,8 @@
     <file url="file://$PROJECT_DIR$/cloud-manager-menu/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-manager-web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-manager-web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zuul/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/zuul/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

@@ -13,8 +13,9 @@ import com.gwy.manager.rabbimq.RabbitmqProducer;
 import com.gwy.manager.service.VrCodeService;
 import com.gwy.manager.util.MailUtil;
 import com.gwy.manager.util.RedisUtil;
-import com.gwy.manager.util.ResultVoUtil;
+import com.gwy.manager.util.ResultVOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -37,9 +38,11 @@ public class VrCodeServiceImpl implements VrCodeService {
      */
     private static final int EXPIRATION_TIME = 300;
 
+    @Qualifier("webStudentInvoker")
     @Autowired
     private StudentInvoker studentMapper;
 
+    @Qualifier("webUserInvoker")
     @Autowired
     private UserInvoker userMapper;
 
@@ -54,7 +57,6 @@ public class VrCodeServiceImpl implements VrCodeService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     @Override
     public String getCode(String userId) {
@@ -86,7 +88,7 @@ public class VrCodeServiceImpl implements VrCodeService {
                 User user = userMapper.selectByPrimaryKey(userId);
 
                 if (user == null) {
-                    return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
+                    return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
                 }
 
                 email = user.getEmail();
@@ -115,14 +117,14 @@ public class VrCodeServiceImpl implements VrCodeService {
             redisUtil.set(key, code.toString());
             redisUtil.expire(key, EXPIRATION_TIME);
         } catch (Exception e) {
-            return ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            return ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         }
 
         if (userType == null) {
-            return ResultVoUtil.success(email);
+            return ResultVOUtil.success(email);
         }
 
-        return ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+        return ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
     }
 
     public ResultVO updatePasswordByCode(String userType,
@@ -132,7 +134,7 @@ public class VrCodeServiceImpl implements VrCodeService {
 
         String code = this.getCode(userId);
         if (!vrCode.equals(code)) {
-            return ResultVoUtil.error("Code Error");
+            return ResultVOUtil.error("Code Error");
         }
 
         ResultVO resultVO;
@@ -145,9 +147,9 @@ public class VrCodeServiceImpl implements VrCodeService {
         }
 
         if (result == 0) {
-            resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
+            resultVO = ResultVOUtil.error(ResponseDataMsg.Fail.getMsg());
         } else {
-            resultVO = ResultVoUtil.success(ResponseDataMsg.Success.getMsg());
+            resultVO = ResultVOUtil.success(ResponseDataMsg.Success.getMsg());
         }
 
         //修改完毕后删除key

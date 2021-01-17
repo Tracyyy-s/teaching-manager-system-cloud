@@ -2,9 +2,14 @@ package com.gwy.manager.invokes;
 
 import com.gwy.manager.domain.entity.Term;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.FeignClientProperties;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -14,27 +19,29 @@ import java.util.List;
  * @author Tracy
  * @date 2020/11/10 15:40
  */
-@FeignClient(serviceId = "springcloud-tqms-dao",contextId = "TermInvoker")
+@Component
 @RequestMapping("TermMapperController")
+@FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "90")
+@Qualifier("webTermInvoker")
 public interface TermInvoker {
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String termId);
+    int deleteByPrimaryKey(@RequestParam("termId") String termId);
 
     @PostMapping("insert")
-    int insert(Term record);
+    int insert(@RequestBody Term record);
 
     @PostMapping("selectByPrimaryKey")
-    Term selectByPrimaryKey(String termId);
+    Term selectByPrimaryKey(@RequestParam("termId") String termId);
 
     @PostMapping("selectAll")
     List<Term> selectAll();
 
     @PostMapping("updateByPrimaryKey")
-    int updateByPrimaryKey(Term record);
+    int updateByPrimaryKey(@RequestBody Term record);
 
     @PostMapping("insertByBatch")
-    int insertByBatch(@Param("terms") List<Term> terms);
+    int insertByBatch(@RequestBody List<Term> terms);
 
     @PostMapping("getCurrentTerm")
-    Term getCurrentTerm(Date date);
+    Term getCurrentTerm(@RequestBody Date date);
 }
