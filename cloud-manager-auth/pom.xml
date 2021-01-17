@@ -65,6 +65,8 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+        
         <!--   MyBatis依赖    -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
