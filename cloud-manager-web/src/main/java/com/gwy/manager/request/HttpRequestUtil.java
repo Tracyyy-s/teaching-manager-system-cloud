@@ -1,12 +1,14 @@
 package com.gwy.manager.request;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Tracy
@@ -26,16 +28,17 @@ public class HttpRequestUtil {
      * @return  结果集
      */
     @SuppressWarnings("unchecked")
-    public static String getBodyContent(HttpServletRequest request, String username) {
-        HashMap<String, Object> bodyParams = new HashMap<>(10);
+    public static String getBodyContent(HttpServletRequest request, String username) throws JsonProcessingException {
+        Map<String, Object> bodyParams = new HashMap<>();
 
         ObjectMapper objectMapper = new ObjectMapper();
         try (InputStream inputStream = request.getInputStream()) {
-            bodyParams = objectMapper.readValue(inputStream, HashMap.class);
+            bodyParams = objectMapper.readValue(inputStream, Map.class);
         } catch (IOException ignored) {
 
         }
 
+        System.out.println(bodyParams);
         bodyParams.putIfAbsent(ADMIN_NO, username);
         bodyParams.putIfAbsent(USER_ID, username);
         bodyParams.putIfAbsent(STUDENT_NO, username);

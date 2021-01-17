@@ -1,7 +1,6 @@
 package com.gwy.manager.config;
 
 import com.alibaba.fastjson.JSONObject;
-import com.gwy.manager.request.WebHttpServletRequestWrapper;
 import com.gwy.manager.util.JwtTokenUtils;
 import com.gwy.manager.util.ResultVOUtil;
 import com.netflix.zuul.ZuulFilter;
@@ -48,7 +47,7 @@ public class MyGlobalFilter extends ZuulFilter {
         String token = request.getHeader(JwtTokenUtils.TOKEN_HEADER);
 
         // 响应类型
-        rc.getResponse().setContentType("application/json; charset=utf-8");
+        rc.getResponse().setContentType("application/json;charset=utf-8");
 
         if (request.getServletPath().equals(LOGIN_REQUEST)) {
             return null;
@@ -75,6 +74,8 @@ public class MyGlobalFilter extends ZuulFilter {
             // 使用 token 进行身份验证
             logger.info("有token");
 
+            token = token.substring(JwtTokenUtils.TOKEN_PREFIX.length());
+
             // Token不合法
             if (isInvalidToken(token)) {
                 // 请求结束，不在继续向下请求。
@@ -88,22 +89,6 @@ public class MyGlobalFilter extends ZuulFilter {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            WebHttpServletRequestWrapper requestWrapper = null;
-            try {
-                requestWrapper = new WebHttpServletRequestWrapper(request, getUsernameByToken(token));
-            } catch (IOException e) {
-                e.printStackTrace();
-                try {
-                    rc.getResponse().getWriter().write(JSONObject.toJSONString(ResultVOUtil.error("Error Parsing Token")));
-                } catch (IOException ignored) {
-
-                }
-            }
-
-            if (requestWrapper != null) {
-                rc.setRequest(requestWrapper);
             }
 
         }
