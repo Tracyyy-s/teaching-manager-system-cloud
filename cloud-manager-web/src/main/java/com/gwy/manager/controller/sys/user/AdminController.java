@@ -157,11 +157,8 @@ public class AdminController {
     @PostMapping("/getTeachersByDept")
     public String getTeachersByDept(@RequestBody Map<String, Object> map) {
 
-        PageHelperUtil.pageMsg(map);
         String deptId = ((String) map.get("deptId"));
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
-        return JSONObject.toJSONStringWithDateFormat(userService.getUsersOfDept(pageNum, pageSize, deptId), DateUtilCustom.DATE_PATTERN);
+        return JSONObject.toJSONStringWithDateFormat(userService.getUsersOfDept(deptId), DateUtilCustom.DATE_PATTERN);
     }
 
     /**
@@ -199,11 +196,8 @@ public class AdminController {
     @PostMapping("/getStudentsByDept")
     public String getStudentsByDept(@RequestBody Map<String, Object> map) {
 
-        PageHelperUtil.pageMsg(map);
         String deptId = ((String) map.get("deptId"));
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
-        return JSONObject.toJSONStringWithDateFormat(studentService.getStudentsByDept(pageNum, pageSize, deptId), DateUtilCustom.DATE_PATTERN);
+        return JSONObject.toJSONStringWithDateFormat(studentService.getStudentsByDept(deptId), DateUtilCustom.DATE_PATTERN);
     }
 
     /**

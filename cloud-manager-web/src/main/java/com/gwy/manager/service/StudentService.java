@@ -58,12 +58,10 @@ public interface StudentService {
 
     /**
      * 获取某学院的所有学生
-     * @param pageNum   页码
-     * @param pageSize  页面大小
      * @param deptId 学院id
      * @return  结果集
      */
-    ResultVO getStudentsByDept(int pageNum, int pageSize, String deptId);
+    ResultVO getStudentsByDept(String deptId);
 
     /**
      * 获取某个班级的所有学生
@@ -91,11 +89,9 @@ public interface StudentService {
 
     /**
      * 获得所有学生并疯转
-     * @param pageNum   页码
-     * @param pageSize  页面大小
      * @return  结果集
      */
-    ResultVO getAllStudents(int pageNum, int pageSize);
+    ResultVO getAllStudents();
 
     /**
      * Excel文件导入学生

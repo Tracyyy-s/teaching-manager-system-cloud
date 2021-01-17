@@ -140,31 +140,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public ResultVO getUsersOfDept(int pageNum, int pageSize, String deptId) {
+    public ResultVO getUsersOfDept(String deptId) {
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectUsersByDeptId(deptId);
         if (CollectionUtils.isEmpty(users)) {
             return ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
 
-        Map<String, Object> infoMap = PageHelperUtil.pageInfoToMap(new PageInfo<>(users));
-
-        Collection<Map<String, Object>> userMaps = (Collection<Map<String, Object>>) infoMap.get(PageHelperConst.LIST);
+        Collection<Map<String, Object>> userMaps = BeanUtil.beansToList(users);
         Dept dept = deptMapper.selectByPrimaryKey(deptId);
         for (Map<String, Object> map : userMaps) {
             map.put("deptName", dept.getDeptName());
         }
 
-        return ResultVOUtil.success(infoMap);
+        return ResultVOUtil.success(userMaps);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public ResultVO getUsersOfDept(int pageNum, int pageSize, String userId, String deptId) {
+    public ResultVO getUsersOfDept(String userId, String deptId) {
 
-        ResultVO resultUsers = this.getUsersOfDept(pageNum, pageSize, deptId);
+        ResultVO resultUsers = this.getUsersOfDept(deptId);
 
         if (resultUsers.getResultCode().equals(ResponseStatus.SUCCESS.getCode())) {
 
@@ -173,12 +169,12 @@ public class UserServiceImpl implements UserService {
             if (term != null) {
 
                 //获得已经查询到的结果集
-                Collection<Map<String, Object>> maps = (Collection<Map<String, Object>>) ((Map<String, Object>) resultUsers.getData()).get(PageHelperConst.LIST);
+                Collection<Map<String, Object>> maps = (Collection<Map<String, Object>>) resultUsers.getData();
 
                 //存储查询结果的userId
                 List<String> userIds = new ArrayList<>();
                 for (Map<String, Object> map : maps) {
-                    userIds.add((String)map.get("userId"));
+                    userIds.add((String) map.get("userId"));
                 }
 
                 //查询该教师在本学期已经评价的教师id
@@ -252,32 +248,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultVO getAllAdmin(int pageNum, int pageSize) {
+    public ResultVO getAllAdmin() {
 
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectUsersByRoleName(RoleName.ADMIN);
         if (CollectionUtils.isEmpty(users)) {
             resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(users)));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(users));
         }
 
         return resultVO;
     }
 
     @Override
-    public ResultVO getAllUsers(int pageNum, int pageSize) {
+    public ResultVO getAllUsers() {
 
         ResultVO resultVO;
 
-        PageHelper.startPage(pageNum, pageSize);
         List<User> users = userMapper.selectAll();
         if (CollectionUtils.isEmpty(users)) {
             resultVO = ResultVOUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            resultVO = ResultVOUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(users)));
+            resultVO = ResultVOUtil.success(BeanUtil.beansToList(users));
         }
 
         return resultVO;
