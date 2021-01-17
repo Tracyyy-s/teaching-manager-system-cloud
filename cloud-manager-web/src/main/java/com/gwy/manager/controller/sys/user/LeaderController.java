@@ -40,12 +40,9 @@ public class LeaderController {
     @PostMapping("/getTeachersInDept")
     public String getTeachersByDept(@RequestBody Map<String, Object> map) {
 
-        PageHelperUtil.pageMsg(map);
         String userId = ((String) map.get("userId"));
         String deptId = ((String) map.get("deptId"));
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
-        return JSONObject.toJSONStringWithDateFormat(userService.getUsersOfDept(pageNum, pageSize, userId, deptId), DateUtilCustom.DATE_PATTERN);
+        return JSONObject.toJSONStringWithDateFormat(userService.getUsersOfDept(userId, deptId), DateUtilCustom.DATE_PATTERN);
     }
 
     /**

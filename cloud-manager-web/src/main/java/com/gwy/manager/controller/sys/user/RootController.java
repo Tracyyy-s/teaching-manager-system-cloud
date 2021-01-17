@@ -70,12 +70,9 @@ public class RootController {
      * @return 结果集
      */
     @PostMapping("/getAllAdmins")
-    public String getAllAdmins(@RequestBody Map<String, Object> map) {
+    public String getAllAdmins() {
 
-        PageHelperUtil.pageMsg(map);
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
-        return JSONObject.toJSONStringWithDateFormat(userService.getAllAdmin(pageNum, pageSize), DateUtilCustom.DATE_PATTERN);
+        return JSONObject.toJSONStringWithDateFormat(userService.getAllAdmin(), DateUtilCustom.DATE_PATTERN);
     }
 
     /**
@@ -84,27 +81,20 @@ public class RootController {
      * @return 结果集
      */
     @PostMapping("/getAllUsers")
-    public String getAllUsers(@RequestBody Map<String, Object> map) {
-
-        PageHelperUtil.pageMsg(map);
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
-        return JSONObject.toJSONStringWithDateFormat(userService.getAllUsers(pageNum, pageSize), DateUtilCustom.DATE_PATTERN);
+    public String getAllUsers() {
+        System.out.println("allUsers");
+        return JSONObject.toJSONStringWithDateFormat(userService.getAllUsers(), DateUtilCustom.DATE_PATTERN);
     }
 
     /**
      * root用户获得所有学生信息
      *
-     * @param map 请求体
      * @return 结果集
      */
     @PostMapping("/getAllStudents")
-    public String getAllStudents(@RequestBody Map<String, Object> map) {
+    public String getAllStudents() {
 
-        PageHelperUtil.pageMsg(map);
-        int pageNum = (int) map.get(PageHelperConst.PAGE_NUM);
-        int pageSize = (int) map.get(PageHelperConst.PAGE_SIZE);
-        return JSONObject.toJSONStringWithDateFormat(studentService.getAllStudents(pageNum, pageSize), DateUtilCustom.DATE_PATTERN);
+        return JSONObject.toJSONStringWithDateFormat(studentService.getAllStudents(), DateUtilCustom.DATE_PATTERN);
     }
 
     /**
