@@ -4,9 +4,10 @@ import com.gwy.manager.domain.entity.SysLog;
 import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.SysLogMapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,47 +25,47 @@ public class SysLogMapperController {
     @Resource
     SysLogMapper sysLogMapper;
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody SysLog record) {
         return sysLogMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
-    SysLog selectByPrimaryKey(Integer id) {
+    @RequestMapping("selectByPrimaryKey")
+    SysLog selectByPrimaryKey(@RequestParam("id") Integer id) {
         return sysLogMapper.selectByPrimaryKey(id);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<SysLog> selectAll() {
         return sysLogMapper.selectAll();
     }
 
-    @PostMapping("selectDataExplainAndCount")
+    @RequestMapping("selectDataExplainAndCount")
     List<Map<String, Object>> selectDataExplainAndCount() {
         return sysLogMapper.selectDataExplainAndCount();
     }
 
-    @PostMapping("selectByType")
-    List<SysLog> selectByType(String type) {
+    @RequestMapping("selectByType")
+    List<SysLog> selectByType(@RequestParam("type") String type) {
         return sysLogMapper.selectByType(type);
     }
 
-    @PostMapping("selectByInterval")
-    List<SysLog> selectByInterval(@RequestBody Date beginTime, @RequestBody Date endTime, String type) {
+    @RequestMapping("selectByInterval")
+    List<SysLog> selectByInterval(@RequestBody Date beginTime, @RequestBody Date endTime,@RequestParam("type") String type) {
         return sysLogMapper.selectByInterval(beginTime, endTime, type);
     }
 
-    @PostMapping("deleteByPrimaryKeys")
+    @RequestMapping("deleteByPrimaryKeys")
     int deleteByPrimaryKeys(@RequestBody List<Integer> ids) {
         return sysLogMapper.deleteByPrimaryKeys(ids);
     }
 
-    @PostMapping("selectLogsInfo")
+    @RequestMapping("selectLogsInfo")
     List<Map<Date, Integer>> selectLogsInfo() {
         return sysLogMapper.selectLogsInfo();
     }
 
-    @PostMapping("selectLogInfo")
+    @RequestMapping("selectLogInfo")
     List<Map<String, Integer>> selectLogInfo() {
         return sysLogMapper.selectLogInfo();
     }

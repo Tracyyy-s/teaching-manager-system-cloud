@@ -2,6 +2,7 @@ package com.gwy.manager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -15,7 +16,7 @@ import org.springframework.web.filter.CorsFilter;
  * @author Tracy
  * @date 2021/1/17 17:01
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class)
 @EnableEurekaClient
 @EnableZuulProxy
 @EnableFeignClients

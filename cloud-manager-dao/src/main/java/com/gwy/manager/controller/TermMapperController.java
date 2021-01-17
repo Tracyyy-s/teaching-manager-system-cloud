@@ -5,9 +5,10 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.TermMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,37 +25,37 @@ public class TermMapperController {
     @Resource
     TermMapper termMapper;
 
-    @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String termId) {
+    @RequestMapping("deleteByPrimaryKey")
+    int deleteByPrimaryKey(@RequestParam("termId") String termId) {
         return termMapper.deleteByPrimaryKey(termId);
     }
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody Term record) {
         return termMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
-    Term selectByPrimaryKey(String termId) {
+    @RequestMapping("selectByPrimaryKey")
+    Term selectByPrimaryKey(@RequestParam("termId") String termId) {
         return termMapper.selectByPrimaryKey(termId);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<Term> selectAll() {
         return termMapper.selectAll();
     }
 
-    @PostMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody Term record) {
         return termMapper.updateByPrimaryKey(record);
     }
 
-    @PostMapping("insertByBatch")
+    @RequestMapping("insertByBatch")
     int insertByBatch(@RequestBody List<Term> terms) {
         return termMapper.insertByBatch(terms);
     }
 
-    @PostMapping("getCurrentTerm")
+    @RequestMapping("getCurrentTerm")
     Term getCurrentTerm(@RequestBody Date date) {
         System.out.println(date);
         return termMapper.getCurrentTerm(date);

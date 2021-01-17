@@ -6,9 +6,10 @@ import com.gwy.manager.mapper.StudentMapper;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -25,27 +26,27 @@ public class StudentMapperController {
     @Resource
     StudentMapper studentMapper;
 
-    @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String studentNo) {
+    @RequestMapping("deleteByPrimaryKey")
+    int deleteByPrimaryKey(@RequestParam("studentNo") String studentNo) {
         return studentMapper.deleteByPrimaryKey(studentNo);
     }
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody Student record) {
         return studentMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
-    Student selectByPrimaryKey(String studentNo) {
+    @RequestMapping("selectByPrimaryKey")
+    Student selectByPrimaryKey(@RequestParam("studentNo") String studentNo) {
         return studentMapper.selectByPrimaryKey(studentNo);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<Student> selectAll() {
         return studentMapper.selectAll();
     }
 
-    @PostMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody Student record) {
         return studentMapper.updateByPrimaryKey(record);
     }
@@ -56,37 +57,37 @@ public class StudentMapperController {
      * @param students 学生列表
      * @return 结果集
      */
-    @PostMapping("insertStudentBatch")
+    @RequestMapping("insertStudentBatch")
     int insertStudentBatch(@RequestBody List<Student> students) {
         return studentMapper.insertStudentBatch(students);
     }
 
-    @PostMapping("updatePassword")
-    int updatePassword(String studentNo, String password) {
+    @RequestMapping("updatePassword")
+    int updatePassword(@RequestParam("studentNo") String studentNo, @RequestParam("password") String password) {
         return studentMapper.updatePassword(studentNo, password);
     }
 
-    @PostMapping("selectStudentsByDept")
-    List<Student> selectStudentsByDept(String deptId) {
+    @RequestMapping("selectStudentsByDept")
+    List<Student> selectStudentsByDept(@RequestParam("deptId") String deptId) {
         return studentMapper.selectStudentsByDept(deptId);
     }
 
-    @PostMapping("selectStudentsByClass")
-    List<Student> selectStudentsByClass(String classId) {
+    @RequestMapping("selectStudentsByClass")
+    List<Student> selectStudentsByClass(@RequestParam("classId") String classId) {
         return studentMapper.selectStudentsByClass(classId);
     }
 
-    @PostMapping("selectStudentsMatchName")
-    List<Student> selectStudentsMatchName(String deptId, String name) {
+    @RequestMapping("selectStudentsMatchName")
+    List<Student> selectStudentsMatchName(@RequestParam("deptId") String deptId, @RequestParam("name") String name) {
         return studentMapper.selectStudentsMatchName(deptId, name);
     }
 
-    @PostMapping("selectStudentNamesByIds")
+    @RequestMapping("selectStudentNamesByIds")
     List<Map<String, Object>> selectStudentNamesByIds(@RequestBody List<String> studentNos) {
         return studentMapper.selectStudentNamesByIds(studentNos);
     }
 
-    @PostMapping("selectStudentNamesForMapByIds")
+    @RequestMapping("selectStudentNamesForMapByIds")
     Map<String, Map<String, String>> selectStudentNamesForMapByIds(@RequestBody List<String> studentNos) {
         return studentMapper.selectStudentNamesForMapByIds(studentNos);
     }

@@ -41,12 +41,12 @@ zuul:
 
 
 ribbon:
-  ConnectTimeout: 55000 # 连接超时时间(ms)
-  ReadTimeout: 55000 # 通信超时时间(ms)
+  ConnectTimeout: 555000 # 连接超时时间(ms)
+  ReadTimeout: 555000 # 通信超时时间(ms)
 hystrix:
   command:
     default:
     execution:
     isolation:
     thread:
-    timeoutInMilliseconds: 60000 # 设置hystrix的超时时间为6000ms
+    timeoutInMilliseconds: 560000 # 设置hystrix的超时时间为6000ms

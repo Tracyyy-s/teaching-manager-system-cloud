@@ -24,19 +24,19 @@ public class PermissionMapperController {
     private PermissionMapper permissionMapper;
 
     @RequestMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(Integer permissionId) {
+    int deleteByPrimaryKey(@RequestParam("permissionId") Integer permissionId) {
         return permissionMapper.deleteByPrimaryKey(permissionId);
     }
 
 
     @RequestMapping("insert")
-    int insert(Permission record) {
+    int insert(@RequestBody Permission record) {
         return permissionMapper.insert(record);
     }
 
 
     @RequestMapping("selectByPrimaryKey")
-    Permission selectByPrimaryKey(Integer permissionId) {
+    Permission selectByPrimaryKey(@RequestParam("permissionId") Integer permissionId) {
         return permissionMapper.selectByPrimaryKey(permissionId);
     }
 
@@ -60,7 +60,7 @@ public class PermissionMapperController {
 
 
     @RequestMapping("selectByUserId")
-    List<Permission> selectByUserId(String userId) {
+    List<Permission> selectByUserId(@RequestParam("userId") String userId) {
         return permissionMapper.selectByUserId(userId);
     }
 
@@ -78,7 +78,7 @@ public class PermissionMapperController {
     }
 
     @RequestMapping("selectIdByName")
-    Integer selectIdByName(String permissionName) {
+    Integer selectIdByName(@RequestParam("permissionName") String permissionName) {
         return permissionMapper.selectIdByName(permissionName);
     }
 

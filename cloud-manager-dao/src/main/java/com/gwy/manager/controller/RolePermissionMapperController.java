@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ public class RolePermissionMapperController {
     RolePermissionMapper rolePermissionMapper;
 
     @RequestMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(Integer roleId, Integer permissionId) {
+    int deleteByPrimaryKey(@RequestParam("roleId") Integer roleId, @RequestParam("permissionId") Integer permissionId) {
         return rolePermissionMapper.deleteByPrimaryKey(roleId, permissionId);
     }
 
@@ -44,17 +45,17 @@ public class RolePermissionMapperController {
     }
 
     @RequestMapping("selectPermissionIdsByRoleId")
-    List<Integer> selectPermissionIdsByRoleId(Integer roleId) {
+    List<Integer> selectPermissionIdsByRoleId(@RequestParam("roleId") Integer roleId) {
         return rolePermissionMapper.selectPermissionIdsByRoleId(roleId);
     }
 
     @RequestMapping("deleteByRoleId")
-    int deleteByRoleId(Integer roleId) {
+    int deleteByRoleId(@RequestParam("roleId") Integer roleId) {
         return rolePermissionMapper.deleteByRoleId(roleId);
     }
 
     @RequestMapping("insertBatch")
-    int insertBatch(Integer roleId, @RequestBody List<Integer> permissionIds) {
+    int insertBatch(@RequestParam("roleId") Integer roleId, @RequestBody List<Integer> permissionIds) {
         return rolePermissionMapper.insertBatch(roleId, permissionIds);
     }
 

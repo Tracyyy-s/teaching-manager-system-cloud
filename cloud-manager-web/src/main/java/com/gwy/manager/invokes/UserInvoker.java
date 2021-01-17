@@ -62,7 +62,7 @@ public interface UserInvoker {
     @RequestMapping("selectByUsername")
     User selectByUsername(@RequestParam("username") String username);
 
-    @GetMapping(value = "selectUsersByRoleName")
+    @RequestMapping("selectUsersByRoleName")
     List<User> selectUsersByRoleName(@RequestParam("roleName") String roleName);
 
     @RequestMapping("updateAvailableDeptIds")

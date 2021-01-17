@@ -5,7 +5,7 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.SysPermissionApiMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,15 +24,15 @@ public class SysPermissionApiMapperController {
     @Resource
     SysPermissionApiMapper sysPermissionApiMapper;
 
-    @PostMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("permissionId") Integer permissionId, @RequestParam("api") String api){
         return sysPermissionApiMapper.deleteByPrimaryKey(permissionId,api);
     }
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody SysPermissionApi record){
         return sysPermissionApiMapper.insert(record);
     }
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<SysPermissionApi> selectAll(){
         return sysPermissionApiMapper.selectAll();
     }
@@ -42,8 +42,8 @@ public class SysPermissionApiMapperController {
      * @param api   api
      * @return  结果list
      */
-    @PostMapping("selectPermissionIdsByApi")
-    List<Integer> selectPermissionIdsByApi(String api){
+    @RequestMapping("selectPermissionIdsByApi")
+    List<Integer> selectPermissionIdsByApi(@RequestParam("api") String api){
         return sysPermissionApiMapper.selectPermissionIdsByApi(api);
     }
 }

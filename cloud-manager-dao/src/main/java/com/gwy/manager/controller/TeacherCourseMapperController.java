@@ -5,7 +5,7 @@ import com.gwy.manager.mapper.RoleMapper;
 import com.gwy.manager.mapper.TeacherCourseMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,27 +24,27 @@ public class TeacherCourseMapperController {
     @Resource
     TeacherCourseMapper teacherCourseMapper;
 
-    @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String tcId) {
+    @RequestMapping("deleteByPrimaryKey")
+    int deleteByPrimaryKey(@RequestParam("tcId") String tcId) {
         return teacherCourseMapper.deleteByPrimaryKey(tcId);
     }
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody TeacherCourse record) {
         return teacherCourseMapper.insert(record);
     }
 
-    @PostMapping("selectByPrimaryKey")
-    TeacherCourse selectByPrimaryKey(String tcId) {
+    @RequestMapping("selectByPrimaryKey")
+    TeacherCourse selectByPrimaryKey(@RequestParam("tcId") String tcId) {
         return teacherCourseMapper.selectByPrimaryKey(tcId);
     }
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<TeacherCourse> selectAll() {
         return teacherCourseMapper.selectAll();
     }
 
-    @PostMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody TeacherCourse record) {
         return teacherCourseMapper.updateByPrimaryKey(record);
     }
@@ -56,7 +56,7 @@ public class TeacherCourseMapperController {
      * @param changeScore 修改的分数
      * @return 返回结果
      */
-    @PostMapping("updateAppraiseScore")
+    @RequestMapping("updateAppraiseScore")
     int updateAppraiseScore(@RequestParam("tcId") String tcId,
                             @RequestParam("changeScore") Integer changeScore) {
         return teacherCourseMapper.updateAppraiseScore(tcId, changeScore);
@@ -69,7 +69,7 @@ public class TeacherCourseMapperController {
      * @param termId    学期id
      * @return 返回结果
      */
-    @PostMapping("selectByTeacherNoAndTermId")
+    @RequestMapping("selectByTeacherNoAndTermId")
     List<TeacherCourse> selectByTeacherNoAndTermId(@RequestParam("teacherNo") String teacherNo,
                                                    @RequestParam("termId") String termId) {
         return teacherCourseMapper.selectByTeacherNoAndTermId(teacherNo, termId);
@@ -82,7 +82,7 @@ public class TeacherCourseMapperController {
      * @param termId    学期
      * @return 返回结果
      */
-    @PostMapping("selectByStudentNoAndTermId")
+    @RequestMapping("selectByStudentNoAndTermId")
     List<TeacherCourse> selectByStudentNoAndTermId(@RequestParam("studentNo") String studentNo,
                                                    @RequestParam("termId") String termId) {
         return teacherCourseMapper.selectByStudentNoAndTermId(studentNo, termId);
@@ -95,7 +95,7 @@ public class TeacherCourseMapperController {
      * @param termId 学期id
      * @return 结果集
      */
-    @PostMapping("selectByTermAndDept")
+    @RequestMapping("selectByTermAndDept")
     List<TeacherCourse> selectByTermAndDept(@RequestParam("deptId") String deptId,
                                             @RequestParam("termId") String termId) {
         return teacherCourseMapper.selectByTermAndDept(deptId, termId);
@@ -107,7 +107,7 @@ public class TeacherCourseMapperController {
      * @param teacherCourses 预添加
      * @return 结果集
      */
-    @PostMapping("insertBatch")
+    @RequestMapping("insertBatch")
     int insertBatch(@RequestBody List<TeacherCourse> teacherCourses) {
         return teacherCourseMapper.insertBatch(teacherCourses);
     }
