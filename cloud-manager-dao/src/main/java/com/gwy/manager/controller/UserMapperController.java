@@ -27,7 +27,7 @@ public class UserMapperController {
     UserMapper userMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String userId) {
+    int deleteByPrimaryKey(@RequestParam("userId") String userId) {
         return userMapper.deleteByPrimaryKey(userId);
     }
 
@@ -53,7 +53,7 @@ public class UserMapperController {
     }
 
     @PostMapping("selectUsersByDeptId")
-    List<User> selectUsersByDeptId(String deptId) {
+    List<User> selectUsersByDeptId(@RequestParam("deptId") String deptId) {
         return userMapper.selectUsersByDeptId(deptId);
     }
 
@@ -85,12 +85,12 @@ public class UserMapperController {
     }
 
     @PostMapping("selectByUsername")
-    User selectByUsername(String username) {
+    User selectByUsername(@RequestParam("username") String username) {
         return userMapper.selectByUsername(username);
     }
 
     @PostMapping("selectUsersByRoleName")
-    List<User> selectUsersByRoleName(String roleName) {
+    List<User> selectUsersByRoleName(@RequestParam("roleName") String roleName) {
         return userMapper.selectUsersByRoleName(roleName);
     }
 

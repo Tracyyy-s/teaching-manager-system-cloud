@@ -25,7 +25,7 @@ public class TeacherCourseMapperController {
     TeacherCourseMapper teacherCourseMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String tcId) {
+    int deleteByPrimaryKey(@RequestParam("tcId") String tcId) {
         return teacherCourseMapper.deleteByPrimaryKey(tcId);
     }
 
@@ -35,7 +35,7 @@ public class TeacherCourseMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    TeacherCourse selectByPrimaryKey(String tcId) {
+    TeacherCourse selectByPrimaryKey(@RequestParam("tcId") String tcId) {
         return teacherCourseMapper.selectByPrimaryKey(tcId);
     }
 

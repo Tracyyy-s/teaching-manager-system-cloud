@@ -5,6 +5,7 @@ import com.gwy.manager.domain.entity.Major;
 import com.gwy.manager.mapper.MajorMapper;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ public class MajorMapperController {
     private MajorMapper majorMapper;
 
     @RequestMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String majorId) {
+    int deleteByPrimaryKey(@RequestParam("majorId") String majorId) {
         return majorMapper.deleteByPrimaryKey(majorId);
     }
 
@@ -31,7 +32,7 @@ public class MajorMapperController {
     }
 
     @RequestMapping("selectByPrimaryKey")
-    Major selectByPrimaryKey(String majorId) {
+    Major selectByPrimaryKey(@RequestParam("majorId") String majorId) {
         return majorMapper.selectByPrimaryKey(majorId);
     }
 
@@ -56,7 +57,7 @@ public class MajorMapperController {
      * @return 返回结果
      */
     @RequestMapping("selectByDept")
-    List<Major> selectByDept(String deptId) {
+    List<Major> selectByDept(@RequestParam("deptId") String deptId) {
         return majorMapper.selectByDept(deptId);
     }
 

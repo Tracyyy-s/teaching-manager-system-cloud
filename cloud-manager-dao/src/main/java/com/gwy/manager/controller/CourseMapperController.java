@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -25,7 +26,7 @@ public class CourseMapperController {
     private CourseMapper courseMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String courseNo) {
+    int deleteByPrimaryKey(@RequestParam("courseNo") String courseNo) {
         return courseMapper.deleteByPrimaryKey(courseNo);
     }
 
@@ -35,7 +36,7 @@ public class CourseMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    Course selectByPrimaryKey(String courseNo) {
+    Course selectByPrimaryKey(@RequestParam("courseNo") String courseNo) {
         return courseMapper.selectByPrimaryKey(courseNo);
     }
 
@@ -50,7 +51,7 @@ public class CourseMapperController {
     }
 
     @PostMapping("getCoursesOfTeacher")
-    List<Course> getCoursesOfTeacher(String teacherNo) {
+    List<Course> getCoursesOfTeacher(@RequestParam("teacherNo") String teacherNo) {
         return courseMapper.getCoursesOfTeacher(teacherNo);
     }
 

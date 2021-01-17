@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -26,7 +27,7 @@ public class StudentMapperController {
     StudentMapper studentMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String studentNo) {
+    int deleteByPrimaryKey(@RequestParam("studentNo") String studentNo) {
         return studentMapper.deleteByPrimaryKey(studentNo);
     }
 
@@ -36,7 +37,7 @@ public class StudentMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    Student selectByPrimaryKey(String studentNo) {
+    Student selectByPrimaryKey(@RequestParam("studentNo") String studentNo) {
         return studentMapper.selectByPrimaryKey(studentNo);
     }
 
@@ -62,22 +63,22 @@ public class StudentMapperController {
     }
 
     @PostMapping("updatePassword")
-    int updatePassword(String studentNo, String password) {
+    int updatePassword(@RequestParam("studentNo") String studentNo, @RequestParam("password") String password) {
         return studentMapper.updatePassword(studentNo, password);
     }
 
     @PostMapping("selectStudentsByDept")
-    List<Student> selectStudentsByDept(String deptId) {
+    List<Student> selectStudentsByDept(@RequestParam("deptId") String deptId) {
         return studentMapper.selectStudentsByDept(deptId);
     }
 
     @PostMapping("selectStudentsByClass")
-    List<Student> selectStudentsByClass(String classId) {
+    List<Student> selectStudentsByClass(@RequestParam("classId") String classId) {
         return studentMapper.selectStudentsByClass(classId);
     }
 
     @PostMapping("selectStudentsMatchName")
-    List<Student> selectStudentsMatchName(String deptId, String name) {
+    List<Student> selectStudentsMatchName(@RequestParam("deptId") String deptId, @RequestParam("name") String name) {
         return studentMapper.selectStudentsMatchName(deptId, name);
     }
 

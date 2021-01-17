@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -24,7 +25,7 @@ public class TargetMapperController {
     TargetMapper targetMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(Integer targetId) {
+    int deleteByPrimaryKey(@RequestParam("targetId") Integer targetId) {
         return targetMapper.deleteByPrimaryKey(targetId);
     }
 
@@ -34,7 +35,7 @@ public class TargetMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    Target selectByPrimaryKey(Integer targetId) {
+    Target selectByPrimaryKey(@RequestParam("targetId") Integer targetId) {
         return targetMapper.selectByPrimaryKey(targetId);
     }
 

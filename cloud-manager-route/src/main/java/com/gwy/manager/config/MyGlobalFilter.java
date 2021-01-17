@@ -25,9 +25,6 @@ public class MyGlobalFilter extends ZuulFilter {
 
     private static final String LOGIN_REQUEST = "/login";
 
-    @Autowired
-    private RedisUtil redisUtil;
-
     @Override
     public String filterType() {
         return "pre";
@@ -54,7 +51,7 @@ public class MyGlobalFilter extends ZuulFilter {
 
         // 响应类型
         rc.getResponse().setContentType("application/json; charset=utf-8");
-        
+
         if (request.getServletPath().equals(LOGIN_REQUEST)) {
             return null;
         }
@@ -93,11 +90,6 @@ public class MyGlobalFilter extends ZuulFilter {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            if (redisUtil.get(token) == null) {
-                redisUtil.set(token, JwtTokenUtils.getUsername(token));
-                redisUtil.expire(token, 60 * 60 * 8);
             }
 
         }

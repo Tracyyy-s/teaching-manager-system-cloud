@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -30,7 +31,7 @@ public class SysLogMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    SysLog selectByPrimaryKey(Integer id) {
+    SysLog selectByPrimaryKey(@RequestParam("id") Integer id) {
         return sysLogMapper.selectByPrimaryKey(id);
     }
 
@@ -45,12 +46,12 @@ public class SysLogMapperController {
     }
 
     @PostMapping("selectByType")
-    List<SysLog> selectByType(String type) {
+    List<SysLog> selectByType(@RequestParam("type") String type) {
         return sysLogMapper.selectByType(type);
     }
 
     @PostMapping("selectByInterval")
-    List<SysLog> selectByInterval(@RequestBody Date beginTime, @RequestBody Date endTime, String type) {
+    List<SysLog> selectByInterval(@RequestBody Date beginTime, @RequestBody Date endTime,@RequestParam("type") String type) {
         return sysLogMapper.selectByInterval(beginTime, endTime, type);
     }
 

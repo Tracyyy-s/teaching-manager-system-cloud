@@ -43,7 +43,7 @@ public class SysPermissionApiMapperController {
      * @return  结果list
      */
     @PostMapping("selectPermissionIdsByApi")
-    List<Integer> selectPermissionIdsByApi(String api){
+    List<Integer> selectPermissionIdsByApi(@RequestParam("api") String api){
         return sysPermissionApiMapper.selectPermissionIdsByApi(api);
     }
 }

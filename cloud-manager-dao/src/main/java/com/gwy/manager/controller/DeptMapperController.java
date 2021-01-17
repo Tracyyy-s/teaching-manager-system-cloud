@@ -24,7 +24,7 @@ public class DeptMapperController {
     private DeptMapper deptMapper;
 
     @PostMapping("deleteByPrimaryKey")
-    int deleteByPrimaryKey(String deptId) {
+    int deleteByPrimaryKey(@RequestParam("deptId") String deptId) {
         return deptMapper.deleteByPrimaryKey(deptId);
     }
 
@@ -35,7 +35,7 @@ public class DeptMapperController {
     }
 
     @PostMapping("selectByPrimaryKey")
-    Dept selectByPrimaryKey(String deptId) {
+    Dept selectByPrimaryKey(@RequestParam("deptId") String deptId) {
         System.out.println(deptId);
         return deptMapper.selectByPrimaryKey(deptId);
     }
@@ -52,7 +52,7 @@ public class DeptMapperController {
 
 
     @PostMapping("getDeptByName")
-    Dept getDeptByName(String name) {
+    Dept getDeptByName(@RequestParam("name") String name) {
         return deptMapper.getDeptByName(name);
     }
 
