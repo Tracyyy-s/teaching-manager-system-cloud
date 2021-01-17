@@ -4,13 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.gwy.manager.domain.constant.PageHelperConst;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.Role;
-import com.gwy.manager.enums.ResponseDataMsg;
+import com.gwy.manager.domain.enums.ResponseDataMsg;
+import com.gwy.manager.domain.enums.ResponseStatus;
 import com.gwy.manager.service.RoleService;
 import com.gwy.manager.service.impl.PermissionServiceImpl;
 import com.gwy.manager.service.impl.UserRoleServiceImpl;
 import com.gwy.manager.service.impl.UserServiceImpl;
-
-import com.gwy.manager.enums.ResponseStatus;
+import com.gwy.manager.domain.enums.*;
 
 import com.gwy.manager.util.DateUtilCustom;
 import com.gwy.manager.util.PageHelperUtil;

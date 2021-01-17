@@ -1,7 +1,7 @@
 package com.gwy.manager.util;
 
 
-import com.gwy.manager.mapper.UserMapper;
+import com.gwy.manager.invokes.UserInvoker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +22,9 @@ public class VRCodeUtil {
      * 验证码过期时间，默认5min
      */
     private static final int EXPIRATION_TIME = 300;
+
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userInvoker;
     @Autowired
     private RedisUtil redisUtil;
     /**

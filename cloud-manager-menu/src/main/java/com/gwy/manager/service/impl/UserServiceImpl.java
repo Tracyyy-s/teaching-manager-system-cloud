@@ -2,20 +2,18 @@ package com.gwy.manager.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.gwy.manager.domain.constant.PageHelperConst;
-import com.gwy.manager.domain.constant.RoleName;
 import com.gwy.manager.domain.dto.ResultVO;
 import com.gwy.manager.domain.entity.*;
 import com.gwy.manager.domain.enums.ResponseDataMsg;
-import com.gwy.manager.domain.enums.ResponseStatus;
-import com.gwy.manager.domain.enums.UserOption;
-import com.gwy.manager.mapper.RoleMapper;
-import com.gwy.manager.mapper.UserMapper;
-import com.gwy.manager.mapper.UserRoleMapper;
+import com.gwy.manager.invokes.RoleInvoker;
+import com.gwy.manager.invokes.UserInvoker;
+import com.gwy.manager.invokes.UserRoleInvoker;
 import com.gwy.manager.service.UserService;
 import com.gwy.manager.util.*;
+import com.gwy.manager.util.ResultVoUtil;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,28 +25,31 @@ import java.util.*;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Qualifier("menuUserInvoker")
     @Autowired
-    private UserMapper userMapper;
+    private UserInvoker userInvoker;
 
     @Autowired
     private VRCodeUtil vrCodeUtil;
 
+    @Qualifier("menuUserRoleInvoker")
     @Autowired
-    private UserRoleMapper userRoleMapper;
+    private UserRoleInvoker userRoleInvoker;
 
+    @Qualifier("menuRoleInvoker")
     @Autowired
-    private RoleMapper roleMapper;
+    private RoleInvoker roleInvoker;
 
 
 
     @Override
     public ResultVO getUserById(String adminNo, String userId) {
 
-        User user = userMapper.selectByPrimaryKey(userId);
-        if (user == null) {
+        User user = userInvoker.selectByPrimaryKey(userId);
+       if (user == null) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
-            User adminUser = userMapper.selectByPrimaryKey(adminNo);
+            User adminUser = userInvoker.selectByPrimaryKey(adminNo);
             if (adminUser == null || !adminUser.getAvailableDeptIds().contains(user.getDeptId())) {
                 return ResultVoUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
             } else {
@@ -60,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultVO getUserById(String userId) {
 
-        User user = userMapper.selectByPrimaryKey(userId);
+        User user = userInvoker.selectByPrimaryKey(userId);
         if (user == null) {
             return ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         }
@@ -74,13 +75,13 @@ public class UserServiceImpl implements UserService {
         ResultVO resultVO;
 
         //判断管理员用户是否存在
-        User adminUser = userMapper.selectByPrimaryKey(adminNo);
+        User adminUser = userInvoker.selectByPrimaryKey(adminNo);
         if (adminUser == null || !adminUser.getAvailableDeptIds().contains(deptId)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.PermissionDeny.getMsg());
             return resultVO;
         }
 
-        List<User> users = userMapper.getUsersMatchNameInDept(deptId, name);
+        List<User> users = userInvoker.getUsersMatchNameInDept(deptId, name);
         if (CollectionUtils.isEmpty(users)) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
@@ -95,7 +96,7 @@ public class UserServiceImpl implements UserService {
 
         ResultVO resultVO;
 
-        int i = userMapper.updateByPrimaryKey(user);
+        int i = userInvoker.updateByPrimaryKey(user);
         if (i == 0) {
             resultVO = ResultVoUtil.error(ResponseDataMsg.Fail.getMsg());
         } else {
@@ -110,9 +111,9 @@ public class UserServiceImpl implements UserService {
         ResultVO resultVO;
 
         PageHelper.startPage(pageNum, pageSize);
-        List<User> users = userMapper.selectAll();
+        List<User> users = userInvoker.selectAll();
         if (CollectionUtils.isEmpty(users)) {
-            resultVO =ResultVoUtil.error(com.gwy.manager.enums.ResponseDataMsg.NotFound.getMsg());
+            resultVO =ResultVoUtil.error(ResponseDataMsg.NotFound.getMsg());
         } else {
             resultVO = ResultVoUtil.success(PageHelperUtil.pageInfoToMap(new PageInfo<>(users)));
         }
