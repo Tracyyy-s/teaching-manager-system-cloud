@@ -68,6 +68,7 @@ public class TermTargetMapperController {
      */
     @RequestMapping("getStudentTermTargets")
     List<Integer> getStudentTermTargets(@RequestParam("termId") String termId) {
+        System.out.println("getStudentTermTargets");
         return termTargetMapper.getStudentTermTargets(termId);
     }
 

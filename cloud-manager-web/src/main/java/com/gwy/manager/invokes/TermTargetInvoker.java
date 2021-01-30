@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.FeignClientProperties;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,24 +17,24 @@ import java.util.List;
  * @date 2021/1/17 9:40
  */
 @Component
-@RequestMapping("TermTargetInvoker")
+@RequestMapping("TermTargetMapperController")
 @FeignClient(value = "CLOUD-MANAGER-DAO-SERVER",configuration = FeignClientProperties.FeignClientConfiguration.class, contextId = "17")
 @Qualifier("webTermTargetInvoker")
 public interface TermTargetInvoker {
 
-    @PostMapping("deleteByPrimaryKey")
+    @RequestMapping("deleteByPrimaryKey")
     int deleteByPrimaryKey(@RequestParam("termId") String termId, @RequestParam("targetId") Integer targetId);
 
-    @PostMapping("insert")
+    @RequestMapping("insert")
     int insert(@RequestBody TermTarget record);
 
-    @PostMapping("selectByPrimaryKey")
+    @RequestMapping("selectByPrimaryKey")
     TermTarget selectByPrimaryKey(@RequestParam("termId") String termId, @RequestParam("targetId") Integer targetId);
 
-    @PostMapping("selectAll")
+    @RequestMapping("selectAll")
     List<TermTarget> selectAll();
 
-    @PostMapping("updateByPrimaryKey")
+    @RequestMapping("updateByPrimaryKey")
     int updateByPrimaryKey(@RequestBody TermTarget record);
 
     /**
@@ -43,7 +43,7 @@ public interface TermTargetInvoker {
      * @param termTargets 学期评价指标
      * @return 结果集
      */
-    @PostMapping("insertTermTargets")
+    @RequestMapping("insertTermTargets")
     int insertTermTargets(@RequestBody List<TermTarget> termTargets);
 
     /**
@@ -52,7 +52,7 @@ public interface TermTargetInvoker {
      * @param termId 学期
      * @return 结果集
      */
-    @PostMapping("getStudentTermTargets")
+    @RequestMapping("getStudentTermTargets")
     List<Integer> getStudentTermTargets(@RequestParam("termId") String termId);
 
     /**
@@ -61,6 +61,6 @@ public interface TermTargetInvoker {
      * @param termId 学期
      * @return 结果集
      */
-    @PostMapping("getTeacherTermTargets")
+    @RequestMapping("getTeacherTermTargets")
     List<Integer> getTeacherTermTargets(@RequestParam("termId") String termId);
 }

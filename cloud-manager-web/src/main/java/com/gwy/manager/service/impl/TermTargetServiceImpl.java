@@ -74,6 +74,7 @@ public class TermTargetServiceImpl implements TermTargetService {
         //获得今天日期
         Date today = DateUtilCustom.getDate();
 
+        System.out.println("termId===" + termId);
         Term term = termMapper.selectByPrimaryKey(termId);
         if (term == null) {
             resultVO = ResultVOUtil.error("Term Not Exist");
@@ -84,6 +85,7 @@ public class TermTargetServiceImpl implements TermTargetService {
 
             if (UserOption.STUDENT.getUserType().equals(obj)) {
 
+                System.out.println("termId=====" + termId);
                 //获得学生学期评价指标列表
                 targetIds = termTargetMapper.getStudentTermTargets(termId);
             } else if (UserOption.TEACHER.getUserType().equals(obj)) {
